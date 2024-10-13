@@ -3,5 +3,36 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ejflab-front-lib": {
+      "projectType": "library",
+      "root": "projects/ejflab-front-lib",
+      "sourceRoot": "projects/ejflab-front-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ejflab-front-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ejflab-front-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ejflab-front-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ejflab-front-lib/src/test.ts",
+            "tsConfig": "projects/ejflab-front-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/ejflab-front-lib/karma.conf.js"
+          }
+        }
+      }
+    }
   }
 }
