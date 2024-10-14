@@ -13,58 +13,10 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['customers']);
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'guides',
     loadChildren: () => GuidesModule,
   },
 ];
-
-/*
-IMPORTANTE: Cuando agregue un módulo acá, debe modificar tsconfig.app.json
-Ver MyConstants.js static ANONYMOUS_PATHS = ['/uechat'];
-*/
-const PAGINAS = [
-  { id: 'guides', module: 'GuidesModule' },
-];
-
-for (let i = 0; i < PAGINAS.length; i++) {
-  const actual = PAGINAS[i];
-  routes.push({
-    path: `${actual.id}`,
-    //canActivate: [AuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
-    loadChildren: () =>
-      import(`./views/${actual.id}/${actual.id}.module`).then(
-        (m) => m[actual.module]
-      ),
-  });
-  routes.push({
-    path: `${actual.id}/p/:path`,
-    //canActivate: [AuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
-    loadChildren: () =>
-      import(`./views/${actual.id}/${actual.id}.module`).then(
-        (m) => m[actual.module]
-      ),
-  });
-  routes.push({
-    path: `${actual.id}/p/:path/:detail`,
-    //canActivate: [AuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
-    loadChildren: () =>
-      import(`./views/${actual.id}/${actual.id}.module`).then(
-        (m) => m[actual.module]
-      ),
-  });
-  routes.push({
-    path: `${actual.id}/:id`,
-    //canActivate: [AuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
-    loadChildren: () =>
-      import(`./views/${actual.id}/${actual.id}.module`).then(
-        (m) => m[actual.module]
-      ),
-  });
-}
 
 routes.push({
   path: '**',
