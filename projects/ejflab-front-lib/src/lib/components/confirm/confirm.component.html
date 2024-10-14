@@ -1,0 +1,15 @@
+<div mat-dialog-title>
+    <h1 class="centrado">{{ title }}</h1>
+    <span class="boton_cerrar" [mat-dialog-close]>
+        <mat-icon>close</mat-icon>
+    </span>
+</div>
+<p>{{ text }}</p>
+<div class="bottom_buttons">
+    <button mat-raised-button color="" (click)="cancelar()">
+        Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="aceptar()">
+        Aceptar
+    </button>
+</div>

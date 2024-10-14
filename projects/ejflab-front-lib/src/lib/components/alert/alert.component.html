@@ -1,0 +1,14 @@
+<div mat-dialog-title>
+    <h1 class="centrado">{{ title }}</h1>
+    <span class="boton_cerrar" [mat-dialog-close]>
+        <mat-icon>close</mat-icon>
+    </span>
+</div>
+<div *ngIf="data.ishtml" [innerHtml]="text"></div>
+<div *ngIf="!data.ishtml">{{ text }}</div>
+<div class="bottom_buttons">
+    <button mat-raised-button color="{{ button.color }}" (click)="genericAction(button)"
+        *ngFor="let button of buttons; index as i;">
+        {{ button.label }}
+    </button>
+</div>
