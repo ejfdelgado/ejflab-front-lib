@@ -1,0 +1,101 @@
+.top_menu {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.top_menu > .relleno {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mi_titulo {
+  font-size: 28px;
+  color: white;
+  overflow: hidden;
+  line-height: 28px;
+}
+
+.relleno {
+  flex: 1;
+}
+
+.usuario_container {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  padding: 0 10px;
+}
+
+.menu_icon_user_parent {
+  height: 100%;
+  width: 100%;
+}
+
+.menu_icon_user {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+  box-shadow: 1px 1px 4px 1px #c7c8ca;
+  font-size: 1.8em;
+  color: #0ec9f4;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_icon_user.white {
+  background: white;
+}
+
+.background_photo {
+  background-size: contain;
+}
+
+.save_status {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save_status mat-icon {
+  transform: scale(2);
+  color: white;
+}
+
+@keyframes myrotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes myscale {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.rotating {
+  animation: myrotation 2s infinite linear;
+}
+
+.scaling {
+  animation: myscale 2s linear;
+}

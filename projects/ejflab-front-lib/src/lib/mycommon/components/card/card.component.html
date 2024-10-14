@@ -1,0 +1,31 @@
+<div class="box" [ngClass]="{'small': isSmall}">
+    <div class="box_image" (click)="navegar(data)" [ngStyle]="{'background' : 'url('+data.imageUrl+')'}"></div>
+    <div class="box_texto">
+        <div class="box_icon" *ngIf="data.icon">
+            <mat-icon>{{getIcon(data.icon)}}</mat-icon>
+        </div>
+        <div class="profile_icon" *ngIf="data.profile" [ngStyle]="{'background' : 'url('+data.profile+')'}">
+        </div>
+        <div class="box_titulo">
+            <div class="mi_menu" *ngIf="data.menu">
+                <div class="menu_icon_parent" [matMenuTriggerFor]="mainMenu" aria-label="Menú">
+                    <div class="menu_icon">
+                        <mat-icon>more_vert</mat-icon>
+                    </div>
+                </div>
+                <mat-menu #mainMenu="matMenu">
+                    <ng-container *ngFor="let oneItem of data.menu; index as i;">
+                        <button mat-menu-item *ngIf="!oneItem.onlyOwner || data.owner" (click)="oneItem.action(data);">
+                            <mat-icon>{{ oneItem.icono }}</mat-icon>
+                            <span>{{ oneItem.texto }}</span>
+                        </button>
+                    </ng-container>
+                </mat-menu>
+            </div>
+            <div class="solo_texto" (click)="navegar(data)">
+                <div *ngIf="data.act" class="solo_fecha">{{ data.act | fechaCard }}</div>
+                <div>{{ data.title }}</div>
+            </div>
+        </div>
+    </div>
+</div>

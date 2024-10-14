@@ -1,0 +1,4 @@
+<div class="myImage" [ngClass]="{'rounded': options.isRounded}" (click)="options.isEditable ? askForImage() : ''">
+    <div *ngIf="background != null" class="blur" [ngStyle]="{'background' : 'url('+background+')'}"></div>
+    <img *ngIf="dataUrl$ != null" [src]="dataUrl$|async" [ngStyle]="getImageStyle()" />
+</div>

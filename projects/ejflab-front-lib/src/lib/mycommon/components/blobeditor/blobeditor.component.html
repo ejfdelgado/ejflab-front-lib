@@ -1,0 +1,20 @@
+<div class="menu_container">
+    <div class="generic_icon" [matMenuTriggerFor]="myMenu" aria-label="Menú">
+        <mat-icon>menu</mat-icon>
+    </div>
+    <mat-menu #myMenu="matMenu">
+        <button *ngIf="url != null" (click)="share()" mat-menu-item>
+            <mat-icon>share</mat-icon>
+            <span>Copiar enlace</span>
+        </button>
+        <button *ngIf="url != null" (click)="download()" mat-menu-item>
+            <mat-icon>download</mat-icon>
+            <span>Descagar archivo</span>
+        </button>
+        <button (click)="askForFile()" mat-menu-item>
+            <mat-icon>upload_file</mat-icon>
+            <span>Subir archivo</span>
+        </button>
+    </mat-menu>
+    <div class="etiqueta_archivo">{{ getFileName() }}</div>
+</div>

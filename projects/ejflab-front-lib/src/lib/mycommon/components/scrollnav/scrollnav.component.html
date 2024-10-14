@@ -1,0 +1,39 @@
+<div class="grandparent no_caret">
+    <div class="container_play">
+        <button class="play_pause" (click)="togglePlayPause()" mat-menu-item>
+            <mat-icon>{{ PLAY_STATE_VISUAL[playState.state].icon }}</mat-icon>
+            <span>{{ PLAY_STATE_VISUAL[playState.state].text }}</span>
+        </button>
+        <button class="play_pause" (click)="toggleTest()" mat-menu-item>
+            <mat-icon>{{ TEST_STATE_VISUAL[testState.state].icon }}</mat-icon>
+            <span>{{ TEST_STATE_VISUAL[testState.state].text }}</span>
+        </button>
+    </div>
+    <div class="parent1">
+        <div class="parent no_caret">
+            <div *ngIf="testState.state == 'test_show'" class="detail_in no_caret" (wheel)="onMouseWheel($event)"
+                (mousedown)="mouseDownSteps($event)" (mouseup)="mouseUpSteps($event)">
+                <div class="my_step no_caret white_subtitle" *ngFor="let step of window"
+                    [ngStyle]="{'background-color': getStepColor(step, model.testName)}">
+                    <div>{{getStepValue(step, model.testName)}}</div>
+                </div>
+            </div>
+            <div class="detail_in no_caret" (wheel)="onMouseWheel($event)" (mousedown)="mouseDownSteps($event)"
+                (mouseup)="mouseUpSteps($event)">
+                <div class="my_step no_caret white_subtitle" *ngFor="let step of window"
+                    [ngStyle]="{'background-color': getStepColor(step, columnName)}">
+                    <div>{{getStepValue(step, columnName)}}</div>
+                </div>
+            </div>
+            <div class="detail_out no_caret" #scroll_parent (wheel)="moveInTime($event)">
+                <div class="my_scroll no_caret" (mousedown)="mouseDownScroll($event)" (mouseup)="mouseUpScroll($event)"
+                    [ngStyle]="{'left': scroll.left+'px', 'width': scroll.scrollWidth+'px'}">
+                    &nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <div class="container_label">
+        <input min="0" step="1" type="number" [ngStyle]="{'background-color': currentClass.color}"
+            class="white_subtitle" (ngModelChange)="currentClassChanged($event)" [(ngModel)]="currentClass.number" />
+    </div>
+</div>

@@ -1,0 +1,78 @@
+.main_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ocupado {
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=20);
+
+  /* Netscape */
+  -moz-opacity: 0.2;
+
+  /* Safari 1.x */
+  -khtml-opacity: 0.2;
+
+  /* Good browsers */
+  opacity: 0.2;
+}
+
+.canvas_container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  margin-top: 5px;
+}
+
+.main_container .back {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.main_container canvas {
+  max-height: 100%;
+  max-width: 100%;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.main_container canvas.front {
+  position: relative;
+  z-index: 2;
+  box-shadow: 1px 1px 4px 1px #c7c8ca;
+}
+
+.menu_container_parent {
+  z-index: 3;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.menu_container {
+}
+
+.menu_container_others {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.local_icon {
+}
+
+.other_icon {
+}
+
+.transparente {
+  visibility: hidden;
+}

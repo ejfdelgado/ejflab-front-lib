@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItemClass } from '../../models/menu';
 
@@ -11,7 +11,10 @@ import { MenuItemClass } from '../../models/menu';
     '../n03-model/n03-model.component.css',
   ],
 })
-export class N05FormValidationComponent extends MenuItemClass {
+export class N05FormValidationComponent
+  extends MenuItemClass
+  implements OnInit
+{
   myOpinionForm: FormGroup;
 
   ngOnInit(): void {

@@ -1,0 +1,85 @@
+<div class="top_menu">
+    <div class="relleno">
+        <div class="usuario_container">
+            <div class="menu_icon_user_parent" [matMenuTriggerFor]="mainMenu" aria-label="Menú principal">
+                <div class="menu_icon_user white">
+                    <mat-icon>menu</mat-icon>
+                </div>
+            </div>
+            <mat-menu #mainMenu="matMenu">
+                <button mat-menu-item (click)="editPage()">
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar documento</span>
+                </button>
+                <button mat-menu-item (click)="editPagePermisions()">
+                    <mat-icon>lock</mat-icon>
+                    <span>Editar permisos del documento</span>
+                </button>
+                <button mat-menu-item (click)="deleteAllTuples()">
+                    <mat-icon>delete</mat-icon>
+                    <span>Borrar datos de página</span>
+                </button>
+                <button mat-menu-item (click)="createNewPage()">
+                    <mat-icon>add</mat-icon>
+                    <span>Crear nuevo documento</span>
+                </button>
+                <button mat-menu-item (click)="lookMyPages()">
+                    <mat-icon>search</mat-icon>
+                    <span>Ver mis documentos</span>
+                </button>
+                <button *ngFor="let item of extraOptions" mat-menu-item (click)="item.action()">
+                    <mat-icon>{{ item.icon }}</mat-icon>
+                    <span>{{ item.label }}</span>
+                </button>
+                <!--button mat-menu-item (click)="goToHome()">
+                    <mat-icon>close</mat-icon>
+                    <span>Salir</span>
+                </button>
+                <button mat-menu-item (click)="logoutAndGoToHome()">
+                    <mat-icon>logout</mat-icon>
+                    <span>Salir y cerrar sesión</span>
+                </button-->
+            </mat-menu>
+
+        </div>
+        <div class="relleno mi_titulo">{{ title }}</div>
+    </div>
+    <div *ngIf="saveState !== null" class="usuario_container">
+        <div class="menu_icon_user_parent">
+            <!--div class="save_status">
+                <mat-icon>save</mat-icon>
+            </div-->
+            <div *ngIf="saveState == 'processing'" class="save_status rotating">
+                <mat-icon>settings</mat-icon>
+            </div>
+            <div *ngIf="saveState == 'done'" class="save_status scaling">
+                <mat-icon>done</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="usuario_container">
+        <div class="menu_icon_user_parent" [matMenuTriggerFor]="userMenu" aria-label="Menú de usuario">
+            <div *ngIf="user == null" class="menu_icon_user white">
+                <mat-icon>person</mat-icon>
+            </div>
+            <div *ngIf="user !== null" class="menu_icon_user background_photo"
+                [ngStyle]="{'background-image': 'url(' + user.photoURL + ')'}">
+
+            </div>
+        </div>
+        <mat-menu #userMenu="matMenu">
+            <button *ngIf="user == null" mat-menu-item (click)="login()">
+                <mat-icon>login</mat-icon>
+                <span>Iniciar sesión</span>
+            </button>
+            <button *ngIf="user !== null" mat-menu-item (click)="editUser()">
+                <mat-icon>edit</mat-icon>
+                <span>Editar usuario</span>
+            </button>
+            <button *ngIf="user !== null" mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Cerrar sesión</span>
+            </button>
+        </mat-menu>
+    </div>
+</div>

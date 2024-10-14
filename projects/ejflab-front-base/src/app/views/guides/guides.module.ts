@@ -11,6 +11,7 @@ import { EjflabFrontLibComponent } from 'ejflab-front-lib';
 import { N03ModelComponent } from './views/n03-model/n03-model.component';
 import { N04ReactiveFormsComponent } from './views/n04-reactive-forms/n04-reactive-forms.component';
 import { N05FormValidationComponent } from './views/n05-form-validation/n05-form-validation.component';
+import { N06PipesComponent } from './views/n06-pipes/n06-pipes.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { N05FormValidationComponent } from './views/n05-form-validation/n05-form
     N03ModelComponent,
     N04ReactiveFormsComponent,
     N05FormValidationComponent,
+    N06PipesComponent,
   ],
   imports: [
     CommonModule,

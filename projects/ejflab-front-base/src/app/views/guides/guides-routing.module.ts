@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GuidesComponent, TheGuides } from './guides.component';
+import { GuidesComponent } from './guides.component';
+import { TheGuides } from './models/menu-index';
 
 const routes: Routes = [
   {

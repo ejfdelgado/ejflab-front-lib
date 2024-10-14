@@ -1,0 +1,15 @@
+<div class="parent_1">
+    <div class="parent_scroll_container">
+        <div class="scroll_container">
+            <app-scrollfile (deleteFile)="deleteFile.emit($event)" (openFile)="openFile.emit($event)"
+                (onBlur)="onBlurContentEditable()" *ngFor="let elemento of archivos | keyvalue | sortByName"
+                [elemento]="elemento"></app-scrollfile>
+        </div>
+    </div>
+    <div class="footer">
+        <button *ngFor="let action of actions" (click)="action.callback()" mat-menu-item>
+            <mat-icon>{{ action.icon }}</mat-icon>
+            <span>{{ action.label }}</span>
+        </button>
+    </div>
+</div>
