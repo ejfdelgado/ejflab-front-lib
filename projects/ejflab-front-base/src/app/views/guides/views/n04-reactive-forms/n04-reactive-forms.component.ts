@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MenuItemClass } from '../../models/menu';
 
 @Component({
@@ -11,14 +11,14 @@ import { MenuItemClass } from '../../models/menu';
   ],
 })
 export class N04ReactiveFormsComponent extends MenuItemClass {
-  myOpinionForm = this.formBuilder.group({
-    comment: '',
-    visibility: 'public',
-    reviewed: false,
-    summary: '',
+  myOpinionForm = new FormGroup({
+    comment: new FormControl(''),
+    visibility: new FormControl('public'),
+    reviewed: new FormControl(false),
+    summary: new FormControl(''),
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor() {
     super();
   }
 }

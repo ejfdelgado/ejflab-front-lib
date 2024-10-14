@@ -12,4 +12,8 @@ export class N03ModelComponent extends MenuItemClass {
   constructor() {
     super();
   }
+
+  summaryChanged(event: string) {
+    this.model.characters = event.length;
+  }
 }
