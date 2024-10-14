@@ -1,1 +1,16 @@
-<p>n06-pipes works!</p>
+<app-documentation [data]="menuItem"></app-documentation>
+<div class="container_horizontal gap_10 fill bordered_table">
+    <span>Before</span>
+    <span>Filter pipe</span>
+    <span>After</span>
+</div>
+<div class="container_horizontal gap_10 fill bordered_table">
+    <span>{{ model.epoch }}</span>
+    <span>epoch2date</span>
+    <span>{{ model.epoch | epoch2date }}</span>
+</div>
+<div class="container_horizontal gap_10 fill bordered_table">
+    <span>{{ model.epoch }}</span>
+    <span>fechaCard</span>
+    <span>{{ model.epoch/1000 | fechaCard }}</span>
+</div>

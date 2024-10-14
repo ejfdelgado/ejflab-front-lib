@@ -33,6 +33,7 @@ li,
 h1,
 h2,
 input,
+span,
 textarea,
 pre,
 label,
@@ -67,4 +68,24 @@ textarea {
 
 .margin_top_10 {
   margin-top: 10px;
+}
+
+.container_horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.container_vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.container_horizontal.gap_10,
+.container_vertical.gap_10 {
+  gap: 10px;
+}
+
+.container_horizontal.fill > *,
+.container_vertical.fill > * {
+  flex: 1;
 }
