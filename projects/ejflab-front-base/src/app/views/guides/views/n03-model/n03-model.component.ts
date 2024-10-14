@@ -8,4 +8,8 @@ import { MenuItemClass } from '../../models/menu';
 })
 export class N03ModelComponent extends MenuItemClass {
   model: any = {};
+
+  constructor() {
+    super();
+  }
 }

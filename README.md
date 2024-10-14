@@ -18,4 +18,4 @@ ng generate component views/assessment/components/my-component --standalone fals
 
 ng generate module app --project=ejflab-front-base --skip-tests
 
-ng generate component views/guides/views/n03-model --standalone false --project=ejflab-front-base --skip-tests
+ng generate component views/guides/views/n04-reactive-forms --standalone false --project=ejflab-front-base --skip-tests
