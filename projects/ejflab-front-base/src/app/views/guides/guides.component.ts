@@ -5,31 +5,38 @@ import { N01DynamicContentComponent } from './views/n01-dynamic-content/n01-dyna
 import { N02ListContentComponent } from './views/n02-list-content/n02-list-content.component';
 import { N03ModelComponent } from './views/n03-model/n03-model.component';
 import { N04ReactiveFormsComponent } from './views/n04-reactive-forms/n04-reactive-forms.component';
+import { N05FormValidationComponent } from './views/n05-form-validation/n05-form-validation.component';
 
 export const TheGuides: Array<MenuItemData> = [
   {
     id: 'app-n01-dynamic-content',
     text: 'Dynamic Content',
-    description: 'Simple mapping from JSON to html',
+    description: 'Show mapping from JSON to html',
     module: N01DynamicContentComponent,
   },
   {
     id: 'app-n02-list-content',
-    text: 'Dynamic List Content',
-    description: 'Uses ngFor to show array items',
+    text: 'ngFor',
+    description: 'Let show array items',
     module: N02ListContentComponent,
   },
   {
     id: 'app-n03-ngmodel',
-    text: 'Forms module and ngModel',
-    description: 'Handle simple forms',
+    text: 'ngModel',
+    description: 'Capture input data',
     module: N03ModelComponent,
   },
   {
     id: 'app-n04-reactive-forms',
-    text: 'Reactive Forms without ngModel',
+    text: 'Forms without ngModel',
     description: 'Handle complex forms',
     module: N04ReactiveFormsComponent,
+  },
+  {
+    id: 'app-n05-form-validation',
+    text: 'Forms with validations',
+    description: 'Add validation to inputs',
+    module: N05FormValidationComponent,
   },
 ];
 

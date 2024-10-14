@@ -10,6 +10,7 @@ import { N01DynamicContentComponent } from './views/n01-dynamic-content/n01-dyna
 import { EjflabFrontLibComponent } from 'ejflab-front-lib';
 import { N03ModelComponent } from './views/n03-model/n03-model.component';
 import { N04ReactiveFormsComponent } from './views/n04-reactive-forms/n04-reactive-forms.component';
+import { N05FormValidationComponent } from './views/n05-form-validation/n05-form-validation.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { N04ReactiveFormsComponent } from './views/n04-reactive-forms/n04-reacti
     N02ListContentComponent,
     N03ModelComponent,
     N04ReactiveFormsComponent,
+    N05FormValidationComponent,
   ],
   imports: [
     CommonModule,

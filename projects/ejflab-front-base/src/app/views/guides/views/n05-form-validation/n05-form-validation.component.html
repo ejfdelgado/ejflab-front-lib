@@ -1,7 +1,7 @@
 <app-documentation [data]="menuItem"></app-documentation>
 <div class="rows margin_top_10">
     <div class="column">
-        <form class="columns" [formGroup]="myOpinionForm">
+        <form class="columns" [formGroup]="myOpinionForm" (ngSubmit)="sendData()">
             <div class="columns">
                 <label class="columns center_align no_select hand">
                     Comment:
@@ -26,9 +26,12 @@
             </div>
             <div class="columns">
                 <label class="columns center_align no_select hand">
-                    Summary ({{ model.characters }}):
+                    Summary:
                     <textarea formControlName="summary" rows="5"></textarea>
                 </label>
+            </div>
+            <div class="bottoms_container">
+                <button class="submit_button hand" type="submit">Send Data!</button>
             </div>
         </form>
     </div>
