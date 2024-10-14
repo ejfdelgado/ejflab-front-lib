@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItemData } from '../../models/menu';
+import { MenuItemClass, MenuItemData } from '../../models/menu';
 
 @Component({
   selector: 'app-n02-list-content',
@@ -7,8 +7,7 @@ import { MenuItemData } from '../../models/menu';
   templateUrl: './n02-list-content.component.html',
   styleUrls: ['./n02-list-content.component.css', '../../guides.component.css'],
 })
-export class N02ListContentComponent {
-  menuItem: MenuItemData | null = null;
+export class N02ListContentComponent extends MenuItemClass {
   animal: any = {
     nombre: 'Elefante',
     patas: 1,
@@ -27,7 +26,4 @@ export class N02ListContentComponent {
       },
     ],
   };
-  setMenuItem(menuItem: MenuItemData) {
-    this.menuItem = menuItem;
-  }
 }

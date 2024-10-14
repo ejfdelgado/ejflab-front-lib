@@ -27,7 +27,9 @@
 }
 
 p,
-li {
+li,
+h1,
+h2 {
   font-size: 20px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;

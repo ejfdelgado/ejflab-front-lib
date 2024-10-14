@@ -17,3 +17,5 @@ ng generate module views/assessment --project=ejflab-front-lib --skip-tests
 ng generate component views/assessment/components/my-component --standalone false --project=ejflab-front-lib --skip-tests
 
 ng generate module app --project=ejflab-front-base --skip-tests
+
+ng generate component views/guides/views/n03-model --standalone false --project=ejflab-front-base --skip-tests

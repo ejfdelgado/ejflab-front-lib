@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MenuItemData } from '../../models/menu';
 
 @Component({
   selector: 'app-documentation',
@@ -6,6 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./documentation.component.css', '../../guides.component.css'],
 })
 export class DocumentationComponent {
-  @Input() title: string;
-  @Input() description: string;
+  @Input() data: MenuItemData | null;
 }

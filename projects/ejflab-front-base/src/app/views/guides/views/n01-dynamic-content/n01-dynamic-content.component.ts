@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItemData } from '../../models/menu';
+import { MenuItemClass, MenuItemData } from '../../models/menu';
 
 @Component({
   selector: 'app-n01-dynamic-content',
@@ -10,8 +10,7 @@ import { MenuItemData } from '../../models/menu';
     '../../guides.component.css',
   ],
 })
-export class N01DynamicContentComponent {
-  menuItem: MenuItemData | null = null;
+export class N01DynamicContentComponent extends MenuItemClass {
   animal: any = {
     nombre: 'Elefante',
     patas: 1,
@@ -30,7 +29,4 @@ export class N01DynamicContentComponent {
       },
     ],
   };
-  setMenuItem(menuItem: MenuItemData) {
-    this.menuItem = menuItem;
-  }
 }
