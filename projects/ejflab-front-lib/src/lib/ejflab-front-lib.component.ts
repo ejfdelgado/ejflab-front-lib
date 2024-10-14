@@ -1,20 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'lib-ejflab-front-lib',
+  standalone: true,
+  imports: [],
   template: `
     <p>
       ejflab-front-lib works!
     </p>
   `,
-  styles: [
-  ]
+  styles: ``
 })
-export class EjflabFrontLibComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class EjflabFrontLibComponent {
 
 }

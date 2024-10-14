@@ -8,7 +8,7 @@ describe('EjflabFrontLibComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EjflabFrontLibComponent ]
+      imports: [EjflabFrontLibComponent]
     })
     .compileComponents();
 

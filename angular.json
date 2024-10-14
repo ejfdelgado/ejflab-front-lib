@@ -27,9 +27,11 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ejflab-front-lib/src/test.ts",
             "tsConfig": "projects/ejflab-front-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/ejflab-front-lib/karma.conf.js"
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
