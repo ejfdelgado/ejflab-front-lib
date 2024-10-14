@@ -1,14 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { HttpOptionsData } from 'src/interfaces/login-data.interface';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { IndicatorService, Wait } from './indicator.service';
 import { ModalService } from './modal.service';
-import { AuthService } from 'src/services/auth.service';
 import { Buffer } from 'buffer';
 import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 import { FileSaveResponseData } from './fileInterface';
+import { AuthService } from './auth.service';
+import { HttpOptionsData } from '../interfaces/login-data.interface';
 
 const DEFAULT_PAGE_SIZE = 30;
 
