@@ -6,4 +6,6 @@ import { MenuItemClass } from '../../models/menu';
   templateUrl: './n03-model.component.html',
   styleUrls: ['./n03-model.component.css', '../../guides.component.css'],
 })
-export class N03ModelComponent extends MenuItemClass {}
+export class N03ModelComponent extends MenuItemClass {
+  model: any = {};
+}

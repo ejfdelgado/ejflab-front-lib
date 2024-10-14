@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule } from '@angular/forms';
 import { GuidesRoutingModule } from './guides-routing.module';
 import { GuidesComponent } from './guides.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
@@ -17,6 +18,11 @@ import { N03ModelComponent } from './views/n03-model/n03-model.component';
     N02ListContentComponent,
     N03ModelComponent,
   ],
-  imports: [CommonModule, GuidesRoutingModule, EjflabFrontLibComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    GuidesRoutingModule,
+    EjflabFrontLibComponent,
+  ],
 })
 export class GuidesModule {}

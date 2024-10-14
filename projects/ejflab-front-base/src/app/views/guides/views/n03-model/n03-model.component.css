@@ -1,0 +1,22 @@
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rows .column {
+  flex: 1;
+  border-radius: 5px;
+  background-color: antiquewhite;
+  padding: 15px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.rows.center_align {
+  align-items: center;
+}
