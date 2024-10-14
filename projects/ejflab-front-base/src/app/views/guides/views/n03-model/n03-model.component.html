@@ -2,18 +2,35 @@
 <div class="rows">
     <div class="column">
         <form class="columns">
-            <input type="text" [(ngModel)]="model.comment" name="comment">
             <div class="columns">
-                <div class="rows center_align">
+                <label class="columns center_align no_select hand">
+                    Comment:
+                    <input type="text" [(ngModel)]="model.comment" name="comment">
+                </label>
+            </div>
+            <div class="columns">
+                <label class="rows center_align no_select hand">
                     <input type="radio" name="visibility" value="public" [checked]="model.visibility == 'public'"
-                        [(ngModel)]="model.visibility" />
-                    <label>Public</label>
-                </div>
-                <div class="rows center_align">
+                        [(ngModel)]="model.visibility" class="hand" />
+                    Public
+                </label>
+                <label class="rows center_align no_select hand">
                     <input type="radio" name="visibility" value="private" [checked]="model.visibility == 'public'"
-                        [(ngModel)]="model.visibility" />
-                    <label>Private</label>
-                </div>
+                        [(ngModel)]="model.visibility" class="hand" />
+                    Private
+                </label>
+            </div>
+            <div class="columns">
+                <label class="rows center_align no_select hand">
+                    <input type="checkbox" [(ngModel)]="model.reviewed" name="reviewed" class="hand">
+                    Reviewed
+                </label>
+            </div>
+            <div class="columns">
+                <label class="columns center_align no_select hand">
+                    Summary:
+                    <textarea [(ngModel)]="model.summary" name="summary" rows="5"></textarea>
+                </label>
             </div>
         </form>
     </div>
