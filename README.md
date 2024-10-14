@@ -15,3 +15,5 @@ ng build ejflab-front-lib && cd dist/ejflab-front-lib && npm publish
 ng generate module views/assessment --project=ejflab-front-lib --skip-tests
 
 ng generate component views/assessment/components/my-component --standalone false --project=ejflab-front-lib --skip-tests
+
+ng generate module app --project=ejflab-front-base --skip-tests
