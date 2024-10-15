@@ -4,6 +4,7 @@ import { N03ModelComponent } from '../views/n03-model/n03-model.component';
 import { N04ReactiveFormsComponent } from '../views/n04-reactive-forms/n04-reactive-forms.component';
 import { N05FormValidationComponent } from '../views/n05-form-validation/n05-form-validation.component';
 import { N06PipesComponent } from '../views/n06-pipes/n06-pipes.component';
+import { N07ModalsComponent } from '../views/n07-modals/n07-modals.component';
 import { MenuItemData } from './menu';
 
 export const TheGuides: Array<MenuItemData> = [
@@ -42,5 +43,11 @@ export const TheGuides: Array<MenuItemData> = [
     text: 'Filter with Pipes',
     description: 'Filter and transform data',
     module: N06PipesComponent,
+  },
+  {
+    id: 'app-n07-modals',
+    text: 'Pop Ups',
+    description: 'Open Pop Ups',
+    module: N07ModalsComponent,
   },
 ];

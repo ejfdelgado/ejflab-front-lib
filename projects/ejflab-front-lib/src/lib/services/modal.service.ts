@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertComponent, AlertData } from '../components/alert/alert.component';
 import {
   ConfirmComponent,
   ConfirmData,
-} from '../components/confirm/confirm.component';
+} from '../mycommon/components/confirm/confirm.component';
 import {
   GenericComponent,
   GenericData,
-} from '../components/generic/generic.component';
+} from '../mycommon/components/generic/generic.component';
+import {
+  AlertComponent,
+  AlertData,
+} from '../mycommon/components/alert/alert.component';
 
 @Injectable({
   providedIn: 'root',

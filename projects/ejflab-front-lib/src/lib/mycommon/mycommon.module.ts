@@ -10,9 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { AlertComponent } from '../components/alert/alert.component';
-import { ConfirmComponent } from '../components/confirm/confirm.component';
-import { GenericComponent } from '../components/generic/generic.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { GenericComponent } from './components/generic/generic.component';
 
 @NgModule({
   declarations: [

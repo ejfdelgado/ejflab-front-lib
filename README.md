@@ -18,6 +18,6 @@ ng generate component views/assessment/components/my-component --standalone fals
 
 ng generate module app --project=ejflab-front-base --skip-tests
 
-ng generate component views/guides/views/n06-pipes --standalone false --project=ejflab-front-base --skip-tests
+ng generate component views/guides/views/n07-modals --standalone false --project=ejflab-front-base --skip-tests
 
 ng generate module mycommon --project=ejflab-front-lib
