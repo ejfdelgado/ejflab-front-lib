@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AlertComponent } from './components/alert/alert.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { GenericComponent } from './components/generic/generic.component';
+import { SortByNamePipe } from './pipes/sort-by-name.pipe';
+import { NgInit } from './directives/NgInit';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { GenericComponent } from './components/generic/generic.component';
     AlertComponent,
     ConfirmComponent,
     GenericComponent,
+    SortByNamePipe,
+    NgInit,
   ],
   imports: [
     CommonModule,
@@ -41,6 +45,8 @@ import { GenericComponent } from './components/generic/generic.component';
     AlertComponent,
     ConfirmComponent,
     GenericComponent,
+    SortByNamePipe,
+    NgInit,
   ],
 })
 export class MycommonModule {}
