@@ -4,7 +4,6 @@ import { PayupopupComponent } from '../components/payupopup/payupopup.component'
 import { AuthService } from './auth.service';
 import { ModalService } from './modal.service';
 import { HttpService } from './http.service';
-import { MycommonModule } from '../mycommon.module';
 
 export interface SecretsReadData {
   key: Array<string>;

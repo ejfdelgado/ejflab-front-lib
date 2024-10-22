@@ -3,7 +3,6 @@ import { HttpService } from './http.service';
 import { Buffer } from 'buffer';
 import { v4 as uuidv4 } from 'uuid';
 const { encode } = require('@msgpack/msgpack');
-import { MycommonModule } from '../mycommon.module';
 import { FlowChartRef } from '../components/base/context.component';
 
 export interface FlowchartProcessRequestData {

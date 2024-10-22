@@ -9,7 +9,6 @@ import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { AuthService } from './auth.service';
 import { HttpService, LoadFileData } from './http.service';
 import { ModalService } from './modal.service';
-import { MycommonModule } from '../mycommon.module';
 
 export interface MyUserData {
   id?: string;

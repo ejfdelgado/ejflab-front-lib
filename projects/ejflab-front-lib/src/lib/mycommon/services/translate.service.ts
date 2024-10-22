@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { SimpleObj } from '@ejfdelgado/ejflab-common/src/SimpleObj';
 import { HttpService } from './http.service';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
-import { MycommonModule } from '../mycommon.module';
 
 @Injectable({
   providedIn: 'root',

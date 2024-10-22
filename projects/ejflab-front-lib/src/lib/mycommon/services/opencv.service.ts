@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalService } from './modal.service';
 import { HttpService } from './http.service';
-import { MycommonModule } from '../mycommon.module';
 
 export interface SolvePnPData {
   v2: Array<Array<number>>;

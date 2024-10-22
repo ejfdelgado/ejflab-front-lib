@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { ModalService } from './modal.service';
 import { io, Socket } from 'socket.io-client';
-import { MycommonModule } from '../mycommon.module';
 
 interface ServerToClientEvents {
   [key: string]: (message: any) => void;

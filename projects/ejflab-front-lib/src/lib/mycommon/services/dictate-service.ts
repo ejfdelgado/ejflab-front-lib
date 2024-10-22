@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
-import { MycommonModule } from '../mycommon.module';
 
 @Injectable({
   providedIn: 'root',

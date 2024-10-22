@@ -15,7 +15,6 @@ import {
 import { Observable } from 'rxjs';
 import { BackendPageService } from './backendPage.service';
 import { ModuloDatoSeguroFront } from '@ejfdelgado/ejflab-common/src/ModuloDatoSeguroFront';
-import { MycommonModule } from '../mycommon.module';
 
 export interface TupleTempData {
   pg: string;

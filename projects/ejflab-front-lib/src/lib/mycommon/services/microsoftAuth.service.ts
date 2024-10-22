@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import * as msal from '@azure/msal-browser';
 import { Subscription } from 'rxjs';
-import { MycommonModule } from '../mycommon.module';
 
 export interface UserMicrosoft {
   username: string;

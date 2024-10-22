@@ -9,7 +9,6 @@ import {
 import { AuthService } from './auth.service';
 import { HttpService } from './http.service';
 import { ModalService } from './modal.service';
-import { MycommonModule } from '../mycommon.module';
 
 export interface PageIteratorData {
   next: Function;

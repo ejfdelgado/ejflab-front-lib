@@ -2,7 +2,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { PageData } from '../interfaces/login-data.interface';
 import { HttpService } from './http.service';
 import { MyDates } from '@ejfdelgado/ejflab-common/src/MyDates';
-import { MycommonModule } from '../mycommon.module';
 
 @Injectable({
   providedIn: 'root',

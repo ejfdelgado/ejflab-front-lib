@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { PageData } from '../interfaces/login-data.interface';
-import { MycommonModule } from '../mycommon.module';
 
 import { AuthService } from './auth.service';
 import { BackendPageService } from './backendPage.service';

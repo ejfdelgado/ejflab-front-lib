@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MycommonModule } from '../mycommon.module';
 import { AlertComponent, AlertData } from '../components/alert/alert.component';
 import {
   ConfirmComponent,

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { MycommonModule } from '../mycommon.module';
 
 export interface MailSendData {
   template: string;

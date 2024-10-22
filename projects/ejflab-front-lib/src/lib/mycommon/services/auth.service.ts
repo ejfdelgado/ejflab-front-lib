@@ -10,7 +10,6 @@ import {
   getIdToken,
 } from '@angular/fire/auth';
 import { LoginData } from '../interfaces/login-data.interface';
-import { MycommonModule } from '../mycommon.module';
 
 @Injectable({
   providedIn: 'root',

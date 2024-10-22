@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { IndicatorService } from './indicator.service';
 import { ModalService } from './modal.service';
-import { MycommonModule } from '../mycommon.module';
 
 @Injectable({
   providedIn: 'root',

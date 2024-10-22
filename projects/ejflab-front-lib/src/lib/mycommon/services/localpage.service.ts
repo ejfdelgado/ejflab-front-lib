@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { LocalFileJson } from './localfilejson';
-import { MycommonModule } from '../mycommon.module';
 
 @Injectable({
   providedIn: 'root',

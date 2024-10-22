@@ -4,7 +4,6 @@ import * as tf from '@tensorflow/tfjs';
 import { Buffer } from 'buffer';
 import { IndicatorService } from './indicator.service';
 import { ModalService } from './modal.service';
-import { MycommonModule } from '../mycommon.module';
 
 export interface ImageDetectionData {
   boxes_data: Array<number>;
