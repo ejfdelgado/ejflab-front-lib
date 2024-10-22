@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Buffer } from 'buffer';
-const { encode } = require('@msgpack/msgpack');
+import { encode, decode } from "@msgpack/msgpack";
 
 @Injectable({
   providedIn: 'root',

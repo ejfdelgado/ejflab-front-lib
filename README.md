@@ -21,3 +21,5 @@ ng generate module app --project=ejflab-front-base --skip-tests
 ng generate component views/guides/views/n07-modals --standalone false --project=ejflab-front-base --skip-tests
 
 ng generate module mycommon --project=ejflab-front-lib
+
+https://angular.dev/tools/libraries/creating-libraries
