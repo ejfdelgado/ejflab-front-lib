@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { CardComponentData } from 'src/interfaces/login-data.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
-  PageData,
   PageIteratorData,
   PageService,
-} from 'src/services/page.service';
+} from '../../services/page.service';
 import { MyRoutes } from '@ejfdelgado/ejflab-common/src/MyRoutes';
-import { AuthService } from 'src/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from '@angular/fire/auth';
-import { ModalService } from 'src/services/modal.service';
+import { ModalService } from '../../services/modal.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
+import {
+  CardComponentData,
+  PageData,
+} from '../../interfaces/login-data.interface';
 
 @Component({
   selector: 'app-multiplepages',

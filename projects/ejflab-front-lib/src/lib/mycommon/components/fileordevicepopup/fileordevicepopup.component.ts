@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FileResponseData, FileService } from 'src/services/file.service';
-import { FileRequestData } from 'src/services/fileInterface';
-import { WebcamService } from 'src/services/webcam.service';
+import { FileResponseData, FileService } from '../../services/file.service';
+import { FileRequestData } from '../../services/fileInterface';
+import { WebcamService } from '../../services/webcam.service';
 import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
 
 @Component({

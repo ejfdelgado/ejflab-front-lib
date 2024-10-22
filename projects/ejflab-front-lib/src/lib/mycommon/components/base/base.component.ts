@@ -1,38 +1,29 @@
 import { Buffer } from 'buffer';
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { User, Auth } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PageData } from 'src/interfaces/login-data.interface';
-import { AuthService } from 'src/services/auth.service';
-import { BackendPageService } from 'src/services/backendPage.service';
-import { FileService } from 'src/services/file.service';
-import { ModalService } from 'src/services/modal.service';
+import { AuthService } from '../../services/auth.service';
+import { BackendPageService } from '../../services/backendPage.service';
+import { FileService } from '../../services/file.service';
+import { ModalService } from '../../services/modal.service';
 import {
-  TupleData,
   TupleService,
   TupleServiceInstance,
-} from 'src/services/tuple.service';
+} from '../../services/tuple.service';
 import {
   WebcamRequestData,
   WebcamResponseData,
   WebcamService,
-} from 'src/services/webcam.service';
+} from '../../services/webcam.service';
 import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
-import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
-import { FileSaveData } from 'src/services/fileInterface';
-import { ImagiationDataQuery } from 'src/services/imagiation.service';
+import { FileSaveData } from '../../services/fileInterface';
 import { ContextComponent } from './context.component';
-import { FlowchartService } from 'src/services/flowchart.service';
-import { CallService } from 'src/services/call.service';
+import { FlowchartService } from '../../services/flowchart.service';
+import { CallService } from '../../services/call.service';
+import { PageData } from '../../interfaces/login-data.interface';
 
 export interface FileBase64Data {
   base64?: string;

@@ -1,16 +1,16 @@
 <app-documentation [data]="menuItem"></app-documentation>
 <div class="container_horizontal gap_10 fill bordered_table">
-    <span>Before</span>
-    <span>Filter pipe</span>
-    <span>After</span>
+    <strong>Before</strong>
+    <strong>Filter pipe function</strong>
+    <strong>After</strong>
 </div>
 <div class="container_horizontal gap_10 fill bordered_table">
     <span>{{ model.epoch }}</span>
     <span>epoch2date</span>
     <span>{{ model.epoch | epoch2date }}</span>
 </div>
-<!--div class="container_horizontal gap_10 fill bordered_table">
-    <span>{{ "room.left.available" }}</span>
+<div class="container_horizontal gap_10 fill bordered_table">
+    <span>{{ "say_hi" }}</span>
     <span>translate</span>
-    <span>{{ "room.left.available" | translate:'nogales' | async }}</span>
-</div-->
+    <span>{{ "say_hi" | translate:'test' | async }}</span>
+</div>

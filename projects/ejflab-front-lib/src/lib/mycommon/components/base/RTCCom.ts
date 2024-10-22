@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 import { EventEmitter } from '@angular/core';
-import { PromiseEmitter } from 'src/app/components/base/PromiseEmitter';
-import { CallServiceInstance } from 'src/services/call.service';
+import { PromiseEmitter } from './PromiseEmitter';
+import { CallServiceInstance } from '../../services/call.service';
 import { MultiScaleMediaStream } from './VideoWebStream';
 
 export interface PeerStream {

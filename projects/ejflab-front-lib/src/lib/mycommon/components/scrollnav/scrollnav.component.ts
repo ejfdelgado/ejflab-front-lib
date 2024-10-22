@@ -10,8 +10,8 @@ import {
   OnInit,
   Output,
   ViewChild,
-} from "@angular/core";
-import { MyColor } from "@ejfdelgado/ejflab-common/src/MyColor";
+} from '@angular/core';
+import { MyColor } from '@ejfdelgado/ejflab-common/src/MyColor';
 
 export interface ScrollNavData {
   testName: string;
@@ -20,38 +20,38 @@ export interface ScrollNavData {
 }
 
 @Component({
-  selector: "app-scrollnav",
-  templateUrl: "./scrollnav.component.html",
-  styleUrls: ["./scrollnav.component.css"],
+  selector: 'app-scrollnav',
+  templateUrl: './scrollnav.component.html',
+  styleUrls: ['./scrollnav.component.css'],
 })
 export class ScrollnavComponent implements OnInit, AfterViewInit {
-  @ViewChild("scroll_parent") scrollParentEl: ElementRef;
+  @ViewChild('scroll_parent') scrollParentEl: ElementRef;
   public model: ScrollNavData;
   @Input()
   data: Array<any>;
   @Input()
   columnName: string;
-  @Output("showPose")
+  @Output('showPose')
   showPose: EventEmitter<any> = new EventEmitter();
-  @Output("markCurrentFileAsChanged")
+  @Output('markCurrentFileAsChanged')
   markCurrentFileAsChanged: EventEmitter<any> = new EventEmitter();
   public currentClass: any = {
     number: 0,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
   };
   public PLAY_STATE_VISUAL: any = {
-    play: { text: "Pause", icon: "pause" },
-    pause: { text: "Play", icon: "play_arrow" },
+    play: { text: 'Pause', icon: 'pause' },
+    pause: { text: 'Play', icon: 'play_arrow' },
   };
   public TEST_STATE_VISUAL: any = {
-    test_show: { text: "Hide", icon: "visibility" },
-    test_hide: { text: "Show", icon: "visibility_off" },
+    test_show: { text: 'Hide', icon: 'visibility' },
+    test_hide: { text: 'Show', icon: 'visibility_off' },
   };
   public playState: any = {
-    state: "pause",
+    state: 'pause',
   };
   public testState: any = {
-    state: "test_hide",
+    state: 'test_hide',
   };
   public dragging: any = {
     target: null,
@@ -78,7 +78,7 @@ export class ScrollnavComponent implements OnInit, AfterViewInit {
   static STEP_COLORS: any = MyColor.getStepColors(32);
   constructor(public cdr: ChangeDetectorRef) {
     this.model = {
-      testName: "test",
+      testName: 'test',
       elwidth: 5,
       startix: 0,
     };
@@ -110,18 +110,18 @@ export class ScrollnavComponent implements OnInit, AfterViewInit {
   }
 
   togglePlayPause() {
-    if (this.playState.state == "pause") {
-      this.playState.state = "play";
+    if (this.playState.state == 'pause') {
+      this.playState.state = 'play';
     } else {
-      this.playState.state = "pause";
+      this.playState.state = 'pause';
     }
   }
 
   toggleTest() {
-    if (this.testState.state == "test_show") {
-      this.testState.state = "test_hide";
+    if (this.testState.state == 'test_show') {
+      this.testState.state = 'test_hide';
     } else {
-      this.testState.state = "test_show";
+      this.testState.state = 'test_show';
     }
   }
 
@@ -129,18 +129,18 @@ export class ScrollnavComponent implements OnInit, AfterViewInit {
 
   public getStepValue(step: any, columnName: string) {
     const ans = step[columnName];
-    if (["number", "string"].indexOf(typeof ans) >= 0) {
+    if (['number', 'string'].indexOf(typeof ans) >= 0) {
       return ans;
     }
-    return "";
+    return '';
   }
 
   public getStepColor(step: any, columnName: string) {
     const ans = step[columnName];
-    if (["number", "string"].indexOf(typeof ans) >= 0) {
+    if (['number', 'string'].indexOf(typeof ans) >= 0) {
       return ScrollnavComponent.STEP_COLORS[ans];
     }
-    return "rgba(0, 0, 0, 0)";
+    return 'rgba(0, 0, 0, 0)';
   }
 
   public computeDimensions() {
@@ -157,25 +157,25 @@ export class ScrollnavComponent implements OnInit, AfterViewInit {
     this.computeWindow();
   }
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.computeDimensions();
     this.computeWindow();
   }
 
-  @HostListener("mousemove", ["$event"])
+  @HostListener('mousemove', ['$event'])
   onMouseMove(ev: any) {
-    if (this.dragging.target == "scroll") {
+    if (this.dragging.target == 'scroll') {
       this.scroll.left =
         this.dragging.startv + (ev.screenX - this.dragging.startx);
       this.clampScroll();
       this.computeRealIndexFromLeft();
       this.computeWindow();
-    } else if (this.dragging.target == "steps") {
+    } else if (this.dragging.target == 'steps') {
       const delta = ev.screenX - this.dragging.startx;
       const selectedStep = this.getRealStep(delta);
       this.assignCurrentClassToStep(selectedStep);
-    } else if (this.dragging.target == "stepplay") {
+    } else if (this.dragging.target == 'stepplay') {
       const delta = ev.screenX - this.dragging.startx;
       const selectedStep = this.getRealStep(delta);
       this.showPose.emit(selectedStep);
@@ -243,7 +243,7 @@ export class ScrollnavComponent implements OnInit, AfterViewInit {
   }
 
   mouseDownScroll(ev: MouseEvent) {
-    this.dragging.target = "scroll";
+    this.dragging.target = 'scroll';
     this.dragging.startv = this.scroll.left;
     this.dragging.startx = ev.screenX;
   }
@@ -254,15 +254,15 @@ export class ScrollnavComponent implements OnInit, AfterViewInit {
 
   mouseDownSteps(ev: MouseEvent) {
     if (ev.shiftKey) {
-      this.dragging.target = "steps";
+      this.dragging.target = 'steps';
     } else {
-      this.dragging.target = "stepplay";
+      this.dragging.target = 'stepplay';
     }
     //Options to get starting x point: .pageX .x .clientX
     this.dragging.startv = ev.x;
     this.dragging.startx = ev.screenX;
 
-    if (this.dragging.target == "steps") {
+    if (this.dragging.target == 'steps') {
       const selectedStep = this.getRealStep(0);
       this.assignCurrentClassToStep(selectedStep);
     }

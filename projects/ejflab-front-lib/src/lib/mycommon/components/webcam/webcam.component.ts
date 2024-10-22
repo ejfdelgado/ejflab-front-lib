@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
-import { ModalService } from 'src/services/modal.service';
-import { WebcamRequestData, WebcamService } from 'src/services/webcam.service';
+import { ModalService } from '../../services/modal.service';
+import { WebcamRequestData, WebcamService } from '../../services/webcam.service';
 
 @Component({
   selector: 'app-webcam',

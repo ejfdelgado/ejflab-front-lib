@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModalService } from 'src/services/modal.service';
-import { MyUserData } from 'src/services/user.service';
-import { ImagepickerOptionsData } from 'src/app/mycommon/components/imagepicker/imagepicker.component';
+import { ModalService } from '../../services/modal.service';
+import { MyUserData } from '../../services/user.service';
+import { ImagepickerOptionsData } from '../imagepicker/imagepicker.component';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { FileBase64Data } from '../base/base.component';
 

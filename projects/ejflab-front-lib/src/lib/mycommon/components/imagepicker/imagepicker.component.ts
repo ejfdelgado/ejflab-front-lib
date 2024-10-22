@@ -17,10 +17,10 @@ import {
   Subscription,
   switchMap,
 } from 'rxjs';
-import { FileBase64Data } from 'src/app/components/base/base.component';
-import { FileResponseData, FileService } from 'src/services/file.service';
-import { FileRequestData, FileSaveData } from 'src/services/fileInterface';
-import { ModalService } from 'src/services/modal.service';
+import { FileBase64Data } from '../base/base.component';
+import { FileResponseData, FileService } from '../../services/file.service';
+import { FileRequestData, FileSaveData } from '../../services/fileInterface';
+import { ModalService } from '../../services/modal.service';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 
 export interface ImagepickerOptionsData {

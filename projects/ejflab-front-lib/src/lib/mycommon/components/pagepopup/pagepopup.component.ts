@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ImagepickerOptionsData } from 'src/app/mycommon/components/imagepicker/imagepicker.component';
-import { PageData } from 'src/interfaces/login-data.interface';
-import { BackendPageService } from 'src/services/backendPage.service';
-import { ModalService } from 'src/services/modal.service';
-import { PageService } from 'src/services/page.service';
+import { ImagepickerOptionsData } from '../imagepicker/imagepicker.component';
+import { BackendPageService } from '../../services/backendPage.service';
+import { ModalService } from '../../services/modal.service';
+import { PageService } from '../../services/page.service';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { FileBase64Data } from '../base/base.component';
+import { PageData } from '../../interfaces/login-data.interface';
 
 @Component({
   selector: 'app-pagepopup',

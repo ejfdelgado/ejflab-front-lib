@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PageData } from 'src/interfaces/login-data.interface';
-import { AuthorizationService } from 'src/services/authorization.service';
-import { BackendPageService } from 'src/services/backendPage.service';
-import { LoginService } from 'src/services/login.service';
-import { ModalService } from 'src/services/modal.service';
-import { PageService } from 'src/services/page.service';
-import { MyUserService } from 'src/services/user.service';
+import { AuthorizationService } from '../../services/authorization.service';
+import { BackendPageService } from '../../services/backendPage.service';
+import { LoginService } from '../../services/login.service';
+import { ModalService } from '../../services/modal.service';
+import { PageService } from '../../services/page.service';
+import { MyUserService } from '../../services/user.service';
 import { MyRoutes } from '@ejfdelgado/ejflab-common/src/MyRoutes';
 
 import { Auth, User } from '@angular/fire/auth';
+import { PageData } from '../../interfaces/login-data.interface';
 
 export interface OptionData {
   icon: string;

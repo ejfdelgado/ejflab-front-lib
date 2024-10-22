@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CardComponentData } from 'src/interfaces/login-data.interface';
+import { CardComponentData } from '../../interfaces/login-data.interface';
 
 @Component({
   selector: 'app-card',

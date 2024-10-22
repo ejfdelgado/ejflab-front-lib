@@ -2,8 +2,9 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
   IndicatorPayload,
   IndicatorService,
-} from 'src/services/indicator.service';
+} from '../../services/indicator.service';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
+import { MyUtilities } from '@ejfdelgado/ejflab-common/src/MyUtilities';
 
 @Component({
   selector: 'app-indicator',
@@ -27,7 +28,9 @@ export class IndicatorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  getRoot() {
-    return MyConstants.SRV_ROOT;
+  getIconImage() {
+    return MyUtilities.removeRepeatedSlash(
+      MyConstants.SRV_ROOT + '/assets/img/loading2.gif'
+    );
   }
 }

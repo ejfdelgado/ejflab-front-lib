@@ -5,9 +5,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ModalService } from 'src/services/modal.service';
+import { ModalService } from '../../services/modal.service';
 import { Inject } from '@angular/core';
-import { PayuService, SecretsWriteData } from 'src/services/payu.service';
+import { PayuService, SecretsWriteData } from '../../services/payu.service';
 
 export interface PayuConfigData {
   payu_api_key: string;

@@ -7,16 +7,16 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FlowchartService } from 'src/services/flowchart.service';
-import { CallService } from 'src/services/call.service';
+import { FlowchartService } from '../../services/flowchart.service';
+import { CallService } from '../../services/call.service';
 import { MyTuples } from '@ejfdelgado/ejflab-common/src/MyTuples';
 import { SendLiveChangesProcessor } from './processors/SendLiveChangesProcessor';
 import { Socket } from 'socket.io-client';
 import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
-import { ImagiationDataQuery } from 'src/services/imagiation.service';
+import { ImagiationDataQuery } from '../../services/imagiation.service';
 import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 import { PromiseEmitter } from './PromiseEmitter';
-import { ModalService } from 'src/services/modal.service';
+import { ModalService } from '../../services/modal.service';
 import { RTCCom } from './RTCCom';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 

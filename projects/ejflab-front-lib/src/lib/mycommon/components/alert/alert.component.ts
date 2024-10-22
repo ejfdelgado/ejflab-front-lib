@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpService } from '../../services/http.service';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
-import { HttpService } from '../../../services/http.service';
 
 export interface AlertDataButton {
   color?: string;

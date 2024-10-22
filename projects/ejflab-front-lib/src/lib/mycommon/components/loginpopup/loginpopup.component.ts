@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AuthService } from 'src/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalService } from 'src/services/modal.service';
-import { IndicatorService } from 'src/services/indicator.service';
+import { ModalService } from '../../services/modal.service';
+import { IndicatorService } from '../../services/indicator.service';
 
 @Component({
   selector: 'app-loginpopup',

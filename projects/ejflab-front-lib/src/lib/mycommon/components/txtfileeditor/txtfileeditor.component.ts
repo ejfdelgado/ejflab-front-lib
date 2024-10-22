@@ -12,10 +12,10 @@ import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Buffer } from 'buffer';
 import { catchError, of } from 'rxjs';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ModalService } from 'src/services/modal.service';
-import { FileBase64Data } from 'src/app/components/base/base.component';
-import { FileService } from 'src/services/file.service';
-import { FileSaveData } from 'src/services/fileInterface';
+import { ModalService } from '../../services/modal.service';
+import { FileBase64Data } from '../base/base.component';
+import { FileService } from '../../services/file.service';
+import { FileSaveData } from '../../services/fileInterface';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 
 export interface TxtOptionsData {

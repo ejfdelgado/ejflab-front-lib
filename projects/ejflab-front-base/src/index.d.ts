@@ -20,4 +20,4 @@ declare module '@ejfdelgado/ejflab-common/src/ModuloVideos';
 declare module '@ejfdelgado/ejflab-common/src/CollisionsEngine';
 declare module '@ejfdelgado/ejflab-common/src/FlowChartDiagram';
 declare module '@ejfdelgado/ejflab-common/src/SimpleObj';
-declare module '@ejfdelgado/ejflab-common/src/MyCookie';
+declare module '@ejfdelgado/ejflab-common/src/MyCookies';

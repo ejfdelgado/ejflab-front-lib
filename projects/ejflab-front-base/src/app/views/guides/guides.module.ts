@@ -7,13 +7,13 @@ import { GuidesComponent } from './guides.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { N02ListContentComponent } from './views/n02-list-content/n02-list-content.component';
 import { N01DynamicContentComponent } from './views/n01-dynamic-content/n01-dynamic-content.component';
-import { EjflabFrontLibComponent } from 'ejflab-front-lib';
 import { N03ModelComponent } from './views/n03-model/n03-model.component';
 import { N04ReactiveFormsComponent } from './views/n04-reactive-forms/n04-reactive-forms.component';
 import { N05FormValidationComponent } from './views/n05-form-validation/n05-form-validation.component';
 import { N06PipesComponent } from './views/n06-pipes/n06-pipes.component';
-import { MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
 import { N07ModalsComponent } from './views/n07-modals/n07-modals.component';
+import { N08ActivityComponent } from './views/n08-activity/n08-activity.component';
+import { MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
 
 @NgModule({
   declarations: [
@@ -26,14 +26,14 @@ import { N07ModalsComponent } from './views/n07-modals/n07-modals.component';
     N05FormValidationComponent,
     N06PipesComponent,
     N07ModalsComponent,
+    N08ActivityComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     GuidesRoutingModule,
-    EjflabFrontLibComponent,
-    MycommonModule
+    MycommonModule,
   ],
 })
 export class GuidesModule {}

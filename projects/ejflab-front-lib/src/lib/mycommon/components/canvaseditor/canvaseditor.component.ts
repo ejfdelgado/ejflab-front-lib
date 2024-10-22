@@ -10,10 +10,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { FileService } from 'src/services/file.service';
-import { FileRequestData } from 'src/services/fileInterface';
-import { IndicatorService } from 'src/services/indicator.service';
-import { ModalService } from 'src/services/modal.service';
+import { FileService } from '../../services/file.service';
+import { FileRequestData } from '../../services/fileInterface';
+import { IndicatorService } from '../../services/indicator.service';
+import { ModalService } from '../../services/modal.service';
 
 export interface KeyUrlPairData {
   key: string;

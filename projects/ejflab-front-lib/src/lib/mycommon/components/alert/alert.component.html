@@ -4,11 +4,13 @@
         <mat-icon>close</mat-icon>
     </span>
 </div>
-<div *ngIf="data.ishtml" [innerHtml]="text"></div>
-<div *ngIf="!data.ishtml">{{ text }}</div>
-<div class="bottom_buttons">
-    <button mat-raised-button color="{{ button.color }}" (click)="genericAction(button)"
-        *ngFor="let button of buttons; index as i;">
-        {{ button.label }}
-    </button>
+<div mat-dialog-content>
+    <div *ngIf="data.ishtml" [innerHtml]="text"></div>
+    <div *ngIf="!data.ishtml">{{ text }}</div>
+    <div class="bottom_buttons">
+        <button mat-raised-button color="{{ button.color }}" (click)="genericAction(button)"
+            *ngFor="let button of buttons; index as i;">
+            {{ button.label }}
+        </button>
+    </div>
 </div>

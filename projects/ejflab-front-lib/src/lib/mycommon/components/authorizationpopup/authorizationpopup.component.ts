@@ -11,14 +11,14 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ModalService } from 'src/services/modal.service';
+import { ModalService } from '../../services/modal.service';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { AdduserrolepopupComponent } from '../adduserrolepopup/adduserrolepopup.component';
 import { Inject } from '@angular/core';
 import {
   AuthorizationService,
   PermisionData,
-} from 'src/services/authorization.service';
+} from '../../services/authorization.service';
 
 export interface AuthorizationData {
   who: string;

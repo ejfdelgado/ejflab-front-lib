@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
-import { ModalService } from "src/services/modal.service";
-import { MyConstants } from "@ejfdelgado/ejflab-common/src/MyConstants";
-import { AuthorizationData } from "../authorizationpopup/authorizationpopup.component";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ModalService } from '../../services/modal.service';
+import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
+import { AuthorizationData } from '../authorizationpopup/authorizationpopup.component';
 
 @Component({
-  selector: "app-adduserrolepopup",
-  templateUrl: "./adduserrolepopup.component.html",
-  styleUrls: ["./adduserrolepopup.component.css"],
+  selector: 'app-adduserrolepopup',
+  templateUrl: './adduserrolepopup.component.html',
+  styleUrls: ['./adduserrolepopup.component.css'],
 })
 export class AdduserrolepopupComponent implements OnInit {
   form: FormGroup;
@@ -22,17 +22,17 @@ export class AdduserrolepopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      who: ["", [Validators.required, Validators.maxLength(128)]],
-      role: ["", [Validators.required]],
+      who: ['', [Validators.required, Validators.maxLength(128)]],
+      role: ['', [Validators.required]],
     });
   }
 
   get who() {
-    return this.form.get("who");
+    return this.form.get('who');
   }
 
   get role() {
-    return this.form.get("role");
+    return this.form.get('role');
   }
 
   cancelar() {
@@ -43,7 +43,7 @@ export class AdduserrolepopupComponent implements OnInit {
     if (error && error.maxlength) {
       return `Máximo ${error.maxlength.requiredLength} letras. Actualmente hay ${error.maxlength.actualLength}.`;
     }
-    return "";
+    return '';
   }
 
   async guardar() {
@@ -56,8 +56,8 @@ export class AdduserrolepopupComponent implements OnInit {
       this.dialogRef.close(valores);
     } else {
       this.modalSrv.alert({
-        title: "Ups...",
-        txt: "Verifica tus datos antes de continuar.",
+        title: 'Ups...',
+        txt: 'Verifica tus datos antes de continuar.',
       });
     }
   }

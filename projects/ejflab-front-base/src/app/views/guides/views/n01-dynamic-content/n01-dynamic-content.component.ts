@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItemClass, MenuItemData } from '../../models/menu';
+import { MenuItemClass } from '../../models/menu';
 
 @Component({
   selector: 'app-n01-dynamic-content',

@@ -5,6 +5,7 @@ import { N04ReactiveFormsComponent } from '../views/n04-reactive-forms/n04-react
 import { N05FormValidationComponent } from '../views/n05-form-validation/n05-form-validation.component';
 import { N06PipesComponent } from '../views/n06-pipes/n06-pipes.component';
 import { N07ModalsComponent } from '../views/n07-modals/n07-modals.component';
+import { N08ActivityComponent } from '../views/n08-activity/n08-activity.component';
 import { MenuItemData } from './menu';
 
 export const TheGuides: Array<MenuItemData> = [
@@ -49,5 +50,11 @@ export const TheGuides: Array<MenuItemData> = [
     text: 'Pop Ups',
     description: 'Open Pop Ups',
     module: N07ModalsComponent,
+  },
+  {
+    id: 'app-n08-activity-indicator',
+    text: 'Activity Indicator',
+    description: 'Open Activity Indicator',
+    module: N08ActivityComponent,
   },
 ];

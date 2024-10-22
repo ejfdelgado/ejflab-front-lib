@@ -4,12 +4,14 @@
         <mat-icon>close</mat-icon>
     </span>
 </div>
-<p>{{ text }}</p>
-<div class="bottom_buttons">
-    <button mat-raised-button color="" (click)="cancelar()">
-        Cancelar
-    </button>
-    <button mat-raised-button color="primary" (click)="aceptar()">
-        Aceptar
-    </button>
+<div mat-dialog-content>
+    <p>{{ text }}</p>
+    <div class="bottom_buttons">
+        <button mat-raised-button color="" (click)="cancelar()">
+            Cancelar
+        </button>
+        <button mat-raised-button color="primary" (click)="aceptar()">
+            Aceptar
+        </button>
+    </div>
 </div>

@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CallService } from 'src/services/call.service';
-import { FlowchartService } from 'src/services/flowchart.service';
+import { CallService } from '../../services/call.service';
+import { FlowchartService } from '../../services/flowchart.service';
 import {
   MicrosoftAuthService,
   UserMicrosoft,
-} from 'src/services/microsoftAuth.service';
+} from '../../services/microsoftAuth.service';
 import { ContextComponent } from './context.component';
 import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
-import { ModalService } from 'src/services/modal.service';
+import { ModalService } from '../../services/modal.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
