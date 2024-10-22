@@ -93,6 +93,8 @@ export * from './lib/mycommon/components/base/processors/SendLiveChangesProcesso
 export * from './lib/mycommon/components/base/processors/SetModelProcessor';
 export * from './lib/mycommon/components/base/processors/UpdateUserListProcessor';
 
+export * from './lib/mycommon/validators/MultipleEmailValidator';
+export * from './lib/mycommon/interfaces/login-data.interface';
 
 // Module
 export * from './lib/mycommon/mycommon.module';
