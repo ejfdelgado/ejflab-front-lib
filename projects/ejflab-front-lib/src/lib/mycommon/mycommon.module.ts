@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContenteditableValueAccessorModule } from '@tinkoff/angular-contenteditable-accessor';
-import { MatSliderModule } from '@angular/material/slider';
 import { WebcamModule } from 'ngx-webcam';
+// Material
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSliderModule } from '@angular/material/slider';
 // Components
 import { CardComponent } from './components/card/card.component';
 import { ImagepickerComponent } from './components/imagepicker/imagepicker.component';
@@ -41,33 +47,21 @@ import { Epoch2datePipe } from './pipes/epoch2date.pipe';
 import { TranslatePipe } from './pipes/translate.pipe';
 // Directives
 import { NgInit } from './directives/NgInit';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
+    // Components
     CardComponent,
     ImagepickerComponent,
     StatusbarComponent,
-    FechaCardPipe,
     TxtfileeditorComponent,
     BlobeditorComponent,
-    FileordevicepopupComponent,
     FilepickerComponent,
+    FileordevicepopupComponent,
     CanvaseditorComponent,
     ScrollnavComponent,
     ScrollfilesComponent,
     PrejsonComponent,
-    ScrollfileComponent,
-    SortByNamePipe,
-    JsonColorPipe,
-    Epoch2datePipe,
-    TranslatePipe,
-    Json2svg,
-    NgInit,
     AdduserrolepopupComponent,
     AlertComponent,
     AuthorizationpopupComponent,
@@ -80,6 +74,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     PayupopupComponent,
     UserpopupComponent,
     WebcamComponent,
+    ScrollfileComponent,
+    // Pipes
+    SortByNamePipe,
+    JsonColorPipe,
+    FechaCardPipe,
+    Epoch2datePipe,
+    TranslatePipe,
+    Json2svg,
+    // Directives
+    NgInit,
   ],
   imports: [
     CommonModule,
@@ -99,6 +103,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSliderModule,
   ],
   exports: [
+    // Components
     CardComponent,
     ImagepickerComponent,
     StatusbarComponent,
@@ -110,13 +115,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ScrollnavComponent,
     ScrollfilesComponent,
     PrejsonComponent,
-    SortByNamePipe,
-    JsonColorPipe,
-    FechaCardPipe,
-    Epoch2datePipe,
-    TranslatePipe,
-    Json2svg,
-    NgInit,
     AdduserrolepopupComponent,
     AlertComponent,
     AuthorizationpopupComponent,
@@ -129,6 +127,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     PayupopupComponent,
     UserpopupComponent,
     WebcamComponent,
+    ScrollfileComponent,
+    // Pipes
+    SortByNamePipe,
+    JsonColorPipe,
+    FechaCardPipe,
+    Epoch2datePipe,
+    TranslatePipe,
+    Json2svg,
+    // Directives
+    NgInit,
   ],
   providers: [],
 })
