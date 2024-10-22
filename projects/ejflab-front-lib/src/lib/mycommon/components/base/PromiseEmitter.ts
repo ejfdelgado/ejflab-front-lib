@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import e from 'express';
+
 export class PromiseEmitter {
   promise: Promise<any>;
   emmiter: EventEmitter<any> = new EventEmitter();

@@ -1,9 +1,7 @@
+/// <reference path="./index.d.ts" />
 /*
  * Public API Surface of ejflab-front-lib
  */
-
-// Components
-export * from './lib/mycommon/mycommon.module';
 
 // Services
 export * from './lib/mycommon/services/authorization.service';
@@ -41,3 +39,46 @@ export * from './lib/mycommon/services/webcam.service';
 
 // Extra
 export * from './lib/mycommon/interceptors/JwtInterceptor';
+
+// Components
+export * from './lib/mycommon/components/adduserrolepopup/adduserrolepopup.component';
+export * from './lib/mycommon/components/alert/alert.component';
+export * from './lib/mycommon/components/authorizationpopup/authorizationpopup.component';
+export * from './lib/mycommon/components/base/base.component';
+export * from './lib/mycommon/components/base/baseMs.component';
+export * from './lib/mycommon/components/base/context.component';
+export * from './lib/mycommon/components/blobeditor/blobeditor.component';
+export * from './lib/mycommon/components/canvaseditor/canvaseditor.component';
+export * from './lib/mycommon/components/card/card.component';
+export * from './lib/mycommon/components/confirm/confirm.component';
+export * from './lib/mycommon/components/fileordevicepopup/fileordevicepopup.component';
+export * from './lib/mycommon/components/filepicker/filepicker.component';
+export * from './lib/mycommon/components/generic/generic.component';
+export * from './lib/mycommon/components/imagepicker/imagepicker.component';
+export * from './lib/mycommon/components/indicator/indicator.component';
+export * from './lib/mycommon/components/loginpopup/loginpopup.component';
+export * from './lib/mycommon/components/multiplepages/multiplepages.component';
+export * from './lib/mycommon/components/pagepopup/pagepopup.component';
+export * from './lib/mycommon/components/payupopup/payupopup.component';
+export * from './lib/mycommon/components/prejson/prejson.component';
+export * from './lib/mycommon/components/scrollfile/scrollfile.component';
+export * from './lib/mycommon/components/scrollfiles/scrollfiles.component';
+export * from './lib/mycommon/components/scrollnav/scrollnav.component';
+export * from './lib/mycommon/components/statusbar/statusbar.component';
+export * from './lib/mycommon/components/txtfileeditor/txtfileeditor.component';
+export * from './lib/mycommon/components/userpopup/userpopup.component';
+export * from './lib/mycommon/components/webcam/webcam.component';
+
+// Pipes
+export * from './lib/mycommon/pipes/epoch2date.pipe';
+export * from './lib/mycommon/pipes/fecha-card.pipe';
+export * from './lib/mycommon/pipes/json-color.pipe';
+export * from './lib/mycommon/pipes/json2svg.pipe';
+export * from './lib/mycommon/pipes/sort-by-name.pipe';
+export * from './lib/mycommon/pipes/translate.pipe';
+
+// Directives
+export * from './lib/mycommon/directives/NgInit';
+
+// Module
+export * from './lib/mycommon/mycommon.module';

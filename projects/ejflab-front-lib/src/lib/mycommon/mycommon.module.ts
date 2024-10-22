@@ -46,35 +46,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthService } from './services/auth.service';
-import { AuthorizationService } from './services/authorization.service';
-import { BackendPageService } from './services/backendPage.service';
-import { CallService } from './services/call.service';
-import { DictateService } from './services/dictate-service';
-import { FileService } from './services/file.service';
-import { FlowchartService } from './services/flowchart.service';
-import { GceService } from './services/gce.service';
-import { HttpService } from './services/http.service';
-import { ImagedetectionService } from './services/imagedetection.service';
-import { ImageiationService } from './services/imagiation.service';
-import { IndicatorService } from './services/indicator.service';
-import { LocalFileService } from './services/localfile.service';
-import { LocalPageService } from './services/localpage.service';
-import { LocalTupleService } from './services/localtuple.service';
-import { LoginService } from './services/login.service';
-import { MailService } from './services/mail.service';
-import { MicrosoftAuthService } from './services/microsoftAuth.service';
-import { MinioService } from './services/minio.service';
-import { ModalService } from './services/modal.service';
-import { MongoService } from './services/mongo.service';
-import { MyAudioService } from './services/myaudio.service';
-import { OpenCVService } from './services/opencv.service';
-import { PageService } from './services/page.service';
-import { PayuService } from './services/payu.service';
-import { TranslateService } from './services/translate.service';
-import { TupleService } from './services/tuple.service';
-import { MyUserService } from './services/user.service';
-import { WebcamService } from './services/webcam.service';
 
 @NgModule({
   declarations: [
@@ -159,39 +130,6 @@ import { WebcamService } from './services/webcam.service';
     UserpopupComponent,
     WebcamComponent,
   ],
-  providers: [
-    Json2svg,
-    NgInit,
-    // Services
-    AuthService,
-    AuthorizationService,
-    BackendPageService,
-    CallService,
-    DictateService,
-    FileService,
-    FlowchartService,
-    GceService,
-    HttpService,
-    ImagedetectionService,
-    ImageiationService,
-    IndicatorService,
-    LocalFileService,
-    LocalPageService,
-    LocalTupleService,
-    LoginService,
-    MailService,
-    MicrosoftAuthService,
-    MinioService,
-    ModalService,
-    MongoService,
-    MyAudioService,
-    OpenCVService,
-    PageService,
-    PayuService,
-    TranslateService,
-    TupleService,
-    MyUserService,
-    WebcamService
-  ],
+  providers: [],
 })
 export class MycommonModule {}

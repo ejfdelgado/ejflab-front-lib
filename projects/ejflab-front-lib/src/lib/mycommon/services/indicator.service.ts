@@ -1,6 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MycommonModule } from '../mycommon.module';
 
 interface WaitPayload {
   done: number;

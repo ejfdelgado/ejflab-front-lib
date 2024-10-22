@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { GuidesModule } from './views/guides/guides.module';
+import { MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +48,7 @@ import { GuidesModule } from './views/guides/guides.module';
     MatIconModule,
     WebcamModule,
     GuidesModule,
+    MycommonModule,
   ],
   providers: [
     ScreenTrackingService,
