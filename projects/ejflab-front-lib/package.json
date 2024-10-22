@@ -1,6 +1,10 @@
 {
   "name": "ejflab-front-lib",
-  "version": "0.0.3",
+  "version": "1.0.1",
+  "scripts": {
+    "mylogin": "npm login",
+    "mypublish": "npm publish --access=public"
+  },
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0",
@@ -13,7 +17,27 @@
     "@angular/material": "^18.2.0",
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
-    "@angular/router": "^18.2.0"
+    "@angular/router": "^18.2.0",
+    "@angular-devkit/build-angular": "^18.0.7",
+    "@angular/cli": "^18.0.7",
+    "@azure/msal-browser": "^3.24.0",
+    "@ejfdelgado/ejflab-common": "^1.5.3",
+    "@googlemaps/js-api-loader": "^1.16.8",
+    "@msgpack/msgpack": "^3.0.0-beta2",
+    "@tensorflow/tfjs": "^4.21.0",
+    "@tinkoff/angular-contenteditable-accessor": "^2.0.0",
+    "firebase-tools": "^13.13.1",
+    "latlon-geohash": "^2.0.0",
+    "moment": "^2.30.1",
+    "ng-packagr": "^18.0.6",
+    "ngx-material-timepicker": "^13.1.1",
+    "ngx-webcam": "^0.4.1",
+    "qrcode": "^1.5.4",
+    "recordrtc": "^5.6.2",
+    "rxjs": "^7.8.1",
+    "socket.io-client": "^4.7.5",
+    "typescript": "^5.4.5",
+    "zone.js": "~0.14.7"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -80,5 +80,19 @@ export * from './lib/mycommon/pipes/translate.pipe';
 // Directives
 export * from './lib/mycommon/directives/NgInit';
 
+// Interfaces
+export * from './lib/mycommon/components/base/VideoWebStream';
+export * from './lib/mycommon/components/base/RTCCom';
+export * from './lib/mycommon/components/base/PromiseEmitter';
+export * from './lib/mycommon/components/base/EmitterThen';
+export * from './lib/mycommon/components/base/processors/BaseProcesor';
+export * from './lib/mycommon/components/base/processors/EchoLogProcessor';
+export * from './lib/mycommon/components/base/processors/ReceiveLiveChangesProcessor';
+export * from './lib/mycommon/components/base/processors/RemoveUserProcessor';
+export * from './lib/mycommon/components/base/processors/SendLiveChangesProcessor';
+export * from './lib/mycommon/components/base/processors/SetModelProcessor';
+export * from './lib/mycommon/components/base/processors/UpdateUserListProcessor';
+
+
 // Module
 export * from './lib/mycommon/mycommon.module';

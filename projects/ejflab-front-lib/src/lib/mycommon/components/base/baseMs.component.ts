@@ -7,7 +7,6 @@ import {
   UserMicrosoft,
 } from '../../services/microsoftAuth.service';
 import { ContextComponent } from './context.component';
-import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
 import { ModalService } from '../../services/modal.service';
 import { v4 as uuidv4 } from 'uuid';
 
