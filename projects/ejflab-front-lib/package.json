@@ -1,6 +1,6 @@
 {
   "name": "ejflab-front-lib",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {},
   "peerDependencies": {
     "@angular/common": "^18.2.0",
