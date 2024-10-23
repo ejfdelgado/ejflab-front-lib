@@ -5,11 +5,11 @@ import { HttpOptionsData } from '../interfaces/login-data.interface';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { MyUtilities } from '@ejfdelgado/ejflab-common/src/MyUtilities';
 import { IndicatorService, Wait } from './indicator.service';
-import { ModalService } from './modal.service';
 import { AuthService } from '../services/auth.service';
 import { Buffer } from 'buffer';
 import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 import { FileSaveResponseData } from './fileInterface';
+import { ModalErrorService } from './modalError.service';
 
 const DEFAULT_PAGE_SIZE = 30;
 
@@ -48,7 +48,7 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private indicatorSrv: IndicatorService,
-    private modalSrv: ModalService,
+    private modalSrv: ModalErrorService,
     private auth: AuthService
   ) {}
 

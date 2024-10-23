@@ -1,3 +1,4 @@
+// This is used only for javascript classes
 declare module '@ejfdelgado/ejflab-common/src/ModuloDatoSeguro';
 declare module '@ejfdelgado/ejflab-common/src/MyDatesFront';
 declare module '@ejfdelgado/ejflab-common/src/sortify';

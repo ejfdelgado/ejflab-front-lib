@@ -12,6 +12,7 @@ export interface GenericData {
   timeout?: number;
   choices?: Array<GenericChoiceData>;
   callback?: string;
+  translateFolder?: string | null;
 }
 
 @Component({
@@ -25,6 +26,8 @@ export class GenericComponent implements OnInit {
   timeout: number = 0; // means no timeout
   choices: Array<GenericChoiceData> = [];
   callback: string = '';
+  translateFolder: string | null = null;
+  useTranslate: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<GenericComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GenericData
@@ -43,6 +46,10 @@ export class GenericComponent implements OnInit {
     }
     if (typeof data.callback == 'string') {
       this.callback = data.callback;
+    }
+    if (typeof data.translateFolder == 'string') {
+      this.translateFolder = data.translateFolder;
+      this.useTranslate = true;
     }
   }
 

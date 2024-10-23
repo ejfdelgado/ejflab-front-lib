@@ -26,6 +26,7 @@ export * from './lib/mycommon/services/mail.service';
 export * from './lib/mycommon/services/microsoftAuth.service';
 export * from './lib/mycommon/services/minio.service';
 export * from './lib/mycommon/services/modal.service';
+export * from './lib/mycommon/services/modalError.service';
 export * from './lib/mycommon/services/mongo.service';
 export * from './lib/mycommon/services/myaudio.service';
 export * from './lib/mycommon/services/opencv.service';

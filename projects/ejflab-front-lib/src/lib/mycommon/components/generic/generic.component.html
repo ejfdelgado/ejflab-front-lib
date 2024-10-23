@@ -1,12 +1,28 @@
-<div mat-dialog-title>
+<div mat-dialog-title *ngIf="!useTranslate">
     <h1 class="centrado">{{ title }}</h1>
     <span class="boton_cerrar" [mat-dialog-close]>
         <mat-icon>close</mat-icon>
     </span>
 </div>
-<p>{{ text }}</p>
-<div class="bottom_buttons">
-    <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
-        {{ someChoice.txt }}
-    </button>
+<div mat-dialog-content *ngIf="!useTranslate">
+    <p>{{ text }}</p>
+    <div class="bottom_buttons">
+        <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
+            {{ someChoice.txt }}
+        </button>
+    </div>
+</div>
+<div mat-dialog-title *ngIf="useTranslate">
+    <h1 class="centrado">{{ title | translate:translateFolder | async }}</h1>
+    <span class="boton_cerrar" [mat-dialog-close]>
+        <mat-icon>close</mat-icon>
+    </span>
+</div>
+<div mat-dialog-content *ngIf="useTranslate">
+    <p>{{ text | translate:translateFolder | async }}</p>
+    <div class="bottom_buttons">
+        <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
+            {{ someChoice.txt | translate:translateFolder | async }}
+        </button>
+    </div>
 </div>

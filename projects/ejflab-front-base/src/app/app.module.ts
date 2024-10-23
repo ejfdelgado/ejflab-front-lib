@@ -27,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
-import { GuidesModule, MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
+import { MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
+import { GuidesModule } from './view/guides/guides.module';
 
 @NgModule({
   declarations: [AppComponent],
