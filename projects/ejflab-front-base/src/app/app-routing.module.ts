@@ -5,8 +5,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
-import { GuidesModule } from './views/guides/guides.module';
-
+import { GuidesModule } from 'projects/ejflab-front-lib/src/public-api';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['customers']);
