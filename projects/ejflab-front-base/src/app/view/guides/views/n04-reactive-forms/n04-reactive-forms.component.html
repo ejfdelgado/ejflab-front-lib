@@ -1,0 +1,38 @@
+<app-documentation [data]="menuItem"></app-documentation>
+<div class="rows margin_top_10">
+    <div class="column">
+        <form class="columns" [formGroup]="myOpinionForm">
+            <div class="columns">
+                <label class="columns center_align no_select hand">
+                    Comment:
+                    <input type="text" formControlName="comment">
+                </label>
+            </div>
+            <div class="columns">
+                <label class="rows center_align no_select hand">
+                    <input type="radio" formControlName="visibility" value="public" class="hand" />
+                    Public
+                </label>
+                <label class="rows center_align no_select hand">
+                    <input type="radio" formControlName="visibility" value="private" class="hand" />
+                    Private
+                </label>
+            </div>
+            <div class="columns">
+                <label class="rows center_align no_select hand">
+                    <input type="checkbox" formControlName="reviewed" class="hand">
+                    Reviewed
+                </label>
+            </div>
+            <div class="columns">
+                <label class="columns center_align no_select hand">
+                    Summary ({{ model.characters }}):
+                    <textarea formControlName="summary" rows="5"></textarea>
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="column">
+        <pre>{{ myOpinionForm.value | json }}</pre>
+    </div>
+</div>

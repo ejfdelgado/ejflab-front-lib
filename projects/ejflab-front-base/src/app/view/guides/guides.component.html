@@ -1,0 +1,12 @@
+<div class="main_container">
+    <div class="index_side_bar">
+        <h1>Guides</h1>
+        <ol>
+            <li *ngFor="let menuChoice of menu" (click)="goTo(menuChoice.id)"
+                [ngClass]="{'selected': menuChoice.id == currentMenuChoice?.id}">{{ menuChoice.text }}</li>
+        </ol>
+    </div>
+    <div class="content_container">
+        <router-outlet (activate)="componentAdded($event)" (deactivate)="componentRemoved($event)"></router-outlet>
+    </div>
+</div>

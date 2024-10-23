@@ -1,0 +1,19 @@
+<app-documentation [data]="menuItem"></app-documentation>
+<p class="margin_top_10">
+    El <em>animal</em>&nbsp;<strong>{{ animal.nombre }}</strong>
+    tiene <strong>{{ animal.patas }}</strong>&nbsp;
+    <span *ngIf="animal.patas > 1">patas</span>
+    <span *ngIf="animal.patas == 1">pata</span>
+    además
+    <strong *ngIf="animal.mamifero">toma leche</strong>
+    <strong *ngIf="!animal.mamifero">NO toma leche</strong>
+</p>
+<p>
+    Lugares donde ha vivido:
+    <span *ngFor="let ubicacion of animal.ubicaciones; index as i">
+        <br>
+        Lugar #{{ i + 1 }} {{ ubicacion.nombre }}
+        <em class="gps">latitud {{ ubicacion.latitud }}</em>, 
+        <em class="gps">longitud {{ ubicacion.longitud }}</em>
+    </span>
+</p>
