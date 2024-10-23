@@ -98,4 +98,3 @@ export * from './lib/mycommon/interfaces/login-data.interface';
 
 // Modules
 export * from './lib/mycommon/mycommon.module';
-export * from './lib/guides/guides.module';
