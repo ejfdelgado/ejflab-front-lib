@@ -1,28 +1,28 @@
 <div mat-dialog-title *ngIf="!useTranslate">
-    <h1 class="centrado">{{ title }}</h1>
+    <h1 class="centrado">{{ title | interpolate:model }}</h1>
     <span class="boton_cerrar" [mat-dialog-close]>
         <mat-icon>close</mat-icon>
     </span>
 </div>
 <div mat-dialog-content *ngIf="!useTranslate">
-    <p>{{ text }}</p>
+    <p>{{ text | interpolate:model }}</p>
     <div class="bottom_buttons">
         <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
-            {{ someChoice.txt }}
+            {{ someChoice.txt | interpolate:model }}
         </button>
     </div>
 </div>
 <div mat-dialog-title *ngIf="useTranslate">
-    <h1 class="centrado">{{ title | translate:translateFolder | async }}</h1>
+    <h1 class="centrado">{{ title | translate:translateFolder:model | async }}</h1>
     <span class="boton_cerrar" [mat-dialog-close]>
         <mat-icon>close</mat-icon>
     </span>
 </div>
 <div mat-dialog-content *ngIf="useTranslate">
-    <p>{{ text | translate:translateFolder | async }}</p>
+    <p>{{ text | translate:translateFolder:model | async }}</p>
     <div class="bottom_buttons">
         <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
-            {{ someChoice.txt | translate:translateFolder | async }}
+            {{ someChoice.txt | translate:translateFolder:model | async }}
         </button>
     </div>
 </div>

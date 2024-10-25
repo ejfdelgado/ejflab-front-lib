@@ -19,32 +19,46 @@ export class N07ModalsComponent extends MenuItemClass {
     super();
   }
 
-  openAlert() {
-    this.modalSrv.alert({ title: 'Title', txt: 'This is my content' });
-  }
-
   async openConfirm() {
-    console.log(`The system open the pop up`);
-    this.model.confirm = await this.modalSrv.confirm({
-      txt: 'Sure?',
-      title: 'Confirm title',
-    });
-    console.log(`The user choose ${this.model.confirm}`);
-  }
-
-  async openCustom() {
-    console.log(`The system open the pop up`);
-
-    const modalResponse: any = await this.modalSrv.generic({
+    const popUpParameter = {
       translateFolder: 'test',
       title: 'popups.custom.title',
       txt: 'popups.custom.text',
       choices: [
-        { txt: 'popups.choices.yes_word', val: '1' },
-        { txt: 'popups.choices.no_word', val: '2' },
+        { txt: 'popups.choices.yes_word', val: 'si' },
+        { txt: 'popups.choices.no_word', val: 'no' },
       ],
-    });
+    };
+    const modalResponse: any = await this.modalSrv.generic(popUpParameter);
     this.model.generic = modalResponse?.choice;
-    console.log(`The user choose ${this.model.generic}`);
+  }
+
+  async openAlert() {
+    const popUpParameter = {
+      translateFolder: 'test',
+      model: {
+        name: "Pinky",
+      },
+      title: 'This title does not exists...',
+      txt: 'popups.alert.text',
+      choices: [
+        { txt: 'popups.choices.ok', val: '1' },
+      ],
+    };
+    await this.modalSrv.generic(popUpParameter);
+  }
+
+  async openConfirmWithModel() {
+    const popUpParameter = {
+      model: {
+        name: "Pinky",
+      },
+      title: 'Title for ${name}',
+      txt: 'This is the ${name} text',
+      choices: [
+        { txt: 'Ok ${name}', val: 'ok' }
+      ],
+    };
+    await this.modalSrv.generic(popUpParameter);
   }
 }

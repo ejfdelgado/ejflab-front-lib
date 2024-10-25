@@ -1,0 +1,23 @@
+{
+  "say_hi": "Hello",
+  "say_bye": "Bye",
+  "popups": {
+    "choices": {
+      "yes_word": "Yes",
+      "no_word": "Not",
+      "ok": "Ok"
+    },
+    "custom": {
+      "title": "Select the person",
+      "text": "Choose one of tjhe followings buttons:"
+    },
+    "exit": {
+      "title": "See you soon",
+      "text": "I would like"
+    },
+    "alert": {
+      "title": "Alert!",
+      "text": "Changes can't be undone by ${name}"
+    }
+  }
+}

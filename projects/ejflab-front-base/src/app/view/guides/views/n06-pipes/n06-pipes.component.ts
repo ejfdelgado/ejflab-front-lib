@@ -9,6 +9,7 @@ import { TranslateService } from 'ejflab-front-lib';
 })
 export class N06PipesComponent extends MenuItemClass implements OnInit {
   model: any = {
+    name: "Pinky",
     epoch: new Date().getTime(),
   };
   constructor(private translateSrv: TranslateService) {

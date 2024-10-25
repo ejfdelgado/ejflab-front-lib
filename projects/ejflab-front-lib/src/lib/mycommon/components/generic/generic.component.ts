@@ -13,6 +13,7 @@ export interface GenericData {
   choices?: Array<GenericChoiceData>;
   callback?: string;
   translateFolder?: string | null;
+  model?: any;
 }
 
 @Component({
@@ -28,6 +29,7 @@ export class GenericComponent implements OnInit {
   callback: string = '';
   translateFolder: string | null = null;
   useTranslate: boolean = false;
+  model: any = null;
   constructor(
     public dialogRef: MatDialogRef<GenericComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GenericData
@@ -51,6 +53,7 @@ export class GenericComponent implements OnInit {
       this.translateFolder = data.translateFolder;
       this.useTranslate = true;
     }
+    this.model = data.model;
   }
 
   ngOnInit(): void {

@@ -19,3 +19,8 @@
     <span>await this.translateSrv.translate("say_bye", ["test"])</span>
     <span>{{ model.text }}</span>
 </div>
+<div class="container_horizontal gap_10 fill bordered_table">
+    <span>{{ "Hello ${name}" }}</span>
+    <span>interpolate</span>
+    <span>{{ "Hello ${name}" | interpolate:model }}</span>
+</div>

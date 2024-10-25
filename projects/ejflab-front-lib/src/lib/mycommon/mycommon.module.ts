@@ -45,6 +45,7 @@ import { JsonColorPipe } from './pipes/json-color.pipe';
 import { Json2svg } from './pipes/json2svg.pipe';
 import { Epoch2datePipe } from './pipes/epoch2date.pipe';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { InterpolatePipe } from './pipes/interpolate.pipe';
 // Directives
 import { NgInit } from './directives/NgInit';
 
@@ -82,6 +83,7 @@ import { NgInit } from './directives/NgInit';
     Epoch2datePipe,
     TranslatePipe,
     Json2svg,
+    InterpolatePipe,
     // Directives
     NgInit,
   ],
@@ -135,6 +137,7 @@ import { NgInit } from './directives/NgInit';
     Epoch2datePipe,
     TranslatePipe,
     Json2svg,
+    InterpolatePipe,
     // Directives
     NgInit,
   ],

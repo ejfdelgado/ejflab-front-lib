@@ -66,7 +66,7 @@ export class TranslateService {
 
   async translate(key: string, args: unknown[]) {
     const valor = await this.loadLanguageDB(args);
-    const def: any = '...';
+    const def: any = key;
     let raw = SimpleObj.getValue(valor, key, def);
     if (args.length >= 2) {
       raw = this.renderer.render(raw, args[1]);
