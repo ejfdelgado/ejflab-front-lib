@@ -12,7 +12,7 @@ export interface GenericData {
   timeout?: number;
   choices?: Array<GenericChoiceData>;
   callback?: string;
-  translateFolder?: string | null;
+  translateFolder?: any
   model?: any;
 }
 
@@ -28,7 +28,6 @@ export class GenericComponent implements OnInit {
   choices: Array<GenericChoiceData> = [];
   callback: string = '';
   translateFolder: string | null = null;
-  useTranslate: boolean = false;
   model: any = null;
   constructor(
     public dialogRef: MatDialogRef<GenericComponent>,
@@ -51,7 +50,6 @@ export class GenericComponent implements OnInit {
     }
     if (typeof data.translateFolder == 'string') {
       this.translateFolder = data.translateFolder;
-      this.useTranslate = true;
     }
     this.model = data.model;
   }

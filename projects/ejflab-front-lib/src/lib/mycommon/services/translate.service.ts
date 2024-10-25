@@ -42,18 +42,22 @@ export class TranslateService {
     return '';
   }
 
-  async loadLanguageDB(args: unknown[]) {
-    // Read query param
+  getCurrentLanguage() {
+    let currentLang = 'en';
     const urlParams = new URLSearchParams(window.location.search);
     const queryParamLanguage = urlParams.get('l');
-    let currentLang = 'en';
     if (queryParamLanguage) {
       currentLang = queryParamLanguage;
       this.setCookie(this.COOKIE_NAME, currentLang, 1000);
     } else {
       currentLang = this.getCookie(this.COOKIE_NAME) || 'en';
     }
+    return currentLang;
+  }
 
+  async loadLanguageDB(args: unknown[]) {
+    // Read query param
+    const currentLang = this.getCurrentLanguage();
     const key = `${args[0]}/${currentLang}`;
     let promesa = this.keyPromises[key];
     if (!promesa) {
@@ -65,12 +69,29 @@ export class TranslateService {
   }
 
   async translate(key: string, args: unknown[]) {
-    const valor = await this.loadLanguageDB(args);
     const def: any = key;
-    let raw = SimpleObj.getValue(valor, key, def);
-    if (args.length >= 2) {
-      raw = this.renderer.render(raw, args[1]);
+    if (args.length > 0) {
+      let valor: any = {};
+      const args0: any = args[0];
+      if (typeof args0 == 'string') {
+        valor = await this.loadLanguageDB(args);
+      } else if (
+        args0 !== undefined &&
+        args0 !== null &&
+        typeof args0 == 'object'
+      ) {
+        const currentLang = this.getCurrentLanguage();
+        if (currentLang in args0) {
+          valor = args0[currentLang];
+        }
+      }
+      let raw = SimpleObj.getValue(valor, key, def);
+      if (args.length >= 2) {
+        raw = this.renderer.render(raw, args[1]);
+      }
+      return raw;
+    } else {
+      return def;
     }
-    return raw;
   }
 }

@@ -17,6 +17,8 @@ export interface AlertData {
   buttons?: Array<AlertDataButton>;
   payload?: any;
   autoCloseMilis?: number;
+  translateFolder?: string | null;
+  model?: any;
 }
 
 @Component({

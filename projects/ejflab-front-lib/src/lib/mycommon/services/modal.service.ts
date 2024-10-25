@@ -17,17 +17,14 @@ export class ModalService {
   constructor(public dialog: MatDialog) {}
 
   async alert(payload: AlertData) {
-    const dialogRef = this.dialog.open(AlertComponent, { data: payload });
-    if (typeof payload.autoCloseMilis == 'number') {
-      setTimeout(() => {
-        dialogRef.close();
-      }, payload.autoCloseMilis);
-    }
-    return new Promise((resolve) => {
-      dialogRef.afterClosed().subscribe((result) => {
-        resolve(result);
-      });
-    });
+    const homologation: GenericData = {
+      txt: payload.txt,
+      title: payload.title,
+      translateFolder: payload.translateFolder,
+      model: payload.model,
+      choices: [{ txt: 'Ok', val: '0' }],
+    };
+    return this.generic(homologation);
   }
 
   async error(error: Error) {
@@ -42,12 +39,24 @@ export class ModalService {
   }
 
   async confirm(payload: ConfirmData) {
-    const dialogRef = this.dialog.open(ConfirmComponent, { data: payload });
-    return new Promise((resolve) => {
-      dialogRef.afterClosed().subscribe((result) => {
-        resolve(result);
-      });
-    });
+    const homologation: GenericData = {
+      txt: payload.txt,
+      title: payload.title,
+      translateFolder: payload.translateFolder,
+      model: payload.model,
+      choices: [
+        { txt: 'Ok', val: '1' },
+        { txt: 'No', val: '0' },
+      ],
+    };
+    const choice = await this.generic(homologation);
+    if (choice === '1') {
+      return true;
+    } else if (choice === '0') {
+      return true;
+    } else {
+      return null;
+    }
   }
 
   async generic(payload: GenericData) {
