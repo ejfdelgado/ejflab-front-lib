@@ -1,6 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItemClass } from '../../models/menu';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+
+export function MyCustomValidator(lista: Array<number>): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const valor = control.value;
+
+    const indice = lista.indexOf(valor);
+    //console.log("El indice es "+indice);
+    
+    if (indice == -1) {
+      // Caso que esta mal
+      return {
+        'no_esta_en_la_lista': true
+      };
+    }
+
+    // Todo bien
+    return {};
+  };
+}
 
 @Component({
   selector: 'app-n05-form-validation',
@@ -20,10 +40,10 @@ export class N05FormValidationComponent
   ngOnInit(): void {
     // Create the form
     this.myOpinionForm = new FormGroup({
-      comment: new FormControl('', [Validators.required]),
-      visibility: new FormControl('public'),
-      reviewed: new FormControl(false),
-      summary: new FormControl(''),
+      comment: new FormControl(null, [MyCustomValidator([50, 30])]),
+      visibility: new FormControl(null, [Validators.required]),
+      reviewed: new FormControl(null, [Validators.required]),
+      summary: new FormControl(null, [Validators.required]),
     });
   }
 

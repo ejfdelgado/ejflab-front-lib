@@ -1,0 +1,15 @@
+input.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+textarea.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+input[type="radio"].ng-invalid.ng-touched {
+    outline: 2px solid red;
+}
+
+input[type="checkbox"].ng-invalid.ng-touched {
+    outline: 2px solid red;
+}

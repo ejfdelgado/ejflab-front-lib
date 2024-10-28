@@ -18,10 +18,10 @@ export class N04ReactiveFormsComponent extends MenuItemClass implements OnInit {
   ngOnInit(): void {
     // Create the form
     this.myOpinionForm = new FormGroup({
-      comment: new FormControl(''),
-      visibility: new FormControl('public'),
-      reviewed: new FormControl(false),
-      summary: new FormControl(''),
+      myComment: new FormControl('Texto inicial'),
+      visibility: new FormControl('private'),
+      reviewed: new FormControl(true),
+      summary: new FormControl('Resumen inicial'),
     });
 
     // bind the event

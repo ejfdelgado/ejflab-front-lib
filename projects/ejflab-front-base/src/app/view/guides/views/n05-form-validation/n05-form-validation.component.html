@@ -4,8 +4,8 @@
         <form class="columns" [formGroup]="myOpinionForm" (ngSubmit)="sendData()">
             <div class="columns">
                 <label class="columns center_align no_select hand">
-                    Comment:
-                    <input type="text" formControlName="comment">
+                    Comment*:
+                    <input type="number" formControlName="comment">
                 </label>
             </div>
             <div class="columns">

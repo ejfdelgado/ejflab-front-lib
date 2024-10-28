@@ -6,9 +6,9 @@
 </div>
 <div mat-dialog-content>
     <p>{{ text | translate:translateFolder:model | async }}</p>
-    <div class="bottom_buttons">
-        <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
-            {{ someChoice.txt | translate:translateFolder:model | async }}
-        </button>
-    </div>
+</div>
+<div mat-dialog-actions class="bottom_buttons">
+    <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
+        {{ someChoice.txt | translate:translateFolder:model | async }}
+    </button>
 </div>
