@@ -269,12 +269,12 @@ export class RTCCom {
   }
 
   static async handleDisconnection(socketId: string) {
-    RTCCom.closeChannelWith(socketId);
+    await RTCCom.closeChannelWith(socketId);
     this.mustUpdate.emit();
   }
 
   static setOnlineStatus(status: string) {
-    console.log(status);
+    console.log(`RTCPeer Conection ${status}`);
   }
 
   static sendBuffer(dataChannel: RTCDataChannel, buffer: Buffer) {

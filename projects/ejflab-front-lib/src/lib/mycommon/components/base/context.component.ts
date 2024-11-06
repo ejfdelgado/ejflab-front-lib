@@ -409,8 +409,12 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     });
   }
 
-  sleep(millis: number): Promise<void> {
+  sleep(min: number, max?: number): Promise<void> {
     return new Promise((resolve) => {
+      let millis = min;
+      if (typeof max == 'string') {
+        millis = Math.ceil(Math.random() * Math.abs(max - min) + min);
+      }
       setTimeout(() => {
         resolve();
       }, millis);
