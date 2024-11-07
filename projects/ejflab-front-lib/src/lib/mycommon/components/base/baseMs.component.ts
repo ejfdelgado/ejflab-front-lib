@@ -41,8 +41,8 @@ export abstract class BaseMsComponent
       }
     );
   }
-  override ngOnDestroy(): void {
-    super.ngOnDestroy();
+  override async ngOnDestroy() {
+    await super.ngOnDestroy();
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }

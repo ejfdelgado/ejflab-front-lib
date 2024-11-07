@@ -296,8 +296,8 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     return MyCookies.deleteCookie(cname);
   }
 
-  ngOnDestroy(): void {
-    this.socketIoDisconnect();
+  async ngOnDestroy() {
+    await this.socketIoDisconnect();
   }
 
   readQueryParam(

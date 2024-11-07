@@ -229,8 +229,8 @@ export abstract class BaseComponent
 
   onTupleWriteDone() {}
 
-  override ngOnDestroy() {
-    super.ngOnDestroy();
+  override async ngOnDestroy() {
+    await super.ngOnDestroy();
     if (this.loginSubscription) {
       this.loginSubscription.unsubscribe();
     }
