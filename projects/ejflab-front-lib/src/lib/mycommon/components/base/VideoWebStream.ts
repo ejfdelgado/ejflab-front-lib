@@ -66,7 +66,7 @@ export class VideoWebStream {
 
   constructor() {
     this.emitterDevices.then((devices: DevicesData) => {
-      this.autoSelectFirstDevice(devices);
+      this.autoSelectMicrophoneAndVideoDevice(devices);
     });
     this.emitterStreams.subscribe((stream) => {
       this.updateSelectedDevice(stream);
@@ -190,25 +190,8 @@ export class VideoWebStream {
       }
     }
     this.devices = { videos, audios, speaker };
-    this.autoFixSelectedDevice();
+    this.autoFixSelectedSpeaker();
     return this.devices;
-  }
-
-  useAudioDevice(audioDevice: string) {
-    this.currentDevices.audio = audioDevice;
-    this.storeCustomSelectedDevices();
-  }
-  useVideoDevice(videoDevice: string) {
-    this.currentDevices.video = videoDevice;
-    this.storeCustomSelectedDevices();
-  }
-
-  logCurrentDevices() {
-    const audioSource = this.currentDevices.audio;
-    const videoSource = this.currentDevices.video;
-    console.log(
-      `VideoWebStream.logCurrentDevices... video:${videoSource} audio:${audioSource}`
-    );
   }
 
   sleep(millis: number): Promise<void> {
@@ -347,6 +330,29 @@ export class VideoWebStream {
     this.emitterStreams.emit(null);
   }
 
+  logCurrentDevices() {
+    const audioSource = this.currentDevices.audio;
+    const videoSource = this.currentDevices.video;
+    console.log(
+      `VideoWebStream.logCurrentDevices... video:${videoSource} audio:${audioSource}`
+    );
+  }
+
+  useSpeakerDevice(outputDevice: string) {
+    this.currentDevices.speaker = outputDevice;
+    this.storeCustomSelectedDevices();
+  }
+
+  useAudioDevice(audioDevice: string) {
+    this.currentDevices.audio = audioDevice;
+    this.storeCustomSelectedDevices();
+  }
+
+  useVideoDevice(videoDevice: string) {
+    this.currentDevices.video = videoDevice;
+    this.storeCustomSelectedDevices();
+  }
+
   updateSelectedDevice(streams: MultiScaleMediaStream | null) {
     //this.logCurrentDevices();
     if (!streams) {
@@ -369,31 +375,94 @@ export class VideoWebStream {
   }
 
   storeCustomSelectedDevices() {
-    let audioInput = this.currentDevices.audio;
-    let audioOutput = this.currentDevices.speaker;
-    let video = this.currentDevices.video;
-    // fallback
-    if (!audioInput) {
-      audioInput = '';
+    let audioInput = '';
+    let videoInput = '';
+    let audioOutput = '';
+    const microphoneDevice = this.searchMicrophoneDevice(
+      this.devices,
+      this.currentDevices.audio
+    );
+    const videoDevice = this.searchVideoDevice(
+      this.devices,
+      this.currentDevices.video
+    );
+    const speakerDevice = this.searchSpeakerDevice(
+      this.devices,
+      this.currentDevices.speaker
+    );
+    if (microphoneDevice) {
+      audioInput = microphoneDevice.txt;
     }
-    if (!video) {
-      video = '';
+    if (videoDevice) {
+      videoInput = videoDevice.txt;
     }
-    if (!audioOutput) {
-      audioOutput = '';
+    if (speakerDevice) {
+      audioOutput = speakerDevice.txt;
     }
-    MyCookies.setCookie('default_audio_input', audioInput, 365);
-    MyCookies.setCookie('default_audio_output', audioOutput, 365);
-    MyCookies.setCookie('default_video', video, 365);
+    const DAYS = 365;
+    MyCookies.setCookie('default_audio_input', audioInput, DAYS);
+    MyCookies.setCookie('default_video', videoInput, DAYS);
+    MyCookies.setCookie('default_audio_output', audioOutput, DAYS);
   }
 
-  autoFixSelectedDevice() {
+  searchSpeakerDevice(
+    devices: DevicesData,
+    query: string | null,
+    type: string = 'id'
+  ) {
+    const current = devices.speaker.filter((device) => {
+      return query == (device as any)[type];
+    });
+    if (current.length == 0) {
+      return null;
+    } else {
+      return current[0];
+    }
+  }
+
+  searchMicrophoneDevice(
+    devices: DevicesData,
+    query: string | null,
+    type: string = 'id'
+  ) {
+    const current = devices.audios.filter((device) => {
+      return query == (device as any)[type];
+    });
+    if (current.length == 0) {
+      return null;
+    } else {
+      return current[0];
+    }
+  }
+
+  searchVideoDevice(
+    devices: DevicesData,
+    query: string | null,
+    type: string = 'id'
+  ) {
+    const current = devices.videos.filter((device) => {
+      return query == (device as any)[type];
+    });
+    if (current.length == 0) {
+      return null;
+    } else {
+      return current[0];
+    }
+  }
+
+  autoFixSelectedSpeaker() {
     if (!this.currentDevices.speaker) {
       if (this.devices.speaker.length > 0) {
-        const currentSpeaker = this.devices.speaker.filter((device) => {
-          return this.currentDevices.speaker == device.id;
-        });
-        if (currentSpeaker.length == 0) {
+        // Search in cookie
+        const oldValue = MyCookies.getCookie('default_audio_output');
+        const oldDevice = this.searchSpeakerDevice(
+          this.devices,
+          oldValue,
+          'txt'
+        );
+        if (oldDevice) {
+          this.currentDevices.speaker = oldDevice.id;
+        } else {
           this.currentDevices.speaker = this.devices.speaker[0].id;
           this.storeCustomSelectedDevices();
         }
@@ -405,17 +474,22 @@ export class VideoWebStream {
    * Select cold cookie selected value, or first if exist at least 1
    * @param devices
    */
-  autoSelectFirstDevice(devices: DevicesData) {
+  autoSelectMicrophoneAndVideoDevice(devices: DevicesData) {
     //this.logCurrentDevices();
-    // Setup audio
+    // Setup audio input microphone
     if (devices.audios.length > 0) {
       if (!this.currentDevices.audio) {
-        this.currentDevices.audio = MyCookies.getCookie('default_audio_input');
+        const oldValue = MyCookies.getCookie('default_audio_input');
+        const oldDevice = this.searchMicrophoneDevice(devices, oldValue, 'txt');
+        if (oldDevice) {
+          this.currentDevices.audio = oldDevice.id;
+        }
       }
-      const currentAudio = devices.audios.filter((device) => {
-        return this.currentDevices.audio == device.id;
-      });
-      if (currentAudio.length == 0) {
+      const currentAudio = this.searchMicrophoneDevice(
+        devices,
+        this.currentDevices.audio
+      );
+      if (!currentAudio) {
         this.currentDevices.audio = devices.audios[0].id;
       }
     } else {
@@ -424,12 +498,17 @@ export class VideoWebStream {
     // Setup video
     if (devices.videos.length > 0) {
       if (!this.currentDevices.video) {
-        this.currentDevices.video = MyCookies.getCookie('default_video');
+        const oldValue = MyCookies.getCookie('default_video');
+        const oldDevice = this.searchVideoDevice(devices, oldValue, 'txt');
+        if (oldDevice) {
+          this.currentDevices.video = oldDevice.id;
+        }
       }
-      const currentVideo = devices.videos.filter((device) => {
-        return this.currentDevices.video == device.id;
-      });
-      if (currentVideo.length == 0) {
+      const currentVideo = this.searchVideoDevice(
+        devices,
+        this.currentDevices.video
+      );
+      if (!currentVideo) {
         this.currentDevices.video = devices.videos[0].id;
       }
     } else {
