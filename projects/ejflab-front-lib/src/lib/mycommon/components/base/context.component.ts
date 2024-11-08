@@ -18,6 +18,7 @@ import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 import { PromiseEmitter } from './PromiseEmitter';
 import { ModalService } from '../../services/modal.service';
 import { RTCCom } from './RTCCom';
+import { ModuloSonido } from '@ejfdelgado/ejflab-common/src/ModuloSonido';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 
 export interface FlowChartRef {
@@ -147,12 +148,12 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
         },
         waitUntilConnection
       );
-      this.connectionState = 'online';
       if (this.socketId === null) {
         this.bindEvents();
         this.bindBasic(socket);
       }
       await this.getCallServiceInstance().waitUntilConnection();
+      this.connectionState = 'online';
       this.getCallServiceInstance().emitEvent('askRoom', {
         room: this.builderConfig.roomName,
       });
@@ -419,5 +420,9 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
         resolve();
       }, millis);
     });
+  }
+
+  playSound(argumento: string) {
+    ModuloSonido.play(`${MyConstants.SRV_ROOT}assets/sounds/${argumento}`);
   }
 }
