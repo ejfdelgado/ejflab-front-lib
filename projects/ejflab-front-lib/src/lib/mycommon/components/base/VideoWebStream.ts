@@ -393,10 +393,10 @@ export class VideoWebStream {
       this.devices,
       this.currentDevices.speaker
     );
-    console.log('storeCustomSelectedDevices');
-    console.log(microphoneDevice);
-    console.log(videoDevice);
-    console.log(speakerDevice);
+    //console.log('storeCustomSelectedDevices');
+    //console.log(microphoneDevice);
+    //console.log(videoDevice);
+    //console.log(speakerDevice);
     if (microphoneDevice) {
       audioInput = microphoneDevice.txt;
     }

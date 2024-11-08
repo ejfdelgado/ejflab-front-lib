@@ -422,7 +422,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     });
   }
 
-  playSound(argumento: string) {
-    ModuloSonido.play(`${MyConstants.SRV_ROOT}assets/sounds/${argumento}`);
+  playSound(argumento: string, loop = false, volume = 1) {
+    ModuloSonido.play(`${MyConstants.SRV_ROOT}assets/sounds/${argumento}`, loop, volume);
   }
 }
