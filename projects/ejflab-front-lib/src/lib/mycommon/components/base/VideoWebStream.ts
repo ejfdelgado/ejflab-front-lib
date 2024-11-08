@@ -339,16 +339,19 @@ export class VideoWebStream {
   }
 
   useSpeakerDevice(outputDevice: string) {
+    console.log(`useSpeakerDevice ${outputDevice}`);
     this.currentDevices.speaker = outputDevice;
     this.storeCustomSelectedDevices();
   }
 
   useAudioDevice(audioDevice: string) {
+    console.log(`useAudioDevice ${audioDevice}`);
     this.currentDevices.audio = audioDevice;
     this.storeCustomSelectedDevices();
   }
 
   useVideoDevice(videoDevice: string) {
+    console.log(`useVideoDevice ${videoDevice}`);
     this.currentDevices.video = videoDevice;
     this.storeCustomSelectedDevices();
   }
@@ -390,6 +393,10 @@ export class VideoWebStream {
       this.devices,
       this.currentDevices.speaker
     );
+    console.log('storeCustomSelectedDevices');
+    console.log(microphoneDevice);
+    console.log(videoDevice);
+    console.log(speakerDevice);
     if (microphoneDevice) {
       audioInput = microphoneDevice.txt;
     }
