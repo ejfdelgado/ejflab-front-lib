@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { EmitterThen } from './EmitterThen';
+import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
 
 declare var MediaStreamTrackProcessor: any;
 declare var MediaStreamTrackGenerator: any;
@@ -193,19 +194,13 @@ export class VideoWebStream {
     return this.devices;
   }
 
-  autoFixSelectedDevice() {
-    if (!this.currentDevices.speaker) {
-      if (this.devices.speaker.length > 0) {
-        this.currentDevices.speaker = this.devices.speaker[0].id;
-      }
-    }
-  }
-
   useAudioDevice(audioDevice: string) {
     this.currentDevices.audio = audioDevice;
+    this.storeCustomSelectedDevices();
   }
   useVideoDevice(videoDevice: string) {
     this.currentDevices.video = videoDevice;
+    this.storeCustomSelectedDevices();
   }
 
   logCurrentDevices() {
@@ -369,12 +364,54 @@ export class VideoWebStream {
         return response;
       })[0]?.id;
     }
+    this.storeCustomSelectedDevices();
     //this.logCurrentDevices();
   }
 
+  storeCustomSelectedDevices() {
+    let audioInput = this.currentDevices.audio;
+    let audioOutput = this.currentDevices.speaker;
+    let video = this.currentDevices.video;
+    // fallback
+    if (!audioInput) {
+      audioInput = '';
+    }
+    if (!video) {
+      video = '';
+    }
+    if (!audioOutput) {
+      audioOutput = '';
+    }
+    MyCookies.setCookie('default_audio_input', audioInput, 365);
+    MyCookies.setCookie('default_audio_output', audioOutput, 365);
+    MyCookies.setCookie('default_video', video, 365);
+  }
+
+  autoFixSelectedDevice() {
+    if (!this.currentDevices.speaker) {
+      if (this.devices.speaker.length > 0) {
+        const currentSpeaker = this.devices.speaker.filter((device) => {
+          return this.currentDevices.speaker == device.id;
+        });
+        if (currentSpeaker.length == 0) {
+          this.currentDevices.speaker = this.devices.speaker[0].id;
+          this.storeCustomSelectedDevices();
+        }
+      }
+    }
+  }
+
+  /**
+   * Select cold cookie selected value, or first if exist at least 1
+   * @param devices
+   */
   autoSelectFirstDevice(devices: DevicesData) {
     //this.logCurrentDevices();
+    // Setup audio
     if (devices.audios.length > 0) {
+      if (!this.currentDevices.audio) {
+        this.currentDevices.audio = MyCookies.getCookie('default_audio_input');
+      }
       const currentAudio = devices.audios.filter((device) => {
         return this.currentDevices.audio == device.id;
       });
@@ -384,7 +421,11 @@ export class VideoWebStream {
     } else {
       this.currentDevices.audio = null;
     }
+    // Setup video
     if (devices.videos.length > 0) {
+      if (!this.currentDevices.video) {
+        this.currentDevices.video = MyCookies.getCookie('default_video');
+      }
       const currentVideo = devices.videos.filter((device) => {
         return this.currentDevices.video == device.id;
       });
@@ -394,6 +435,7 @@ export class VideoWebStream {
     } else {
       this.currentDevices.video = null;
     }
+    this.storeCustomSelectedDevices();
     //this.logCurrentDevices();
   }
 
