@@ -14,6 +14,7 @@ interface ClientToServerEvents {
 export interface ConnectionDataOptions {
   room: string;
   uuid: string | null;
+  model?: string;
 }
 
 export class CallServiceInstance {

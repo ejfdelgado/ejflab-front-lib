@@ -135,7 +135,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     }, 0);
   }
 
-  async socketIoConnect(config?: LiveModelConfigData) {
+  async socketIoConnect(config?: LiveModelConfigData, model?: any) {
     if (config) {
       this.builderConfig = config;
     }
@@ -145,6 +145,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
         {
           room: this.builderConfig.roomName,
           uuid: this.getSessionStorageValue('ANONYMOUS_USER'),
+          model: model? JSON.stringify(model) : undefined,
         },
         waitUntilConnection
       );
