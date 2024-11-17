@@ -32,6 +32,7 @@ export class RTCCom {
   static mediaStreams: MultiScaleMediaStream | null = null;
   static callMadeConfigured: EventEmitter<void> = new EventEmitter();
   static includeOtherPeersEvent: EventEmitter<void> = new EventEmitter();
+  static streamActive: EventEmitter<any> = new EventEmitter();
 
   static async init(callServiceInstance: CallServiceInstance) {
     this.rtcConfig = new PromiseEmitter();
@@ -509,13 +510,32 @@ export class RTCCom {
           )}`
         );
         peerRef.streams.audio.stream = stream;
+        // bind events with event emmiter
+        const emitFunction = () => {
+          // Emit Event
+          RTCCom.streamActive.emit({
+            type: 'audio',
+            socketId: remoteSocketId,
+          });
+        };
+        stream.addEventListener('active', emitFunction);
+        emitFunction();
       } else if (stream.getVideoTracks().length > 0) {
         peerRef.streams.video.push({
           stream: stream,
         });
+        const emitFunction = () => {
+          // Emit Event
+          RTCCom.streamActive.emit({
+            type: 'video',
+            id: peerRef.streams.video.length,
+            socketId: remoteSocketId,
+          });
+        };
+        stream.addEventListener('active', emitFunction);
+        emitFunction();
         console.log(
-          `STREAM RECEIVE: socketId: ${remoteSocketId} key:video#${
-            peerRef.streams.video.length
+          `STREAM RECEIVE: socketId: ${remoteSocketId} key:video#${peerRef.streams.video.length
           } ${RTCCom.printMediaStream(stream)}`
         );
         // TODO clean old/closed streams
@@ -636,9 +656,8 @@ export class RTCCom {
     if (!stream) {
       return 'null';
     } else {
-      return `Stream: ${stream.id} ${stream.active}${
-        stream.getAudioTracks().length > 0 ? ' AUDIO' : ''
-      }${stream.getVideoTracks().length > 0 ? ' VIDEO' : ''}`;
+      return `Stream: ${stream.id} ${stream.active}${stream.getAudioTracks().length > 0 ? ' AUDIO' : ''
+        }${stream.getVideoTracks().length > 0 ? ' VIDEO' : ''}`;
     }
   }
 }
