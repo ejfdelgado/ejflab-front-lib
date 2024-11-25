@@ -22,6 +22,13 @@ export interface PeerOutputElements {
   video?: HTMLVideoElement;
 }
 
+export interface StreamActiveData {
+  type: string;
+  socketId: string;
+  stream: MediaStream,
+  id?: number;
+}
+
 export class RTCCom {
   static peers: { [key: string]: PeerDataChannel } = {};
   static peersElements: { [key: string]: PeerOutputElements } = {};
@@ -32,7 +39,7 @@ export class RTCCom {
   static mediaStreams: MultiScaleMediaStream | null = null;
   static callMadeConfigured: EventEmitter<void> = new EventEmitter();
   static includeOtherPeersEvent: EventEmitter<void> = new EventEmitter();
-  static streamActive: EventEmitter<any> = new EventEmitter();
+  static streamActive: EventEmitter<StreamActiveData> = new EventEmitter();
 
   static async init(callServiceInstance: CallServiceInstance) {
     this.rtcConfig = new PromiseEmitter();
@@ -516,6 +523,7 @@ export class RTCCom {
           RTCCom.streamActive.emit({
             type: 'audio',
             socketId: remoteSocketId,
+            stream
           });
         };
         stream.addEventListener('active', emitFunction);
@@ -530,6 +538,7 @@ export class RTCCom {
             type: 'video',
             id: peerRef.streams.video.length,
             socketId: remoteSocketId,
+            stream
           });
         };
         stream.addEventListener('active', emitFunction);
@@ -541,10 +550,10 @@ export class RTCCom {
         // TODO clean old/closed streams
       }
 
-      track.onunmute = () => {
-        const trackIndex = 0; //1 = big, 0 = small
-        this.connectStreamToHtmlElement(remoteSocketId, trackIndex);
-      };
+      //track.onunmute = () => {
+      const trackIndex = 0; //1 = big, 0 = small
+      this.connectStreamToHtmlElement(remoteSocketId, trackIndex);
+      //};
     };
     //
     peerConn.onconnectionstatechange = (ev: any) => {

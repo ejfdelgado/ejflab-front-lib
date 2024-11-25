@@ -11,7 +11,7 @@
     "test": "ng test",
     "diff": "git difftool",
     "mylogin": "npm login",
-    "mypublish": "cd dist/ejflab-front-lib && npm publish --access=public && cd .. && cd .."
+    "mypublish": "npm run build && cd dist/ejflab-front-lib && npm publish --access=public && cd .. && cd .."
   },
   "keywords": [],
   "author": "",
