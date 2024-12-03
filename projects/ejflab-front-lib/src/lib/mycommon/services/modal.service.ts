@@ -49,10 +49,10 @@ export class ModalService {
         { txt: 'No', val: '0' },
       ],
     };
-    const choice = await this.generic(homologation);
-    if (choice === '1') {
+    const choice: any = await this.generic(homologation);
+    if (choice.choice === '1') {
       return true;
-    } else if (choice === '0') {
+    } else if (choice.choice === '0') {
       return true;
     } else {
       return null;

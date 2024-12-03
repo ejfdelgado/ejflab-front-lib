@@ -24,6 +24,7 @@ import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 export interface FlowChartRef {
   room?: string;
   names: { [key: string]: string };
+  multiples: { [key: string]: string };
   dataVal?: { [key: string]: any };
   dataPath: { [key: string]: string };
   conf: { sleep: number; debug: boolean };
