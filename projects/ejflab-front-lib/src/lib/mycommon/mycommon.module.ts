@@ -48,6 +48,7 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { InterpolatePipe } from './pipes/interpolate.pipe';
 // Directives
 import { NgInit } from './directives/NgInit';
+import { MMDDYYYYAdapter } from './adapters/date-adapters';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { NgInit } from './directives/NgInit';
     InterpolatePipe,
     // Directives
     NgInit,
+    // Adapters
   ],
   imports: [
     CommonModule,
