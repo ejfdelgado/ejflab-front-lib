@@ -12,6 +12,7 @@ export interface ConfirmData {
   selector: 'app-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.css'],
+  standalone: false,
 })
 export class ConfirmComponent implements OnInit {
   text: string;

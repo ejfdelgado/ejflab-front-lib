@@ -36,6 +36,7 @@ export interface FileBase64Data {
   selector: 'app-base',
   template: ` <div></div> `,
   styles: [],
+  standalone: false,
 })
 export abstract class BaseComponent
   extends ContextComponent

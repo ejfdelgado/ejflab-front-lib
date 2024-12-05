@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-prejson',
   templateUrl: './prejson.component.html',
   styleUrls: ['./prejson.component.css'],
+  standalone: false,
 })
 export class PrejsonComponent implements OnInit {
   @Input('model')

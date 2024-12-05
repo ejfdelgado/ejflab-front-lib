@@ -25,6 +25,7 @@ export interface AlertData {
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css'],
+  standalone: false,
 })
 export class AlertComponent implements OnInit {
   text: string;

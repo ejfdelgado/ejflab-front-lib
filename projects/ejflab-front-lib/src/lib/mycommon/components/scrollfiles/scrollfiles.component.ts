@@ -21,6 +21,7 @@ export interface ScrollFilesActionData {
   selector: 'app-scrollfiles',
   templateUrl: './scrollfiles.component.html',
   styleUrls: ['./scrollfiles.component.css'],
+  standalone: false,
 })
 export class ScrollfilesComponent implements OnInit {
   @Input()

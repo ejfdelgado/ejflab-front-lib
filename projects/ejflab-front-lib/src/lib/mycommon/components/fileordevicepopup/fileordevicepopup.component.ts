@@ -9,6 +9,7 @@ import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
   selector: 'app-fileordevicepopup',
   templateUrl: './fileordevicepopup.component.html',
   styleUrls: ['./fileordevicepopup.component.css'],
+  standalone: false,
 })
 export class FileordevicepopupComponent implements OnInit {
   constructor(

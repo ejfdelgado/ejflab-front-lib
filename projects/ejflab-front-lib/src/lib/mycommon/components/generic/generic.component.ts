@@ -20,6 +20,7 @@ export interface GenericData {
   selector: 'app-generic',
   templateUrl: './generic.component.html',
   styleUrls: ['./generic.component.css'],
+  standalone: false,
 })
 export class GenericComponent implements OnInit {
   text: string = 'Sin detalle';

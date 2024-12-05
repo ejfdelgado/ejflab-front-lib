@@ -3,6 +3,7 @@ import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 
 @Pipe({
   name: 'epoch2date',
+  standalone: false,
 })
 export class Epoch2datePipe implements PipeTransform {
   transform(value: number | undefined, ...args: unknown[]): unknown {

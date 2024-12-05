@@ -19,6 +19,7 @@ import {
   selector: 'app-multiplepages',
   templateUrl: './multiplepages.component.html',
   styleUrls: ['./multiplepages.component.css'],
+  standalone: false,
 })
 export class MultiplepagesComponent implements OnInit {
   form: FormGroup;

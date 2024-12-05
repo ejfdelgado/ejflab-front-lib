@@ -30,6 +30,7 @@ export interface AuthorizationData {
   selector: 'app-authorizationpopup',
   templateUrl: './authorizationpopup.component.html',
   styleUrls: ['./authorizationpopup.component.css'],
+  standalone: false,
 })
 export class AuthorizationpopupComponent implements OnInit {
   form: FormGroup;

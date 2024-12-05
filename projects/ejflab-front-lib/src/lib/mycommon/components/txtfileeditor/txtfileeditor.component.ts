@@ -29,6 +29,7 @@ export interface TxtOptionsData {
   selector: 'app-txtfileeditor',
   templateUrl: './txtfileeditor.component.html',
   styleUrls: ['./txtfileeditor.component.css'],
+  standalone: false,
 })
 export class TxtfileeditorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() options: TxtOptionsData;

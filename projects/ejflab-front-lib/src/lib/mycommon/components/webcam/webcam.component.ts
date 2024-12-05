@@ -8,6 +8,7 @@ import { WebcamRequestData, WebcamService } from '../../services/webcam.service'
   selector: 'app-webcam',
   templateUrl: './webcam.component.html',
   styleUrls: ['./webcam.component.css'],
+  standalone: false,
 })
 export class WebcamComponent implements OnInit {
   isActive: boolean = false;

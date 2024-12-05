@@ -52,6 +52,7 @@ export interface ChangesData {
   selector: 'app-context-component',
   template: ` <div></div> `,
   styles: [],
+  standalone: false,
 })
 export abstract class ContextComponent implements OnInit, OnDestroy {
   @ViewChildren('remote_video') remoteVideoRefs: QueryList<ElementRef>;

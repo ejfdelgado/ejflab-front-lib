@@ -7,6 +7,7 @@ import { CardComponentData } from '../../interfaces/login-data.interface';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
   host: { class: 'box' },
+  standalone: false,
 })
 export class CardComponent implements OnInit {
   @HostBinding('class.small') isSmall: boolean = false;

@@ -3,6 +3,7 @@ import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
 
 @Pipe({
   name: 'interpolate',
+  standalone: false,
 })
 export class InterpolatePipe implements PipeTransform {
   static renderer = new MyTemplate();

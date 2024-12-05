@@ -3,6 +3,7 @@ import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 
 @Pipe({
   name: 'fechaCard',
+  standalone: false,
 })
 export class FechaCardPipe implements PipeTransform {
   transform(value: number | undefined, ...args: unknown[]): unknown {

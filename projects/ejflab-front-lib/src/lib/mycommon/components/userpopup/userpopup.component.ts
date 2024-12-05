@@ -18,6 +18,7 @@ export interface UserPopUpData {
   selector: 'app-userpopup',
   templateUrl: './userpopup.component.html',
   styleUrls: ['./userpopup.component.css'],
+  standalone: false,
 })
 export class UserpopupComponent implements OnInit {
   form: FormGroup;

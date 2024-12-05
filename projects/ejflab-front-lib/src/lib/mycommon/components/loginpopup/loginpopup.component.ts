@@ -9,6 +9,7 @@ import { IndicatorService } from '../../services/indicator.service';
   selector: 'app-loginpopup',
   templateUrl: './loginpopup.component.html',
   styleUrls: ['./loginpopup.component.css'],
+  standalone: false,
 })
 export class LoginpopupComponent implements OnInit {
   currentView = 'inicio';

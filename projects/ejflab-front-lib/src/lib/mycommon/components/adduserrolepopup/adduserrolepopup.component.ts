@@ -9,6 +9,7 @@ import { AuthorizationData } from '../authorizationpopup/authorizationpopup.comp
   selector: 'app-adduserrolepopup',
   templateUrl: './adduserrolepopup.component.html',
   styleUrls: ['./adduserrolepopup.component.css'],
+  standalone: false,
 })
 export class AdduserrolepopupComponent implements OnInit {
   form: FormGroup;

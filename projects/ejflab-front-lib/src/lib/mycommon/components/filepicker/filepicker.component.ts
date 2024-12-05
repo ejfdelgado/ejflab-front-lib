@@ -10,6 +10,7 @@ import { FileRequestData } from '../../services/fileInterface';
   selector: 'app-filepicker',
   templateUrl: './filepicker.component.html',
   styleUrls: ['./filepicker.component.css'],
+  standalone: false,
 })
 export class FilepickerComponent implements OnInit {
   @ViewChild('imageInput') imageInput: ElementRef;

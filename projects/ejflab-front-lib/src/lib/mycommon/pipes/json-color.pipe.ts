@@ -3,6 +3,7 @@ import sortify from '@ejfdelgado/ejflab-common/src/sortify';
 
 @Pipe({
   name: 'jsonColor',
+  standalone: false,
 })
 export class JsonColorPipe implements PipeTransform {
   replacer(match: any, pIndent: any, pKey: any, pVal: any, pEnd: any): any {

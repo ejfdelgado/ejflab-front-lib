@@ -20,6 +20,7 @@ export interface OptionData {
   selector: 'app-statusbar',
   templateUrl: './statusbar.component.html',
   styleUrls: ['./statusbar.component.css'],
+  standalone: false,
 })
 export class StatusbarComponent implements OnInit {
   @Input('title')

@@ -13,6 +13,7 @@ import { PageData } from '../../interfaces/login-data.interface';
   selector: 'app-pagepopup',
   templateUrl: './pagepopup.component.html',
   styleUrls: ['./pagepopup.component.css'],
+  standalone: false,
 })
 export class PagepopupComponent implements OnInit {
   form: FormGroup;

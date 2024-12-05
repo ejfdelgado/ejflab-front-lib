@@ -10,6 +10,7 @@ import { MyUtilities } from '@ejfdelgado/ejflab-common/src/MyUtilities';
   selector: 'app-indicator',
   templateUrl: './indicator.component.html',
   styleUrls: ['./indicator.component.css'],
+  standalone: false,
 })
 export class IndicatorComponent implements OnInit {
   isLoading: boolean = false;

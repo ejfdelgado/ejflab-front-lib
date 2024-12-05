@@ -10,6 +10,7 @@ Remember use is as follow:
 @Directive({
   selector: '[ngInit]',
   exportAs: 'ngInit',
+  standalone: false,
 })
 export class NgInit {
   @Input() values: any = {};
