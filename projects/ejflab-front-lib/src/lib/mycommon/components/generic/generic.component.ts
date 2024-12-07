@@ -9,6 +9,7 @@ export interface GenericChoiceData {
 
 export interface GenericData {
   txt?: string;
+  ishtml?: boolean;
   title?: string;
   timeout?: number;
   choices?: Array<GenericChoiceData>;

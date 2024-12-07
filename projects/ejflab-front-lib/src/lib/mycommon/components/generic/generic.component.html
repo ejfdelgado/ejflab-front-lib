@@ -5,7 +5,8 @@
     </span>
 </div>
 <div mat-dialog-content>
-    <p>{{ text | translate:translateFolder:model | async }}</p>
+    <p *ngIf="!!data.ishtml" [innerHtml]="text"></p>
+    <p *ngIf="!data.ishtml">{{ text | translate:translateFolder:model | async }}</p>
 </div>
 <div mat-dialog-actions class="bottom_buttons">
     <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">

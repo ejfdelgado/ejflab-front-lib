@@ -19,6 +19,7 @@ export class ModalService {
   async alert(payload: AlertData) {
     const homologation: GenericData = {
       txt: payload.txt,
+      ishtml: payload.ishtml,
       title: payload.title,
       translateFolder: payload.translateFolder,
       model: payload.model,

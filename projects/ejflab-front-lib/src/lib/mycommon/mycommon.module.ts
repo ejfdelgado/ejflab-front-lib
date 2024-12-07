@@ -143,6 +143,14 @@ import { MMDDYYYYAdapter } from './adapters/date-adapters';
     // Directives
     NgInit,
   ],
-  providers: [],
+  providers: [
+    SortByNamePipe,
+    JsonColorPipe,
+    FechaCardPipe,
+    Epoch2datePipe,
+    TranslatePipe,
+    Json2svg,
+    InterpolatePipe,
+  ],
 })
-export class MycommonModule {}
+export class MycommonModule { }
