@@ -14,7 +14,7 @@ import {
   providedIn: 'root',
 })
 export class ModalService {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
   async alert(payload: AlertData) {
     const homologation: GenericData = {
@@ -38,22 +38,22 @@ export class ModalService {
     });
   }
 
-  async confirm(payload: ConfirmData) {
+  async confirm(payload: ConfirmData): Promise<boolean | null> {
     const homologation: GenericData = {
       txt: payload.txt,
       title: payload.title,
       translateFolder: payload.translateFolder,
       model: payload.model,
       choices: [
-        { txt: 'Ok', val: '1' },
-        { txt: 'No', val: '0' },
+        { txt: 'Ok', val: '1', icon: "check" },
+        { txt: 'No', val: '0', icon: "close" },
       ],
     };
     const choice: any = await this.generic(homologation);
     if (choice.choice === '1') {
       return true;
     } else if (choice.choice === '0') {
-      return true;
+      return false;
     } else {
       return null;
     }

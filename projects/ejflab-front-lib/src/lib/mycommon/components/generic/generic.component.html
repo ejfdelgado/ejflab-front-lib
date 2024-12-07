@@ -9,6 +9,7 @@
 </div>
 <div mat-dialog-actions class="bottom_buttons">
     <button *ngFor="let someChoice of choices" mat-raised-button color="" (click)="selectChoice(someChoice.val)">
-        {{ someChoice.txt | translate:translateFolder:model | async }}
+        <mat-icon *ngIf="someChoice.icon" class="peque">{{ someChoice.icon }}</mat-icon>
+        <span>{{ someChoice.txt | translate:translateFolder:model | async }}</span>
     </button>
 </div>
