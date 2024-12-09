@@ -146,7 +146,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
         {
           room: this.builderConfig.roomName,
           uuid: this.getSessionStorageValue('ANONYMOUS_USER'),
-          model: model? JSON.stringify(model) : undefined,
+          model: model ? JSON.stringify(model) : undefined,
         },
         waitUntilConnection
       );
@@ -169,8 +169,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     socket.on('connect', () => {
       this.disconnectPromise = new PromiseEmitter();
       console.log(
-        `context: ${new Date()} connect to ${
-          this.builderConfig.roomName
+        `context: ${new Date()} connect to ${this.builderConfig.roomName
         } with ${socket.id}`
       ); // OK
       this.connectionState = 'online';
@@ -219,9 +218,9 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     });
   }
 
-  async onFlowChartLoaded() {}
+  async onFlowChartLoaded() { }
 
-  async onFlowChartUnloaded() {}
+  async onFlowChartUnloaded() { }
 
   async socketIoDisconnect() {
     console.log('socketIoDisconnect');
@@ -266,7 +265,14 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
 
   async connectToRoomName(roomName: string, disconnect: boolean = true) {
     //console.log(`Disconnect from ${this.builderConfig.roomName}`);
-    if (!this.callService.isConnectedToRoom(roomName) || disconnect === true) {
+    if (this.callService.isConnectedToRoom(roomName)) {
+      // Already connected
+      if (disconnect === true) {
+        // Force disconnection
+        await this.socketIoDisconnect();
+      }
+    } else {
+      // Disconnect from wherever it is connected
       await this.socketIoDisconnect();
     }
     this.builderConfig = {
