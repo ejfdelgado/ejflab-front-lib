@@ -266,7 +266,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
 
   async connectToRoomName(roomName: string, disconnect: boolean = true) {
     //console.log(`Disconnect from ${this.builderConfig.roomName}`);
-    if (this.callService.isConnectedToRoom(roomName) || disconnect === true) {
+    if (!this.callService.isConnectedToRoom(roomName) || disconnect === true) {
       await this.socketIoDisconnect();
     }
     this.builderConfig = {
