@@ -477,6 +477,13 @@ export class VideoWebStream {
     }
   }
 
+  static isMobile() {
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Select cold cookie selected value, or first if exist at least 1
    * @param devices
@@ -509,6 +516,16 @@ export class VideoWebStream {
         const oldDevice = this.searchVideoDevice(devices, oldValue, 'txt');
         if (oldDevice) {
           this.currentDevices.video = oldDevice.id;
+        }
+        // if it is mobile 
+        if (!this.currentDevices.video && VideoWebStream.isMobile()) {
+          // Try to find front camera
+          const frontCameras = devices.videos.filter((oneDevice) => {
+            return /front/ig.test(oneDevice.txt);
+          });
+          if (frontCameras.length > 0) {
+            this.currentDevices.video = frontCameras[0].id;
+          }
         }
       }
       const currentVideo = this.searchVideoDevice(
