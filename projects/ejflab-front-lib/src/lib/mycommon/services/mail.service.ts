@@ -6,7 +6,7 @@ export interface MailSendData {
   params: any;
   to: Array<string>;
   subject: string;
-  replyTo: string;
+  replyTo?: string;
 }
 
 @Injectable({

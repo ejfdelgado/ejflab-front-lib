@@ -6,6 +6,7 @@ import { encode, decode } from "@msgpack/msgpack";
 import { FlowChartRef } from '../components/base/context.component';
 
 export interface FlowchartProcessRequestData {
+  loadingIndicator?: boolean;
   channel: string;
   room: string;
   processorMethod: string;
@@ -68,7 +69,7 @@ export class FlowchartService {
         `srv/flowchart/processor_process`,
         binaryData,
         {
-          showIndicator: true,
+          showIndicator: !(payload.loadingIndicator===false),
           contentType: 'application/octet-stream',
         }
       );
