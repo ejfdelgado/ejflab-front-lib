@@ -49,6 +49,7 @@ import { InterpolatePipe } from './pipes/interpolate.pipe';
 // Directives
 import { NgInit } from './directives/NgInit';
 import { MMDDYYYYAdapter } from './adapters/date-adapters';
+import { SincePipe } from './pipes/since.pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { MMDDYYYYAdapter } from './adapters/date-adapters';
     TranslatePipe,
     Json2svg,
     InterpolatePipe,
+    SincePipe,
     // Directives
     NgInit,
     // Adapters
@@ -140,6 +142,7 @@ import { MMDDYYYYAdapter } from './adapters/date-adapters';
     TranslatePipe,
     Json2svg,
     InterpolatePipe,
+    SincePipe,
     // Directives
     NgInit,
   ],
@@ -151,6 +154,7 @@ import { MMDDYYYYAdapter } from './adapters/date-adapters';
     TranslatePipe,
     Json2svg,
     InterpolatePipe,
+    SincePipe,
   ],
 })
 export class MycommonModule { }
