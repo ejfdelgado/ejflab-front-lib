@@ -9,12 +9,38 @@ import {
   GenericComponent,
   GenericData,
 } from '../components/generic/generic.component';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
-  constructor(public dialog: MatDialog) { }
+  TRANSLATION: any = {
+    'en': {
+      "yes": "Yes",
+      "no": "Not",
+      "ok": "Ok",
+      "ups": "Ups!",
+    },
+    'es': {
+      "yes": "Sí",
+      "no": "No",
+      "ok": "Ok",
+      "ups": "Ups!",
+    },
+  }
+  constructor(
+    public dialog: MatDialog,
+    private configService: ConfigService,
+  ) { }
+
+  translate(key: string) {
+    let lang = this.configService.getCurrentLanguage();
+    if (!(lang in this.TRANSLATION)) {
+      lang = 'es';
+    }
+    return this.TRANSLATION[lang][key];
+  }
 
   async alert(payload: AlertData) {
     const homologation: GenericData = {
@@ -23,14 +49,19 @@ export class ModalService {
       title: payload.title,
       translateFolder: payload.translateFolder,
       model: payload.model,
-      choices: [{ txt: 'Ok', val: '0' }],
+      choices: [
+        {
+          txt: this.translate('ok'),
+          val: '0'
+        }
+      ],
     };
     return this.generic(homologation);
   }
 
   async error(error: Error) {
     const dialogRef = this.dialog.open(AlertComponent, {
-      data: { title: 'Ups!', txt: error.message },
+      data: { title: this.translate('ups'), txt: error.message },
     });
     return new Promise((resolve) => {
       dialogRef.afterClosed().subscribe((result) => {
@@ -46,16 +77,21 @@ export class ModalService {
       translateFolder: payload.translateFolder,
       model: payload.model,
       choices: [
-        { txt: 'Ok', val: '1', icon: "check" },
-        { txt: 'No', val: '0', icon: "close" },
+        { txt: this.translate('yes'), val: '1', icon: "check" },
+        { txt: this.translate('no'), val: '0', icon: "close" },
       ],
     };
     const choice: any = await this.generic(homologation);
-    if (choice.choice === '1') {
-      return true;
-    } else if (choice.choice === '0') {
-      return false;
+    if (choice) {
+      if (choice.choice === '1') {
+        return true;
+      } else if (choice.choice === '0') {
+        return false;
+      } else {
+        return null;
+      }
     } else {
+      // Case when close window
       return null;
     }
   }

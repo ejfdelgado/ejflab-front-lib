@@ -37,6 +37,7 @@ export * from './lib/mycommon/services/translate.service';
 export * from './lib/mycommon/services/tuple.service';
 export * from './lib/mycommon/services/user.service';
 export * from './lib/mycommon/services/webcam.service';
+export * from './lib/mycommon/services/config.service';
 
 // Extra
 export * from './lib/mycommon/interceptors/JwtInterceptor';

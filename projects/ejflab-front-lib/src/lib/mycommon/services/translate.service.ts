@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SimpleObj } from '@ejfdelgado/ejflab-common/src/SimpleObj';
 import { HttpService } from './http.service';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,54 +11,20 @@ export class TranslateService {
   COOKIE_NAME = 'noglang';
   keyPromises: any = {};
   renderer: any;
-  constructor(private httpService: HttpService) {
+  constructor(
+    private httpService: HttpService,
+    private configService: ConfigService,
+  ) {
     this.renderer = new MyTemplate();
   }
 
   setLanguage(lang: string) {
-    this.setCookie(this.COOKIE_NAME, lang, 1000);
-    window.location.reload();
-  }
-
-  setCookie(cname: string, cvalue: string, exdays: number) {
-    const d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-    let expires = 'expires=' + d.toUTCString();
-    document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
-  }
-
-  getCookie(cname: string) {
-    let name = cname + '=';
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return '';
-  }
-
-  getCurrentLanguage() {
-    let currentLang = 'en';
-    const urlParams = new URLSearchParams(window.location.search);
-    const queryParamLanguage = urlParams.get('l');
-    if (queryParamLanguage) {
-      currentLang = queryParamLanguage;
-      this.setCookie(this.COOKIE_NAME, currentLang, 1000);
-    } else {
-      currentLang = this.getCookie(this.COOKIE_NAME) || 'en';
-    }
-    return currentLang;
+    this.configService.setLanguage(lang);
   }
 
   async loadLanguageDB(args: unknown[]) {
     // Read query param
-    const currentLang = this.getCurrentLanguage();
+    const currentLang = this.configService.getCurrentLanguage();
     const key = `${args[0]}/${currentLang}`;
     let promesa = this.keyPromises[key];
     if (!promesa) {
@@ -80,7 +47,7 @@ export class TranslateService {
         args0 !== null &&
         typeof args0 == 'object'
       ) {
-        const currentLang = this.getCurrentLanguage();
+        const currentLang = this.configService.getCurrentLanguage();
         if (currentLang in args0) {
           valor = args0[currentLang];
         }
