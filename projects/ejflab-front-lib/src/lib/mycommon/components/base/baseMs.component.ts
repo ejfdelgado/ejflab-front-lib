@@ -17,8 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export abstract class BaseMsComponent
   extends ContextComponent
-  implements OnInit, OnDestroy
-{
+  implements OnInit, OnDestroy {
   currentUser: UserMicrosoft | null = null;
   currentUserUID: string = '';
   userSubscription: Subscription | null = null;
@@ -121,5 +120,13 @@ export abstract class BaseMsComponent
     });
     this.srcImageBlob = await promise;
     return promise;
+  }
+
+  isUserInAllGroup(groups: string[]) {
+    return this.authSrv.isUserInGroupInternal(this.currentUser, groups, true);
+  }
+
+  isUserInSomeGroup(groups: string[]) {
+    return this.authSrv.isUserInGroupInternal(this.currentUser, groups, false);
   }
 }

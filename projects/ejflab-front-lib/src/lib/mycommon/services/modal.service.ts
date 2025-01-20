@@ -77,8 +77,8 @@ export class ModalService {
       translateFolder: payload.translateFolder,
       model: payload.model,
       choices: [
-        { txt: this.translate('yes'), val: '1', icon: "check" },
         { txt: this.translate('no'), val: '0', icon: "close" },
+        { txt: this.translate('yes'), val: '1', icon: "check" },
       ],
     };
     const choice: any = await this.generic(homologation);

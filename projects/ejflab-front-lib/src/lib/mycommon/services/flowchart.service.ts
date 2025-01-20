@@ -6,30 +6,31 @@ import { encode, decode } from "@msgpack/msgpack";
 import { FlowChartRef } from '../components/base/context.component';
 
 export interface FlowchartProcessRequestData {
-  loadingIndicator?: boolean;
-  channel: string;
-  room: string;
-  processorMethod: string;
-  namedInputs: { [key: string]: any };
-  id?: string;
-  data: { [key: string]: any };
+  loadingIndicator?: boolean,
+  channel: string,
+  room: string,
+  processorMethod: string,
+  namedInputs: { [key: string]: any },
+  id?: string,
+  data: { [key: string]: any },
+  dbData?: { [key: string]: any },
 }
 
 export interface FlowchartProcessorDetailData {
-  data: any;
+  data: any,
 }
 
 export interface FlowchartGenericResponseData {
-  status: string;
-  message?: string;
-  response?: FlowchartProcessorDetailData | any;
+  status: string,
+  message?: string,
+  response?: FlowchartProcessorDetailData | any,
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class FlowchartService {
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService) { }
 
   async loadFlowchart(payload: FlowChartRef) {
     const response = await this.httpService.post<FlowchartGenericResponseData>(
@@ -69,7 +70,7 @@ export class FlowchartService {
         `srv/flowchart/processor_process`,
         binaryData,
         {
-          showIndicator: !(payload.loadingIndicator===false),
+          showIndicator: !(payload.loadingIndicator === false),
           contentType: 'application/octet-stream',
         }
       );

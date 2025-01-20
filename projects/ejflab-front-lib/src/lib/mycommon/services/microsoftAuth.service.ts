@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Inject } from '@angular/core';
 import * as msal from '@azure/msal-browser';
 import { Subscription } from 'rxjs';
 
@@ -7,6 +7,7 @@ export interface UserMicrosoft {
   homeAccountId: string;
   name?: string;
   idToken?: string;
+  groups: string[];
 }
 
 // https://graph.microsoft.com/v1.0/me/photos/648x648/$value
@@ -17,8 +18,6 @@ export interface UserMicrosoft {
   providedIn: 'root',
 })
 export class MicrosoftAuthService {
-  tenant = 'e03b8fb1-7e35-4dab-ae1e-aa681402dbf2';
-  clientId = '4c1062f0-7409-4597-9eac-21b87ac6005e';
   redirectUri = window.location.href;
   pca: Promise<msal.IPublicClientApplication>;
   accessToken: string | null;
@@ -26,7 +25,11 @@ export class MicrosoftAuthService {
   evento: EventEmitter<UserMicrosoft | null> = new EventEmitter();
   loginMode: 'select_account' | 'none' = 'select_account';
 
-  constructor() {
+  constructor(
+    @Inject('msTenant') private tenant: string,
+    @Inject('msClientId') private clientId: string,
+    @Inject('msGroupIdMap') private groupIdMap: { [key: string]: string },
+  ) {
     this.createMicrosoftAuth();
   }
 
@@ -72,7 +75,18 @@ export class MicrosoftAuthService {
       homeAccountId,
       name,
       idToken,
+      groups: [],
     };
+    // get groups
+    const groups = response.idTokenClaims?.groups;
+    if (groups instanceof Array) {
+      this.currentUser.groups = groups.map((idGroup: string) => {
+        if (idGroup in this.groupIdMap) {
+          return this.groupIdMap[idGroup];
+        }
+        return idGroup;
+      });
+    }
     this.evento.emit(this.currentUser);
   }
 
@@ -145,5 +159,25 @@ export class MicrosoftAuthService {
       return partes[1];
     }
     return null;
+  }
+
+  isUserInGroupInternal(user: UserMicrosoft | null, groups: string[], and: boolean) {
+    if (!user) {
+      return false;
+    }
+    const currentGroups = user.groups;
+    const notMeet = groups.filter((group: string) => {
+      if (currentGroups.indexOf(group) >= 0) {
+        return false;
+      }
+      return true;
+    });
+    if (and) {
+      //All must have
+      return notMeet.length == 0;
+    } else {
+      // At least one
+      return notMeet.length < groups.length;
+    }
   }
 }
