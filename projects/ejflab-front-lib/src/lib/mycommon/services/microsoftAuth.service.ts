@@ -21,6 +21,7 @@ export class MicrosoftAuthService {
   redirectUri = window.location.href;
   pca: Promise<msal.IPublicClientApplication>;
   accessToken: string | null;
+  idToken: string | null;
   currentUser: UserMicrosoft | null = null;
   evento: EventEmitter<UserMicrosoft | null> = new EventEmitter();
   loginMode: 'select_account' | 'none' = 'select_account';
@@ -44,7 +45,8 @@ export class MicrosoftAuthService {
     const msalConfig = {
       auth: {
         clientId: this.clientId,
-        authority: `https://login.microsoftonline.com/${this.tenant}`,
+        authority: `https://login.microsoftonline.com/${this.tenant}/v2.0`,
+        //authority: `https://sts.windows.net/${this.tenant}`,
         redirectUri: this.redirectUri,
       },
     };
@@ -65,6 +67,7 @@ export class MicrosoftAuthService {
   }
 
   async assignCurrentUserFromAccount(response: any) {
+    this.idToken = response.idToken;
     this.accessToken = response.accessToken;
     const account = response.account;
     const msalInstance = await this.pca;
@@ -104,7 +107,7 @@ export class MicrosoftAuthService {
     //console.log(callbackId);
   }
 
-  async getSessionToken(): Promise<string> {
+  async getSessionToken(type = "session"): Promise<string> {
     const msalInstance = await this.pca;
     //const accounts = msalInstance.getAllAccounts();
     const current = msalInstance.getActiveAccount();
@@ -114,12 +117,17 @@ export class MicrosoftAuthService {
     const request = {
       scopes: ['User.Read'],
       account: current,
-      //forceRefresh: true,//Just refresh when expired
+      forceRefresh: false,//Just refresh when expired
       refreshTokenExpirationOffsetSeconds: 7200, // 2 hours * 60 minutes * 60 seconds = 7200 seconds
     };
     const response = await msalInstance.acquireTokenSilent(request);
+    this.idToken = response.idToken;
     this.accessToken = response.accessToken;
-    return response.accessToken;
+    if (type == "session") {
+      return response.accessToken;
+    } else {
+      return response.idToken;
+    }
   }
 
   async logout(): Promise<any> {

@@ -32,7 +32,7 @@ export class JwtInterceptor implements HttpInterceptor {
     let promesaToken: Promise<string | null> = Promise.resolve(null);
     if (avoidToken != "yes") {
       if (this.authProvider == "microsoft") {
-        promesaToken = this.msAuth.getSessionToken();
+        promesaToken = this.msAuth.getSessionToken("id");
       } else if (this.authProvider == "google") {
         promesaToken = this.auth.getIdToken();
       }
