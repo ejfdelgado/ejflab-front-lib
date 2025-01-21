@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -20,8 +20,9 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
-    private msAuth: MicrosoftAuthService
-  ) {}
+    private msAuth: MicrosoftAuthService,
+    @Inject('authProvider') private authProvider: string,
+  ) { }
 
   intercept(
     request: HttpRequest<any>,
@@ -29,13 +30,17 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const avoidToken: any = request.headers.get('x-avoid-token');
     let promesaToken: Promise<string | null> = Promise.resolve(null);
-    if (['yes', 'ms'].indexOf(avoidToken) < 0) {
-      promesaToken = this.auth.getIdToken();
-    } else if (avoidToken == 'ms') {
-      promesaToken = this.msAuth.getSessionToken();
+    if (avoidToken != "yes") {
+      if (this.authProvider == "microsoft") {
+        promesaToken = this.msAuth.getSessionToken();
+      } else if (this.authProvider == "google") {
+        promesaToken = this.auth.getIdToken();
+      }
     }
+
     return from(promesaToken).pipe(
       switchMap((token) => {
+        //console.log(`auth ${request.url} ${token ? token.substring(0, 10) : "null"}`);
         if (token == null) {
           const headers = request.headers.append('HTTP_REFERER', location.href);
           const requestClone = request.clone({

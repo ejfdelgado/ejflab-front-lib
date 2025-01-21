@@ -49,8 +49,8 @@ export class HttpService {
     private http: HttpClient,
     private indicatorSrv: IndicatorService,
     private modalSrv: ModalErrorService,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+  ) { }
 
   getServerTime() {
     return MyDatesFront.getServerTime();

@@ -114,7 +114,7 @@ export class MicrosoftAuthService {
     const request = {
       scopes: ['User.Read'],
       account: current,
-      forceRefresh: true,
+      //forceRefresh: true,//Just refresh when expired
       refreshTokenExpirationOffsetSeconds: 7200, // 2 hours * 60 minutes * 60 seconds = 7200 seconds
     };
     const response = await msalInstance.acquireTokenSilent(request);
