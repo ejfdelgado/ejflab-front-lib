@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter, Inject } from '@angular/core';
+import { Injectable, EventEmitter, Inject, InjectionToken } from '@angular/core';
 import * as msal from '@azure/msal-browser';
 import { Subscription } from 'rxjs';
 
@@ -10,6 +10,11 @@ export interface UserMicrosoft {
   groups: string[];
 }
 
+export const MS_LOGIN_MODE = new InjectionToken<string>('msLoginMode', {
+  providedIn: 'root',
+  factory: () => 'select_account',//select_account, none
+});
+
 // https://graph.microsoft.com/v1.0/me/photos/648x648/$value
 // https://graph.microsoft.com/v1.0/users/EJDelgado@NogalesPsychological.com/photo/$value
 // https://entra.microsoft.com/
@@ -18,18 +23,18 @@ export interface UserMicrosoft {
   providedIn: 'root',
 })
 export class MicrosoftAuthService {
-  redirectUri = window.location.href;
   pca: Promise<msal.IPublicClientApplication>;
   accessToken: string | null;
   idToken: string | null;
   currentUser: UserMicrosoft | null = null;
   evento: EventEmitter<UserMicrosoft | null> = new EventEmitter();
-  loginMode: 'select_account' | 'none' = 'select_account';
+  pathChangedEvent: EventEmitter<string> = new EventEmitter();
 
   constructor(
     @Inject('msTenant') private tenant: string,
     @Inject('msClientId') private clientId: string,
     @Inject('msGroupIdMap') private groupIdMap: { [key: string]: string },
+    @Inject(MS_LOGIN_MODE) private loginMode: string,
   ) {
     this.createMicrosoftAuth();
   }
@@ -47,7 +52,7 @@ export class MicrosoftAuthService {
         clientId: this.clientId,
         authority: `https://login.microsoftonline.com/${this.tenant}/v2.0`,
         //authority: `https://sts.windows.net/${this.tenant}`,
-        redirectUri: this.redirectUri,
+        redirectUri: window.location.href.replace(/#.*$/, ''),
       },
     };
     this.pca = msal.createStandardPublicClientApplication(msalConfig);
@@ -90,6 +95,7 @@ export class MicrosoftAuthService {
         return idGroup;
       });
     }
+    this.restoreHash();
     this.evento.emit(this.currentUser);
   }
 
@@ -137,12 +143,45 @@ export class MicrosoftAuthService {
     this.evento.emit(null);
   }
 
+  hideHash() {
+    const parts = /^[^#]+#(.+)$/.exec(location.href);
+    if (parts) {
+      const hash = parts[1];
+      if (hash.length > 0) {
+        sessionStorage.setItem("NOGALES_HASH", hash);
+        location.hash = '';
+      }
+    }
+  }
+
+  restoreHash() {
+    const hash = sessionStorage.getItem("NOGALES_HASH");
+    if (hash && hash.length > 0) {
+      sessionStorage.setItem("NOGALES_HASH", "");
+      location.hash = hash;
+      //this.router.navigate(hash.split("/"));
+      this.pathChangedEvent.emit(hash);
+      return true;
+    }
+    return false;
+  }
+
   async login(): Promise<any> {
+    this.hideHash();
     if (this.currentUser == null) {
       const msalInstance = await this.pca;
+      let loginMode = "none";
+      if (this.loginMode && this.loginMode.length > 0) {
+        loginMode = this.loginMode;
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const mode = urlParams.get('mode');
+      if (mode && mode.length > 0) {
+        loginMode = mode;
+      }
       const response = await msalInstance.loginPopup({
         scopes: ['User.Read.All'],
-        prompt: this.loginMode,
+        prompt: loginMode,
       });
       await this.assignCurrentUserFromAccount(response);
       return response;
