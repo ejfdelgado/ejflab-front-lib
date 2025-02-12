@@ -113,10 +113,18 @@ export class MicrosoftAuthService {
     //console.log(callbackId);
   }
 
-  public async refreshActiveAccount() {
+  public async refreshActiveAccount(redirectIdNoUser?: string): Promise<boolean> {
     const response = await this.getActiveAccount();
     if (response) {
       await this.assignCurrentUserFromAccount(response);
+    }
+    if (!this.currentUser) {
+      if (redirectIdNoUser) {
+        window.location.href = redirectIdNoUser;
+      }
+      return false;
+    } else {
+      return true;
     }
   }
 
