@@ -50,8 +50,8 @@ export abstract class BaseMsComponent
     await this.authSrv.logout();
   }
 
-  async login() {
-    await this.authSrv.login();
+  async login(force: boolean = false) {
+    await this.authSrv.login(force);
   }
 
   async getCurrentUserUID() {

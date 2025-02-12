@@ -71,7 +71,7 @@ export class MicrosoftAuthService {
     }
   }
 
-  async assignCurrentUserFromAccount(response: any) {
+  public async assignCurrentUserFromAccount(response: any) {
     this.idToken = response.idToken;
     this.accessToken = response.accessToken;
     const account = response.account;
@@ -113,12 +113,19 @@ export class MicrosoftAuthService {
     //console.log(callbackId);
   }
 
-  async getSessionToken(type = "session"): Promise<string> {
+  public async refreshActiveAccount() {
+    const response = await this.getActiveAccount();
+    if (response) {
+      await this.assignCurrentUserFromAccount(response);
+    }
+  }
+
+  public async getActiveAccount(): Promise<msal.AuthenticationResult | null> {
     const msalInstance = await this.pca;
     //const accounts = msalInstance.getAllAccounts();
     const current = msalInstance.getActiveAccount();
     if (!current) {
-      return '';
+      return null;
     }
     const request = {
       scopes: ['User.Read'],
@@ -127,6 +134,14 @@ export class MicrosoftAuthService {
       refreshTokenExpirationOffsetSeconds: 7200, // 2 hours * 60 minutes * 60 seconds = 7200 seconds
     };
     const response = await msalInstance.acquireTokenSilent(request);
+    return response;
+  }
+
+  public async getSessionToken(type = "session"): Promise<string> {
+    const response = await this.getActiveAccount();
+    if (!response) {
+      return '';
+    }
     this.idToken = response.idToken;
     this.accessToken = response.accessToken;
     if (type == "session") {
@@ -166,9 +181,9 @@ export class MicrosoftAuthService {
     return false;
   }
 
-  async login(): Promise<any> {
+  async login(force: boolean = false): Promise<any> {
     this.hideHash();
-    if (this.currentUser == null) {
+    if (this.currentUser == null || force) {
       const msalInstance = await this.pca;
       let loginMode = "none";
       if (this.loginMode && this.loginMode.length > 0) {
