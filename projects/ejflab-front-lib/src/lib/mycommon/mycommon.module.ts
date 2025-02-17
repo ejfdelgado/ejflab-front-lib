@@ -145,6 +145,7 @@ import { AgePipe } from './pipes/age.pipe';
     Json2svg,
     InterpolatePipe,
     SincePipe,
+    AgePipe,
     // Directives
     NgInit,
   ],
@@ -157,6 +158,7 @@ import { AgePipe } from './pipes/age.pipe';
     Json2svg,
     InterpolatePipe,
     SincePipe,
+    AgePipe,
   ],
 })
 export class MycommonModule { }
