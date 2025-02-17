@@ -13,7 +13,7 @@ export class TranslatePipe implements PipeTransform {
       return new Promise(async (resolve, reject) => {
         try {
           let rendered = await this.translateSrv.translate(value, args);
-          rendered = TranslatePipe.renderer.render(rendered, args[1]);
+          rendered = TranslatePipe.renderer.render(rendered, args[1]);//creo esta linea sobra
           resolve(rendered);
         } catch (err) {
           reject(err);

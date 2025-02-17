@@ -9,7 +9,7 @@ import { ConfigService } from './config.service';
 })
 export class TranslateService {
   COOKIE_NAME = 'noglang';
-  keyPromises: any = {};
+  keyPromises: any = {};// this is the cache
   renderer: any;
   constructor(
     private httpService: HttpService,
@@ -35,6 +35,12 @@ export class TranslateService {
     return valor;
   }
 
+  /**
+   * 
+   * @param key 
+   * @param args Can be a string, referencing the folder name in assets/lang/FOLDER/en.json or a JSON object {es: {}, en: {}}
+   * @returns 
+   */
   async translate(key: string, args: unknown[]) {
     const def: any = key;
     if (args.length > 0) {
