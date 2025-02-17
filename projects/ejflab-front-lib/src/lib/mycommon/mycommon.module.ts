@@ -50,6 +50,7 @@ import { InterpolatePipe } from './pipes/interpolate.pipe';
 import { NgInit } from './directives/NgInit';
 import { MMDDYYYYAdapter } from './adapters/date-adapters';
 import { SincePipe } from './pipes/since.pipe';
+import { AgePipe } from './pipes/age.pipe';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { SincePipe } from './pipes/since.pipe';
     Json2svg,
     InterpolatePipe,
     SincePipe,
+    AgePipe,
     // Directives
     NgInit,
     // Adapters

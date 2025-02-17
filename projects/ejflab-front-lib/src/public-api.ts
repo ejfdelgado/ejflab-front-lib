@@ -80,6 +80,7 @@ export * from './lib/mycommon/pipes/sort-by-name.pipe';
 export * from './lib/mycommon/pipes/translate.pipe';
 export * from './lib/mycommon/pipes/interpolate.pipe';
 export * from './lib/mycommon/pipes/since.pipe';
+export * from './lib/mycommon/pipes/age.pipe';
 
 // Directives
 export * from './lib/mycommon/directives/NgInit';

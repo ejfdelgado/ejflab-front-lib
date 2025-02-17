@@ -18,7 +18,7 @@ export class ModalService {
   TRANSLATION: any = {
     'en': {
       "yes": "Yes",
-      "no": "Not",
+      "no": "No",
       "ok": "Ok",
       "ups": "Ups!",
     },
