@@ -40,6 +40,14 @@ export interface LoadFileData {
   erasefile?: string | null;
 }
 
+export interface PagingData {
+  limit: number;
+  offset?: number;
+  page?: number;
+  orderColumn?: string;
+  direction: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
