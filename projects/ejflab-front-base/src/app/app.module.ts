@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
-import { MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
+import { JwtInterceptor, MycommonModule } from 'projects/ejflab-front-lib/src/public-api';
 import { GuidesModule } from './view/guides/guides.module';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 
@@ -58,13 +58,18 @@ if (location.hostname == "localhost") {
   providers: [
     ScreenTrackingService,
     UserTrackingService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    { provide: 'authProvider', useValue: 'google' },
+    { provide: 'msTenant', useValue: '' },
+    { provide: 'msClientId', useValue: '' },
+    { provide: "msGroupIdMap", useValue: {} },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
