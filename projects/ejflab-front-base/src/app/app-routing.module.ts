@@ -12,7 +12,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['customers']);
 
 const routes: Routes = [
   {
-    path: 'guides',
+    path: '',
     loadChildren: () => GuidesModule,
   },
 ];

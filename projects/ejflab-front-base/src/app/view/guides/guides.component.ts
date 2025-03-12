@@ -13,7 +13,7 @@ export class GuidesComponent {
   currentMenuChoice: MenuItemData | null = null;
   constructor(private router: Router) {}
   goTo(id: string) {
-    this.router.navigate(['guides', id]);
+    this.router.navigate([id]);
     this.currentMenuChoice = this.menu.filter((item) => {
       return item.id == id;
     })[0];

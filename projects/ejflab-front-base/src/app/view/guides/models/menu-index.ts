@@ -6,6 +6,7 @@ import { N05FormValidationComponent } from '../views/n05-form-validation/n05-for
 import { N06PipesComponent } from '../views/n06-pipes/n06-pipes.component';
 import { N07ModalsComponent } from '../views/n07-modals/n07-modals.component';
 import { N08ActivityComponent } from '../views/n08-activity/n08-activity.component';
+import { N09RealtimeComponent } from '../views/n09-realtime/n09-realtime.component';
 import { MenuItemData } from './menu';
 
 export const TheGuides: Array<MenuItemData> = [
@@ -56,5 +57,11 @@ export const TheGuides: Array<MenuItemData> = [
     text: 'Activity Indicator',
     description: 'Open Activity Indicator',
     module: N08ActivityComponent,
+  },
+  {
+    id: 'app-n09-realtime',
+    text: 'Real Time',
+    description: 'Real Time',
+    module: N09RealtimeComponent,
   },
 ];
