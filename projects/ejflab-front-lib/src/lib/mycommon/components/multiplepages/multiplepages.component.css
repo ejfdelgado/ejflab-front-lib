@@ -1,6 +1,8 @@
 .contenedor {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 [mat-dialog-title] {
@@ -30,8 +32,6 @@ mat-form-field {
 
 .contenedor .paginas_scroll {
   flex: 1;
-  overflow-y: scroll;
-  max-height: 70vh;
 }
 
 .contenedor .wrapper {
@@ -48,6 +48,9 @@ mat-form-field {
 
 mat-dialog-content {
   overflow: hidden;
+  min-width: 60vw;
+  display: flex;
+  flex-direction: column;
 }
 
 .controles_textos {

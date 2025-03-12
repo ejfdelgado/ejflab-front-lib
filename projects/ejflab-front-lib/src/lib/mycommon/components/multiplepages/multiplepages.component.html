@@ -21,15 +21,15 @@
                 [ngClass]="{'active': !onlyMyPages, 'inactive': onlyMyPages}">Todas</span>
         </p>
     </form>
-</mat-dialog-content>
-<div class="contenedor">
-    <div class="paginas_scroll">
-        <div class="wrapper">
-            <app-card [data]="cardInicial"></app-card>
-            <app-card *ngFor="let oneCard of paginas; index as i;" [data]="oneCard" class="multiplepages"></app-card>
-            <div class="contenedor_ver_mas" (click)="buscar(false)">
-                <span>Ver más</span>
+    <div class="contenedor">
+        <div class="paginas_scroll">
+            <div class="wrapper">
+                <app-card [data]="cardInicial"></app-card>
+                <app-card *ngFor="let oneCard of paginas; index as i;" [data]="oneCard" class="multiplepages"></app-card>
+                <div class="contenedor_ver_mas" (click)="buscar(false)">
+                    <span>Ver más</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</mat-dialog-content>

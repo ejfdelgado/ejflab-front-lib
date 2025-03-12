@@ -32,6 +32,10 @@ mat-form-field {
   width: 100%;
 }
 
+mat-dialog-content {
+  min-width: 30vw;
+}
+
 mat-dialog-content.con_form {
   min-height: 315px;
 }
@@ -45,4 +49,5 @@ form {
 
 app-imagepicker {
   height: 200px;
+  margin-bottom: 21px;
 }

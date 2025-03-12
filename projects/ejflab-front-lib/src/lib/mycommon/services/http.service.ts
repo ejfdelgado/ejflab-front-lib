@@ -160,8 +160,7 @@ export class HttpService {
     if (path.indexOf('?') >= 0) {
       prefijo = '&';
     }
-    let myUrl = `${MyConstants.resolveDomain(path)}/${path}`;
-    myUrl = MyUtilities.removeRepeatedSlash(myUrl);
+    let myUrl = MyUtilities.removeRepeatedSlash(path);
     do {
       actual = await this.get<any | null>(
         `${myUrl}${prefijo}offset=${params.offset}&max=${params.max}`,
