@@ -7,5 +7,20 @@ import { BaseMenuItemClass } from '../../models/menuBase';
   styleUrl: './n09-realtime.component.css'
 })
 export class N09RealtimeComponent extends BaseMenuItemClass {
+  override onTupleReadDone() {
+    super.onTupleReadDone();
+  }
 
+  override onTupleNews() {
+    //console.log(this.tupleModel);
+    super.onTupleNews();
+  }
+
+  async setTime() {
+    if (!this.tupleModel) {
+      return;
+    }
+    this.tupleModel.t = new Date().getTime();
+    super.saveTuple();
+  }
 }

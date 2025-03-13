@@ -197,7 +197,6 @@ export abstract class BaseComponent
                   this.onTupleReadDone();
                   this.saveState = 'done';
                 } else if (evento.status == 'news') {
-                  console.log('news');
                   // Stop read indicator
                   this.tupleModel = evento.body;
                   this.onTupleNews();

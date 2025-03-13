@@ -7,9 +7,6 @@ const random = document.getElementById('meta_random')?.getAttribute('content');
 const custom = document.getElementById('meta_custom')?.getAttribute('content');
 const defifrado = ModuloDatoSeguro.decifrarSimple(custom, random, AES, Utf8);
 
-console.log("2");
-console.log(defifrado);
-
 export const environment = {
   firebase: defifrado,
   production: false,
