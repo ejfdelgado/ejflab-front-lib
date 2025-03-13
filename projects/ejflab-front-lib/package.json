@@ -1,9 +1,9 @@
 {
   "name": "ejflab-front-lib",
-  "version": "2.4.5",
+  "version": "2.4.6",
   "scripts": {},
   "peerDependencies": {
-    "@ejfdelgado/ejflab-common": "^1.16.0",
+    "@ejfdelgado/ejflab-common": "^1.16.1",
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0",
     "@angular/animations": "^18.2.0",
