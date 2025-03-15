@@ -10,6 +10,11 @@ export interface UserMicrosoft {
   groups: string[];
 }
 
+export interface GetAccountOptionData {
+  forceRefresh?: boolean,
+  refreshTokenExpirationOffsetSeconds?: number,
+}
+
 export const MS_LOGIN_MODE = new InjectionToken<string>('msLoginMode', {
   providedIn: 'root',
   factory: () => 'select_account',//select_account, none
@@ -128,7 +133,14 @@ export class MicrosoftAuthService {
     }
   }
 
-  public async getActiveAccount(): Promise<msal.AuthenticationResult | null> {
+  public async getActiveAccount(options: GetAccountOptionData | null = null): Promise<msal.AuthenticationResult | null> {
+    let defaults = {
+      forceRefresh: false,
+      refreshTokenExpirationOffsetSeconds: 32400, // 9 hours * 60 minutes * 60 seconds = 7200 seconds
+    };
+    if (typeof options == "object") {
+      defaults = Object.assign(defaults, options);
+    }
     const msalInstance = await this.pca;
     //const accounts = msalInstance.getAllAccounts();
     const current = msalInstance.getActiveAccount();
@@ -138,8 +150,8 @@ export class MicrosoftAuthService {
     const request = {
       scopes: ['User.Read'],
       account: current,
-      forceRefresh: false,//Just refresh when expired
-      refreshTokenExpirationOffsetSeconds: 7200, // 2 hours * 60 minutes * 60 seconds = 7200 seconds
+      forceRefresh: defaults.forceRefresh,
+      refreshTokenExpirationOffsetSeconds: defaults.refreshTokenExpirationOffsetSeconds
     };
     const response = await msalInstance.acquireTokenSilent(request);
     return response;
