@@ -118,8 +118,11 @@ export class MicrosoftAuthService {
     //console.log(callbackId);
   }
 
-  public async refreshActiveAccount(redirectIdNoUser?: string): Promise<boolean> {
-    const response = await this.getActiveAccount();
+  public async refreshActiveAccount(redirectIdNoUser?: string, minutes?: number): Promise<boolean> {
+    const options: GetAccountOptionData = {
+      forceRefresh: true,
+    };
+    const response = await this.getActiveAccount(options);
     if (response) {
       await this.assignCurrentUserFromAccount(response);
     }
@@ -169,6 +172,13 @@ export class MicrosoftAuthService {
     } else {
       return response.idToken;
     }
+  }
+
+  async logoutSimple(): Promise<any> {
+    const msalInstance = await this.pca;
+    await msalInstance.logout();
+    this.currentUser = null;
+    this.evento.emit(null);
   }
 
   async logout(): Promise<any> {

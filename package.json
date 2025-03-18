@@ -78,6 +78,7 @@
     "rxjs": "^7.8.1",
     "socket.io-client": "^4.7.5",
     "typescript": "^5.4.5",
-    "zone.js": "~0.14.7"
+    "zone.js": "~0.14.7",
+    "jwt-decode": "^4.0.0"
   }
 }

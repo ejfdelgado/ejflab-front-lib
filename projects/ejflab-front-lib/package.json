@@ -1,6 +1,6 @@
 {
   "name": "ejflab-front-lib",
-  "version": "2.4.9",
+  "version": "2.4.16",
   "scripts": {},
   "peerDependencies": {
     "@ejfdelgado/ejflab-common": "^1.16.1",
@@ -34,7 +34,8 @@
     "rxjs": "^7.8.1",
     "socket.io-client": "^4.7.5",
     "typescript": "^5.4.5",
-    "zone.js": "~0.14.7"
+    "zone.js": "~0.14.7",
+    "jwt-decode": "^4.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

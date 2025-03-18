@@ -10,6 +10,7 @@ import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MicrosoftAuthService } from '../services/microsoftAuth.service';
+import { jwtDecode } from "jwt-decode";
 
 const URLS_NO_TOKEN = ['https://storage.googleapis.com'];
 
@@ -23,6 +24,27 @@ export class JwtInterceptor implements HttpInterceptor {
     private msAuth: MicrosoftAuthService,
     @Inject('authProvider') private authProvider: string,
   ) { }
+
+  isTokenExpired(token: string, minutes: number = 0) {
+    const response: any = {
+      with: true,
+      without: true,
+      correct: false,
+    };
+    try {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken && decodedToken.exp) {
+        const expirationTime = decodedToken.exp * 1000;
+        const now = Date.now();
+        response.with = now > (expirationTime - minutes * 60 * 1000);
+        response.without = now > expirationTime;
+        response.correct = true;
+      }
+    } catch (err) {
+      //
+    }
+    return response;
+  }
 
   intercept(
     request: HttpRequest<any>,
@@ -48,6 +70,28 @@ export class JwtInterceptor implements HttpInterceptor {
           });
           return next.handle(requestClone);
         } else {
+          // could check if it is expired...
+          const expired = this.isTokenExpired(token, 30);
+          if (expired) {
+            if (expired.without === true) {
+              // Nothing to do, it is expired at all
+              if (this.authProvider == "microsoft") {
+                /*
+                this.msAuth.logoutSimple().then(()=> {
+                  if (expired.correct) {
+                    window.location.reload();
+                  }
+                });
+                */
+              }
+            } else if (expired.with === true && expired.correct) {
+              // Could refresh it
+              if (this.authProvider == "microsoft") {
+                console.log("Refresing token");
+                this.msAuth.refreshActiveAccount();
+              }
+            }
+          }
           const url = request.url;
           const partes = /^(https?:\/\/[^\/]+)/.exec(url);
           let addAuthorization = true;
