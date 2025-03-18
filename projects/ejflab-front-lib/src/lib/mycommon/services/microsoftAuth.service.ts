@@ -32,6 +32,7 @@ export class MicrosoftAuthService {
   accessToken: string | null;
   idToken: string | null;
   currentUser: UserMicrosoft | null = null;
+  currentAccount: msal.AccountInfo | null = null;
   evento: EventEmitter<UserMicrosoft | null> = new EventEmitter();
   pathChangedEvent: EventEmitter<string> = new EventEmitter();
 
@@ -70,8 +71,8 @@ export class MicrosoftAuthService {
       current = accounts[0];
     }
     */
-    const current = msalInstance.getActiveAccount();
-    if (current) {
+    this.currentAccount = msalInstance.getActiveAccount();
+    if (this.currentAccount) {
       this.getSessionToken();
     }
   }
@@ -146,13 +147,13 @@ export class MicrosoftAuthService {
     }
     const msalInstance = await this.pca;
     //const accounts = msalInstance.getAllAccounts();
-    const current = msalInstance.getActiveAccount();
-    if (!current) {
+    this.currentAccount = msalInstance.getActiveAccount();
+    if (!this.currentAccount) {
       return null;
     }
     const request = {
       scopes: ['User.Read'],
-      account: current,
+      account: this.currentAccount,
       forceRefresh: defaults.forceRefresh,
       refreshTokenExpirationOffsetSeconds: defaults.refreshTokenExpirationOffsetSeconds
     };
@@ -176,7 +177,13 @@ export class MicrosoftAuthService {
 
   async logoutSimple(): Promise<any> {
     const msalInstance = await this.pca;
-    await msalInstance.logout();
+    await msalInstance.logoutRedirect({
+      onRedirectNavigate: () => {
+        // Prevent the redirect
+        return false;
+      },
+      account: this.currentAccount,
+    });
     this.currentUser = null;
     this.evento.emit(null);
   }

@@ -76,13 +76,15 @@ export class JwtInterceptor implements HttpInterceptor {
             if (expired.without === true) {
               // Nothing to do, it is expired at all
               if (this.authProvider == "microsoft") {
-                /*
-                this.msAuth.logoutSimple().then(()=> {
-                  if (expired.correct) {
+                // Assure destroy the session
+                if (expired.correct) {
+                  // Only reload if there was session before
+                  this.msAuth.refreshActiveAccount().then(() => {
                     window.location.reload();
-                  }
-                });
-                */
+                  }).catch((err) => {
+                    console.error(err);
+                  });
+                }
               }
             } else if (expired.with === true && expired.correct) {
               // Could refresh it
