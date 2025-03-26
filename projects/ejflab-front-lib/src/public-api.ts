@@ -8,6 +8,7 @@ export * from './lib/mycommon/services/authorization.service';
 export * from './lib/mycommon/services/auth.service';
 export * from './lib/mycommon/services/backendPage.service';
 export * from './lib/mycommon/services/call.service';
+export * from './lib/mycommon/services/console.service';
 export * from './lib/mycommon/services/dictate-service';
 export * from './lib/mycommon/services/fileInterface';
 export * from './lib/mycommon/services/file.service';

@@ -6,11 +6,31 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
     
     COOKIE_NAME = 'noglang';
+    COOKIE_NAME_LOG = 'loglevel';
     keyPromises: any = {};
     renderer: any;
 
     constructor() {
 
+    }
+
+    setLogLevel(val: string) {
+        this.setCookie(this.COOKIE_NAME_LOG, val, 1000);
+        window.location.reload();
+    }
+
+    getLogLevel() {
+        //error warning info
+        let currentLogLevel = 'error';
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryParamLanguage = urlParams.get('loglevel');
+        if (queryParamLanguage) {
+            currentLogLevel = queryParamLanguage;
+            this.setCookie(this.COOKIE_NAME_LOG, currentLogLevel, 1000);
+        } else {
+            currentLogLevel = this.getCookie(this.COOKIE_NAME_LOG) || 'error';
+        }
+        return currentLogLevel;
     }
 
     setLanguage(lang: string) {
