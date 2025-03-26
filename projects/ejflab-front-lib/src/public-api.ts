@@ -85,6 +85,7 @@ export * from './lib/mycommon/pipes/age.pipe';
 
 // Directives
 export * from './lib/mycommon/directives/NgInit';
+export * from './lib/mycommon/directives/MoveNextByEnter.directive';
 
 // Interfaces
 export * from './lib/mycommon/components/base/VideoWebStream';

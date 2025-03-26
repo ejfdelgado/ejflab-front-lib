@@ -48,6 +48,7 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { InterpolatePipe } from './pipes/interpolate.pipe';
 // Directives
 import { NgInit } from './directives/NgInit';
+import { MoveNextByEnterDirective } from './directives/MoveNextByEnter.directive';
 import { MMDDYYYYAdapter } from './adapters/date-adapters';
 import { SincePipe } from './pipes/since.pipe';
 import { AgePipe } from './pipes/age.pipe';
@@ -91,6 +92,7 @@ import { AgePipe } from './pipes/age.pipe';
     AgePipe,
     // Directives
     NgInit,
+    MoveNextByEnterDirective,
     // Adapters
   ],
   imports: [
@@ -148,6 +150,7 @@ import { AgePipe } from './pipes/age.pipe';
     AgePipe,
     // Directives
     NgInit,
+    MoveNextByEnterDirective,
   ],
   providers: [
     SortByNamePipe,
