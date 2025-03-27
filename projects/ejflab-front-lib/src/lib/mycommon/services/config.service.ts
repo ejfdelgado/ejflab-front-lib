@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
+import { IndicatorService } from './indicator.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ConfigService {
-    
+
     COOKIE_NAME = 'noglang';
     COOKIE_NAME_LOG = 'loglevel';
     keyPromises: any = {};
     renderer: any;
 
-    constructor() {
+    constructor(
+        private activity: IndicatorService,
+    ) {
 
     }
 
     setLogLevel(val: string) {
         this.setCookie(this.COOKIE_NAME_LOG, val, 1000);
+        this.activity.start();
         window.location.reload();
     }
 
@@ -35,6 +39,7 @@ export class ConfigService {
 
     setLanguage(lang: string) {
         this.setCookie(this.COOKIE_NAME, lang, 1000);
+        this.activity.start();
         window.location.reload();
     }
 
