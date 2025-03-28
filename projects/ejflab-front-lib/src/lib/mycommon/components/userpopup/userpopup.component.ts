@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalService } from '../../services/modal.service';
-import { MyUserData } from '../../services/user.service';
+import { MyUserData, MyUserOptionsData } from '../../services/user.service';
 import { ImagepickerOptionsData } from '../imagepicker/imagepicker.component';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { FileBase64Data } from '../base/base.component';
@@ -21,6 +21,11 @@ export interface UserPopUpData {
 })
 export class UserpopupComponent implements OnInit {
   form: FormGroup;
+  options: MyUserOptionsData = {
+    editPhone: true,
+    editEmail: true,
+    editName: true,
+  };
   imageOptions: ImagepickerOptionsData = {
     isEditable: true,
     isRounded: true,
@@ -35,6 +40,9 @@ export class UserpopupComponent implements OnInit {
     private modalSrv: ModalService,
     @Inject(MAT_DIALOG_DATA) public data: MyUserData
   ) {
+    if (data.options) {
+      this.options = data.options;
+    }
     this.respuesta = {
       old: data,
       changed: false,
@@ -63,11 +71,17 @@ export class UserpopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      name: [this.data.name, [Validators.required, Validators.maxLength(512)]],
-      email: [this.data.email, [Validators.maxLength(512)]],
-      phone: [this.data.phone, [Validators.maxLength(512)]],
-    });
+    this.form = this.fb.group({});
+
+    if (this.options.editName) {
+      this.form.addControl("name", this.fb.control(this.data.name, [Validators.required, Validators.maxLength(512)]));
+    }
+    if (this.options.editEmail) {
+      this.form.addControl("email", this.fb.control(this.data.email, [Validators.maxLength(512)]));
+    }
+    if (this.options.editPhone) {
+      this.form.addControl("phone", this.fb.control(this.data.phone, [Validators.maxLength(512)]));
+    }
   }
 
   getMaxLengthMessage(label: string, error: any | null): string {
@@ -97,15 +111,25 @@ export class UserpopupComponent implements OnInit {
         this.respuesta.changed = true;
       }
 
-      this.respuesta.new.name = this.form.value.name;
-      this.respuesta.new.email = this.form.value.email;
-      this.respuesta.new.phone = this.form.value.phone;
+      const llaves = [];
+      if (this.options.editName) {
+        this.respuesta.new.name = this.form.value.name;
+        llaves.push("name");
+      }
+      if (this.options.editEmail) {
+        this.respuesta.new.email = this.form.value.email;
+        llaves.push("email");
+      }
+      if (this.options.editPhone) {
+        this.respuesta.new.phone = this.form.value.phone;
+        llaves.push("phone");
+      }
+
       this.respuesta.new.picture = this.respuesta.old.picture;
       this.respuesta.new.created = this.respuesta.old.created;
 
       // o si alguno de los campos ha cambiado
       if (!this.respuesta.changed) {
-        const llaves = ['name', 'email', 'phone'];
         for (let i = 0; i < llaves.length; i++) {
           const llave = llaves[i];
           const nuevo: any = this.respuesta.new;

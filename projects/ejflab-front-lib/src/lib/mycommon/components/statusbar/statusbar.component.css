@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-.top_menu > .relleno {
+.top_menu>.relleno {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,6 +18,14 @@
   line-height: 28px;
 }
 
+.mi_nombre {
+  font-size: 28px;
+  color: white;
+  overflow: hidden;
+  line-height: 28px;
+  text-align: right;
+}
+
 .relleno {
   flex: 1;
 }
@@ -26,9 +34,12 @@
   width: 60px;
   height: 60px;
   cursor: pointer;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
   padding: 0 10px;
 }
 
@@ -78,6 +89,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }
@@ -87,6 +99,7 @@
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }

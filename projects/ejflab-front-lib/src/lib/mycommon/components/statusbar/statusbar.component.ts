@@ -4,11 +4,20 @@ import { BackendPageService } from '../../services/backendPage.service';
 import { LoginService } from '../../services/login.service';
 import { ModalService } from '../../services/modal.service';
 import { PageService } from '../../services/page.service';
-import { MyUserService } from '../../services/user.service';
+import { MyUserOptionsData, MyUserService } from '../../services/user.service';
 import { MyRoutes } from '@ejfdelgado/ejflab-common/src/MyRoutes';
 
 import { Auth, User } from '@angular/fire/auth';
 import { PageData } from '../../interfaces/login-data.interface';
+
+export interface StatusBarOptionsData {
+  editDocument?: boolean;
+  editDocumentPermissions?: boolean;
+  deleteDocument?: boolean;
+  createDocument?: boolean;
+  searchDocuments?: boolean;
+  displayUserName?: boolean;
+}
 
 export interface OptionData {
   icon: string;
@@ -24,6 +33,25 @@ export interface OptionData {
 export class StatusbarComponent implements OnInit {
   @Input('title')
   title: string | null;
+  @Input() options: StatusBarOptionsData = {
+    createDocument: true,
+    deleteDocument: true,
+    editDocument: true,
+    editDocumentPermissions: true,
+    searchDocuments: true,
+    displayUserName: false,
+  };
+  @Input() textStyle: { [key: string]: string } = {
+    "color": "#000000",
+  };
+  @Input() backgroundStyle: { [key: string]: string } = {
+    "background-color": "#eef7ff",
+  };
+  @Input() userOptions: MyUserOptionsData = {
+    editEmail: true,
+    editName: true,
+    editPhone: true,
+  };
   @Input('extraOptions')
   extraOptions: Array<OptionData> = [];
   @Input('saveState') saveState: string | null = null;
@@ -47,7 +75,7 @@ export class StatusbarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async editPage() {
     this.pageSrv.edit();
@@ -89,14 +117,14 @@ export class StatusbarComponent implements OnInit {
     this.pageSrv.multiple();
   }
 
-  async goToHome() {}
+  async goToHome() { }
 
   async logoutAndGoToHome() {
     await this.loginSrv.logout();
   }
 
   async editUser() {
-    this.usrSrv.edit();
+    this.usrSrv.edit(this.userOptions);
   }
 
   async logout() {

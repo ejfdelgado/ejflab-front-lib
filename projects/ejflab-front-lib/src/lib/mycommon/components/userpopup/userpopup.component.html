@@ -9,7 +9,7 @@
     <form class="form-container layout_columna" [formGroup]="form" (ngSubmit)="guardar()">
         <app-imagepicker [options]="imageOptions" (eventSave)="changedImage($event)" [url]="getImage()">
         </app-imagepicker>
-        <mat-form-field class="form-control">
+        <mat-form-field class="form-control" *ngIf="options.editName === true">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="name" type="text" required />
             <mat-error *ngIf="name?.hasError('required')">
@@ -19,14 +19,14 @@
                 {{ getMaxLengthMessage("", name?.errors) }}
             </mat-error>
         </mat-form-field>
-        <mat-form-field class="form-control">
+        <mat-form-field class="form-control" *ngIf="options.editEmail === true">
             <mat-label>Correo</mat-label>
             <input matInput formControlName="email" type="text" />
             <mat-error *ngIf="email?.hasError('maxlength')">
                 {{ getMaxLengthMessage("", email?.errors) }}
             </mat-error>
         </mat-form-field>
-        <mat-form-field class="form-control">
+        <mat-form-field class="form-control" *ngIf="options.editPhone === true">
             <mat-label>Celular</mat-label>
             <input matInput formControlName="phone" type="text" />
             <mat-error *ngIf="phone?.hasError('maxlength')">

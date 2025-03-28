@@ -10,6 +10,12 @@ import { AuthService } from './auth.service';
 import { HttpService, LoadFileData } from './http.service';
 import { ModalService } from './modal.service';
 
+export interface MyUserOptionsData {
+  editName: boolean;
+  editEmail: boolean;
+  editPhone: boolean;
+};
+
 export interface MyUserData {
   id?: string;
   created?: number;
@@ -18,6 +24,7 @@ export interface MyUserData {
   phone: string | null;
   picture?: string;
   updated?: number;
+  options?: MyUserOptionsData;
 }
 
 @Injectable({
@@ -79,10 +86,13 @@ export class MyUserService {
     }
   }
 
-  async edit() {
+  async edit(options?: MyUserOptionsData) {
     const usuario = await this.getCurrentUser();
     if (usuario) {
       const URL = 'srv/usr/me';
+      if (options) {
+        usuario.options = options;
+      }
       const dialogRef = await this.dialog.open(UserpopupComponent, {
         data: usuario,
         panelClass: 'edit-user-dialog-container',
@@ -125,7 +135,7 @@ export class MyUserService {
                 title: 'Listo!',
                 txt: 'Guardados tus datos.',
               });
-            } catch (err) {}
+            } catch (err) { }
           }
         });
     } else {
