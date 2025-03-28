@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AuthorizationService } from '../../services/authorization.service';
 import { BackendPageService } from '../../services/backendPage.service';
 import { LoginService } from '../../services/login.service';
 import { ModalService } from '../../services/modal.service';
 import { PageService } from '../../services/page.service';
-import { MyUserOptionsData, MyUserService } from '../../services/user.service';
+import { MyUserData, MyUserOptionsData, MyUserService } from '../../services/user.service';
 import { MyRoutes } from '@ejfdelgado/ejflab-common/src/MyRoutes';
 
 import { Auth, User } from '@angular/fire/auth';
 import { PageData } from '../../interfaces/login-data.interface';
+import { Subscription } from 'rxjs';
 
 export interface StatusBarOptionsData {
   editDocument?: boolean;
@@ -30,7 +31,7 @@ export interface OptionData {
   templateUrl: './statusbar.component.html',
   styleUrls: ['./statusbar.component.css'],
 })
-export class StatusbarComponent implements OnInit {
+export class StatusbarComponent implements OnInit, OnDestroy {
   @Input('title')
   title: string | null;
   @Input() options: StatusBarOptionsData = {
@@ -56,6 +57,9 @@ export class StatusbarComponent implements OnInit {
   extraOptions: Array<OptionData> = [];
   @Input('saveState') saveState: string | null = null;
   user: User | null = null;
+  dbUser: MyUserData | null = null;
+  dbUserSubscription: Subscription | null = null;
+  updateCount: number = 0;
 
   constructor(
     private loginSrv: LoginService,
@@ -64,7 +68,7 @@ export class StatusbarComponent implements OnInit {
     private backendPageSrv: BackendPageService,
     private usrSrv: MyUserService,
     private modalSrv: ModalService,
-    private auth: Auth
+    private auth: Auth,
   ) {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -75,7 +79,12 @@ export class StatusbarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.dbUserSubscription = this.usrSrv.eventoUsuario.subscribe((dbUser) => {
+      this.dbUser = dbUser;
+      this.updateCount = Date.now();
+    });
+  }
 
   async editPage() {
     this.pageSrv.edit();
@@ -133,5 +142,31 @@ export class StatusbarComponent implements OnInit {
 
   async login() {
     this.loginSrv.login();
+  }
+
+  getUserName() {
+    if (this.dbUser?.name) {
+      return this.dbUser?.name;
+    }
+    if (this.user?.displayName) {
+      return this.user.displayName;
+    }
+    return "";
+  }
+
+  getPhoto() {
+    if (this.dbUser?.picture) {
+      return this.dbUser.picture + `?t=${this.updateCount}`;
+    }
+    if (this.user?.photoURL) {
+      return this.user.photoURL + `?t=${this.updateCount}`;
+    }
+    return "";
+  }
+
+  async ngOnDestroy() {
+    if (this.dbUserSubscription) {
+      this.dbUserSubscription.unsubscribe();
+    }
   }
 }

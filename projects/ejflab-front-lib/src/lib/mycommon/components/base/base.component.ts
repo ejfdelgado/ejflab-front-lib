@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { User, Auth } from '@angular/fire/auth';
+import { Auth, User } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -39,8 +39,7 @@ export interface FileBase64Data {
 })
 export abstract class BaseComponent
   extends ContextComponent
-  implements OnInit, OnDestroy
-{
+  implements OnInit, OnDestroy {
   tupleModel: any | null = null;
   page: PageData | null = null;
   currentUser: User | null = null;
@@ -49,6 +48,7 @@ export abstract class BaseComponent
   tupleSubscription: Subscription | null = null;
   tupleServiceInstance: TupleServiceInstance | null;
   saveState: string | null = null;
+
   constructor(
     public override flowchartSrv: FlowchartService,
     public override callService: CallService,
@@ -61,7 +61,7 @@ export abstract class BaseComponent
     public fileService: FileService,
     public override modalService: ModalService,
     public webcamService: WebcamService,
-    public auth: Auth
+    public auth: Auth,
   ) {
     super(flowchartSrv, callService, modalService, cdr);
   }
@@ -226,7 +226,7 @@ export abstract class BaseComponent
     this.cdr.detectChanges();
   }
 
-  onTupleWriteDone() {}
+  onTupleWriteDone() { }
 
   override async ngOnDestroy() {
     await super.ngOnDestroy();

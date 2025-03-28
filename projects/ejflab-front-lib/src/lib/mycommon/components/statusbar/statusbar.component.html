@@ -36,7 +36,7 @@
         </div>
         <div class="relleno mi_titulo" [ngStyle]="textStyle">{{ title }}</div>
         <div *ngIf="options.displayUserName === true && user" class="relleno mi_nombre" [ngStyle]="textStyle">{{
-            user.displayName }}</div>
+            getUserName() }}</div>
     </div>
     <div *ngIf="saveState !== null" class="usuario_container">
         <div class="menu_icon_user_parent">
@@ -57,7 +57,7 @@
                 <mat-icon>person</mat-icon>
             </div>
             <div *ngIf="user !== null" class="menu_icon_user background_photo"
-                [ngStyle]="{'background-image': 'url(' + user.photoURL + ')'}">
+                [ngStyle]="{'background-image': 'url(' + getPhoto() + ')'}">
 
             </div>
         </div>
