@@ -34,7 +34,9 @@
             </mat-menu>
 
         </div>
-        <div class="relleno mi_titulo" [ngStyle]="textStyle">{{ title }}</div>
+        <div *ngIf="title != undefined && title != null && title.length > 0" class="relleno mi_titulo"
+            [ngStyle]="textStyle">{{
+            title }}</div>
         <div *ngIf="options.displayUserName === true && user" class="relleno mi_nombre" [ngStyle]="textStyle">{{
             getUserName() }}</div>
     </div>

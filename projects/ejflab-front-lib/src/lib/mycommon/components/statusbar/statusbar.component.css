@@ -18,6 +18,9 @@
   color: white;
   overflow: hidden;
   line-height: 30px;
+  word-break: unset;
+  text-wrap: unset;
+  text-overflow: ellipsis;
 }
 
 .mi_nombre {
@@ -26,6 +29,9 @@
   overflow: hidden;
   line-height: 30px;
   text-align: right;
+  word-break: unset;
+  text-wrap: unset;
+  text-overflow: ellipsis;
 }
 
 .relleno {
@@ -72,6 +78,7 @@
 
 .background_photo {
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .save_status {
