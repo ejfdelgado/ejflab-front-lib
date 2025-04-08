@@ -81,6 +81,7 @@ export class ModalService {
       txt: payload.txt,
       title: payload.title,
       translateFolder: payload.translateFolder,
+      imageUrl: payload.imageUrl,
       model: payload.model,
       choices: [
         { txt: this.translate('no'), val: '0', icon: "close", class: "btn-secondary" },

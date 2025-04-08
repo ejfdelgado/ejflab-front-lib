@@ -6,6 +6,7 @@ export interface ConfirmData {
   title?: string;
   translateFolder?: string | null;
   model?: any;
+  imageUrl?: string;
 }
 
 @Component({
@@ -16,15 +17,17 @@ export interface ConfirmData {
 export class ConfirmComponent implements OnInit {
   text: string;
   title: string;
+  imageUrl?: string;
   constructor(
     public dialogRef: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmData
   ) {
     this.text = typeof data.txt == 'string' ? data.txt : 'Sin detalle';
     this.title = typeof data.title == 'string' ? data.title : 'Confirmación';
+    this.imageUrl = data.imageUrl;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   cancelar() {
     this.dialogRef.close(false);

@@ -5,6 +5,9 @@
     </span>
 </div>
 <div mat-dialog-content>
+    <div class="alert_image_container" *ngIf="imageUrl !== undefined">
+        <img src="{{ imageUrl }}" />
+    </div>
     <p>{{ text }}</p>
     <div class="bottom_buttons">
         <button mat-raised-button color="" (click)="cancelar()">

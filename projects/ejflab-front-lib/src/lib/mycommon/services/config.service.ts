@@ -37,13 +37,15 @@ export class ConfigService {
         return currentLogLevel;
     }
 
-    setLanguage(lang: string) {
+    setLanguage(lang: string, reload: boolean = true) {
         this.setCookie(this.COOKIE_NAME, lang, 1000);
-        this.activity.start();
-        window.location.reload();
+        if (reload) {
+            this.activity.start();
+            window.location.reload();
+        }
     }
 
-    setCookie(cname: string, cvalue: string, exdays: number) {
+    setCookie(cname: string, cvalue: string, exdays: number = 365) {
         const d = new Date();
         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
         let expires = 'expires=' + d.toUTCString();
