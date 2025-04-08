@@ -27,6 +27,10 @@
 [mat-dialog-title] h1 {
     flex: 1;
     margin-bottom: 8px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
 }
 
 [mat-dialog-title] .boton_cerrar {

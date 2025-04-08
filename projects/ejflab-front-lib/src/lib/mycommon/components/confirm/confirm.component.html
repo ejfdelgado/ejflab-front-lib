@@ -1,8 +1,10 @@
 <div mat-dialog-title>
-    <h1 class="centrado">{{ title }}</h1>
-    <span class="boton_cerrar" [mat-dialog-close]>
-        <mat-icon>close</mat-icon>
-    </span>
+    <header>
+        <h1 class="centrado">{{ title }}</h1>
+        <span class="boton_cerrar" [mat-dialog-close]>
+            <mat-icon>close</mat-icon>
+        </span>
+    </header>
 </div>
 <div mat-dialog-content>
     <div class="alert_image_container" *ngIf="imageUrl !== undefined">
@@ -10,10 +12,12 @@
     </div>
     <p>{{ text }}</p>
     <div class="bottom_buttons">
-        <button mat-raised-button color="" (click)="cancelar()">
+        <button class="btn btn-secondary" (click)="cancelar()">
+            <mat-icon>close</mat-icon>
             Cancelar
         </button>
-        <button mat-raised-button color="primary" (click)="aceptar()">
+        <button class="btn btn-primary" (click)="aceptar()">
+            <mat-icon>check</mat-icon>
             Aceptar
         </button>
     </div>

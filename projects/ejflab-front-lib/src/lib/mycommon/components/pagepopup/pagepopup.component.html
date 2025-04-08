@@ -1,8 +1,10 @@
 <div mat-dialog-title>
-    <h1 class="centrado">Editar página</h1>
-    <span class="boton_cerrar" [mat-dialog-close]>
-        <mat-icon>close</mat-icon>
-    </span>
+    <header>
+        <h1 class="centrado">Editar página</h1>
+        <span class="boton_cerrar" [mat-dialog-close]>
+            <mat-icon>close</mat-icon>
+        </span>
+    </header>
 </div>
 <mat-dialog-content class="mat-typography con_form">
     <p class="texto_descripcion">Personaliza esta aplicación web para cuando regreses.</p>
@@ -40,9 +42,11 @@
         <mat-icon>key</mat-icon> #2
     </button>
     <button class="btn btn-secondary" (click)="cancelar()">
+        <mat-icon>close</mat-icon>
         Cancelar
     </button>
     <button class="btn btn-primary" (click)="guardar()">
+        <mat-icon>check</mat-icon>
         Guardar
     </button>
 </div>

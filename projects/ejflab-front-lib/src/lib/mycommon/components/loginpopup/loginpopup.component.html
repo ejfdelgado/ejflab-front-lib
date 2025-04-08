@@ -1,8 +1,10 @@
 <div mat-dialog-title *ngIf="currentView == 'inicio'">
-    <h1 class="centrado">Inicia sesión para continuar</h1>
-    <span class="boton_cerrar" [mat-dialog-close]>
-        <mat-icon>close</mat-icon>
-    </span>
+    <header>
+        <h1 class="centrado">Inicia sesión para continuar</h1>
+        <span class="boton_cerrar" [mat-dialog-close]>
+            <mat-icon>close</mat-icon>
+        </span>
+    </header>
 </div>
 <mat-dialog-content class="mat-typography" *ngIf="currentView == 'inicio'">
     <p class="texto_descripcion">Personaliza esta aplicación web para cuando regreses.</p>
