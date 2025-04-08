@@ -5,6 +5,7 @@ export interface GenericChoiceData {
   txt: string;
   val: string;
   icon?: string;
+  class?: string;
 }
 
 export interface GenericData {
@@ -16,6 +17,7 @@ export interface GenericData {
   callback?: string;
   translateFolder?: any
   model?: any;
+  imageUrl?: string;
 }
 
 @Component({
@@ -26,6 +28,7 @@ export interface GenericData {
 export class GenericComponent implements OnInit {
   text: string = 'Sin detalle';
   title: string = 'Pop Up';
+  imageUrl?: string;
   timeout: number = 0; // means no timeout
   choices: Array<GenericChoiceData> = [];
   callback: string = '';
@@ -52,6 +55,9 @@ export class GenericComponent implements OnInit {
     }
     if (typeof data.translateFolder == 'string') {
       this.translateFolder = data.translateFolder;
+    }
+    if (typeof data.imageUrl == 'string') {
+      this.imageUrl = data.imageUrl;
     }
     this.model = data.model;
   }

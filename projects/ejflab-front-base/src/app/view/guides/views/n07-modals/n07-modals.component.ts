@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItemClass } from '../../models/menu';
-import { ModalService, TranslateService } from 'ejflab-front-lib';
+import { ModalService, TranslateService } from 'projects/ejflab-front-lib/src/public-api';
 
 @Component({
   selector: 'app-n07-modals',
@@ -24,6 +24,7 @@ export class N07ModalsComponent extends MenuItemClass {
       translateFolder: 'test',
       title: 'popups.custom.title',
       txt: 'popups.custom.text',
+
       choices: [
         { txt: 'popups.choices.yes_word', val: 'si' },
         { txt: 'popups.choices.no_word', val: 'no' },
@@ -55,6 +56,7 @@ export class N07ModalsComponent extends MenuItemClass {
       },
       title: 'Title for ${name}',
       txt: 'This is the ${name} text',
+      imageUrl: "https://storage.googleapis.com/labs-pro-public/svg/car.svg",
       choices: [
         { txt: 'Ok ${name}', val: 'ok' }
       ],

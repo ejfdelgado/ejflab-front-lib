@@ -20,7 +20,7 @@ export class ModalService {
       "yes": "Yes",
       "no": "No",
       "ok": "Ok",
-      "ups": "Ups!",
+      "ups": "Oops!",
     },
     'es': {
       "yes": "Sí",
@@ -61,7 +61,13 @@ export class ModalService {
 
   async error(error: Error) {
     const dialogRef = this.dialog.open(AlertComponent, {
-      data: { title: this.translate('ups'), txt: error.message },
+      data: {
+        title: this.translate('ups'),
+        txt: error.message,
+        buttons: [
+          { label: this.translate('ok') }
+        ]
+      },
     });
     return new Promise((resolve) => {
       dialogRef.afterClosed().subscribe((result) => {
@@ -77,7 +83,7 @@ export class ModalService {
       translateFolder: payload.translateFolder,
       model: payload.model,
       choices: [
-        { txt: this.translate('no'), val: '0', icon: "close" },
+        { txt: this.translate('no'), val: '0', icon: "close", class: "btn-secondary" },
         { txt: this.translate('yes'), val: '1', icon: "check" },
       ],
     };

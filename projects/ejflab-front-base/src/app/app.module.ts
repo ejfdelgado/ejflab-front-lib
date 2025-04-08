@@ -32,7 +32,7 @@ import { GuidesModule } from './view/guides/guides.module';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 
 if (location.hostname == "localhost") {
-  MyConstants.SRV_ROOT = `https://${location.hostname}:8081/`;
+  MyConstants.SRV_ROOT = `http://${location.hostname}:8081/`;
 }
 
 @NgModule({

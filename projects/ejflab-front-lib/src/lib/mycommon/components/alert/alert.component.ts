@@ -4,9 +4,11 @@ import { HttpService } from '../../services/http.service';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
 
 export interface AlertDataButton {
-  color?: string;
+  class?: string;
+  color?: string;// deprecated
   label?: string;
   action?: Function;
+  icon?: string;
 }
 
 export interface AlertData {
@@ -19,6 +21,7 @@ export interface AlertData {
   autoCloseMilis?: number;
   translateFolder?: string | null;
   model?: any;
+  imageUrl?: string;
 }
 
 @Component({
@@ -30,6 +33,7 @@ export class AlertComponent implements OnInit {
   text: string;
   title: string;
   buttons?: Array<AlertDataButton>;
+  imageUrl?: string;
   constructor(
     public dialogRef: MatDialogRef<AlertComponent>,
     private readonly httpSrv: HttpService,
@@ -37,6 +41,7 @@ export class AlertComponent implements OnInit {
   ) {
     this.title = typeof data.title == 'string' ? data.title : 'Información';
     this.buttons = data.buttons;
+    this.imageUrl = data.imageUrl;
     if (!this.buttons) {
       this.buttons = [];
       /*
@@ -52,7 +57,7 @@ export class AlertComponent implements OnInit {
     this.loadTemplate();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async loadTemplate() {
     if (typeof this.data.txt == 'string') {
@@ -89,5 +94,5 @@ export class AlertComponent implements OnInit {
     }
   }
 
-  async aceptar(data: AlertData) {}
+  async aceptar(data: AlertData) { }
 }
