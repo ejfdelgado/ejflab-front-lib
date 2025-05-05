@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { SimpleObj } from '@ejfdelgado/ejflab-common/src/SimpleObj';
 import { HttpService } from './http.service';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
@@ -14,6 +14,7 @@ export class TranslateService {
   constructor(
     private httpService: HttpService,
     private configService: ConfigService,
+    @Inject('appVersion') public appVersion: string = "default",
   ) {
     this.renderer = new MyTemplate();
   }
@@ -28,7 +29,7 @@ export class TranslateService {
     const key = `${args[0]}/${currentLang}`;
     let promesa = this.keyPromises[key];
     if (!promesa) {
-      this.keyPromises[key] = this.httpService.get(`assets/lang/${key}.json`);
+      this.keyPromises[key] = this.httpService.get(`assets/lang/${key}.json?v=${this.appVersion}`);
       promesa = this.keyPromises[key];
     }
     const valor = await promesa;
