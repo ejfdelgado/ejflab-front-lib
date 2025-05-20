@@ -44,8 +44,7 @@ button {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+input[type="radio"] {
   height: 1.5em;
   width: 1.5em;
 }
