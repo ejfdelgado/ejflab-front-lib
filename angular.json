@@ -60,7 +60,12 @@
               }
             ],
             "styles": [
-              "projects/ejflab-front-base/src/styles.css"
+              "projects/ejflab-front-base/src/styles.css",
+              "projects/ejflab-front-lib/src/styles/popups.css",
+              "projects/ejflab-front-base/src/assets/css/buttons.css",
+              "projects/ejflab-front-base/src/assets/css/containers.css",
+              "projects/ejflab-front-base/src/assets/css/fonts.css",
+              "projects/ejflab-front-base/src/assets/css/forms.css"
             ],
             "scripts": []
           },

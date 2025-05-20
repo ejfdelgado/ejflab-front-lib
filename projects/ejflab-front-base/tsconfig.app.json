@@ -5,7 +5,9 @@
   "compilerOptions": {
     "allowJs": true,
     "outDir": "../../out-tsc/app",
-    "types": ["node"]
+    "types": ["node"],
+    "target": "ES2022",
+    "useDefineForClassFields": false
   },
   "files": [
     "src/main.ts", "src/polyfills.ts"
