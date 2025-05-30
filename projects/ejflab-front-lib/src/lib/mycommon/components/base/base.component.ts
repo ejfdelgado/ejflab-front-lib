@@ -149,6 +149,10 @@ export abstract class BaseComponent
     }
   }
 
+  usePage() : boolean {
+    return true;
+  }
+
   override async ngOnInit(): Promise<void> {
     super.ngOnInit();
     const updateDinamicallyOgDataThis = this.updateDinamicallyOgData.bind(this);
@@ -162,7 +166,13 @@ export abstract class BaseComponent
         this.setCurrentUser(null);
       } else {
         const promesas: Array<Promise<any>> = [];
-        promesas.push(this.pageService.getCurrentPage());
+        if (this.usePage()) {
+          promesas.push(this.pageService.getCurrentPage());
+        } else {
+          promesas.push(new Promise((resolve) => {
+            resolve({});
+          }));
+        }
         promesas.push(this.authService.getCurrentUser());
 
         const respuestas = await Promise.all(promesas);

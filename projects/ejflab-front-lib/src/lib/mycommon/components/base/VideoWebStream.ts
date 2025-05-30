@@ -63,6 +63,10 @@ export class VideoWebStream {
   volumeEmitter: EventEmitter<number> = new EventEmitter();
   lastUpdatedVideoDevice: string | null = null;
   lastUpdatedAudioDevice: string | null = null;
+  static hooks: {[key: string]: Function} = {};
+  static registerHook(name: string, fun: Function) {
+    VideoWebStream.hooks[name] = fun;
+  }
 
   constructor() {
     this.emitterDevices.then((devices: DevicesData) => {
@@ -225,6 +229,9 @@ export class VideoWebStream {
   }
 
   async getUserMedia(): Promise<MultiScaleMediaStream> {
+    if ("getUserMedia" in VideoWebStream.hooks) {
+      return await VideoWebStream.hooks["getUserMedia"](this);
+    }
     const audioSource = this.currentDevices.audio;
     const videoSource = this.currentDevices.video;
     //this.logCurrentDevices();
