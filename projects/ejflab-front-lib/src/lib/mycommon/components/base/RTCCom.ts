@@ -91,16 +91,29 @@ export class RTCCom {
     if (!peerData) {
       return;
     }
-    peerData.peerConn.close();
-    peerData.streams.audio.stream?.getTracks().forEach(function (track) {
-      track.stop();
-    });
-    const videos = peerData.streams.video;
-    videos.forEach((someVideo) => {
-      someVideo.stream?.getTracks().forEach(function (track) {
+    try {
+      peerData.peerConn.close();
+    } catch (err) {
+      console.error(`Error closing ${remoteSocketId} peerConn`);
+    }
+    try {
+
+      peerData.streams.audio.stream?.getTracks().forEach(function (track) {
         track.stop();
       });
-    });
+    } catch (err) {
+      console.error(`Error closing ${remoteSocketId} audio stream`);
+    }
+    try {
+      const videos = peerData.streams.video;
+      videos.forEach((someVideo) => {
+        someVideo.stream?.getTracks().forEach(function (track) {
+          track.stop();
+        });
+      });
+    } catch (err) {
+      console.error(`Error closing ${remoteSocketId} video stream`);
+    }
     delete this.peers[remoteSocketId];
   }
 
@@ -564,6 +577,8 @@ export class RTCCom {
           break;
         case 'connected':
           this.setOnlineStatus('Online');
+          // succeed
+          this.mustUpdate.emit();
           break;
         case 'disconnected':
           this.setOnlineStatus('Disconnecting...');
@@ -571,6 +586,7 @@ export class RTCCom {
           break;
         case 'closed':
           this.setOnlineStatus('Offline');
+          this.handleDisconnection(remoteSocketId);
           break;
         case 'failed':
           this.setOnlineStatus('Error');
