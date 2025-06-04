@@ -86,6 +86,14 @@ export class RTCCom {
     return this.dataChannelEvents.subscribe(callback);
   }
 
+  static async disconnectAll() {
+    const peerIds = Object.keys(this.peers);
+    for (let i = 0; i < peerIds.length; i++) {
+      const peerId = peerIds[i];
+      RTCCom.closeChannelWith(peerId);
+    }
+  }
+
   static async closeChannelWith(remoteSocketId: string) {
     const peerData = this.peers[remoteSocketId];
     if (!peerData) {
