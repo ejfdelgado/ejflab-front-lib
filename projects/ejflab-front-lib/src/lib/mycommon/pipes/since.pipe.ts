@@ -35,7 +35,7 @@ export class SincePipe implements PipeTransform {
         if (args && args.length > 0) {
           translateFolder = args[0];
         }
-        if (args && args.length > 1) {
+        if (args && args.length > 1 && typeof args[1] == "string") {
           map['type'] = args[1];
         }
         map["hours2"] = (map["hours"]/100).toFixed(2).split(".")[1];

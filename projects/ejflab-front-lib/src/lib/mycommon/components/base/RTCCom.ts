@@ -38,7 +38,6 @@ export class RTCCom {
   static mustUpdate: EventEmitter<void> = new EventEmitter();
   static mediaStreams: MultiScaleMediaStream | null = null;
   static callMadeConfigured: EventEmitter<void> = new EventEmitter();
-  static includeOtherPeersEvent: EventEmitter<void> = new EventEmitter();
   static streamActive: EventEmitter<StreamActiveData> = new EventEmitter();
 
   static async init(callServiceInstance: CallServiceInstance) {
@@ -152,7 +151,7 @@ export class RTCCom {
     remoteSocketId: string,
     channelLabels: Array<string> = []
   ) {
-    console.log(`openChannelWith(${remoteSocketId})`);
+    console.log(`rtcDetail: openChannelWith(${remoteSocketId})`);
     // Espero la configuración
     const config = await this.rtcConfig.then();
     // Se crea el webrtc
@@ -182,6 +181,7 @@ export class RTCCom {
         return peerConn.setLocalDescription(offer);
       })
       .then(() => {
+        console.log(`rtcDetail: send callUser`);
         this.callServiceInstance.emitEvent('callUser', {
           offer: peerConn.localDescription,
           to: remoteSocketId,
@@ -229,24 +229,19 @@ export class RTCCom {
         this.onDataChannelCreated(event.channel, socket);
       };
       // Se envía la respuesta
-      console.log('callMade -> peerConn.setRemoteDescription');
+      console.log(`rtcDetail: me: ${socketId} remote: ${socket}`);
+      console.log(`rtcDetail: callMade -> peerConn.setRemoteDescription with state ${peerConn.signalingState}`);
       await peerConn.setRemoteDescription(new RTCSessionDescription(offer));
       const answer = await peerConn.createAnswer();
       await peerConn.setLocalDescription(new RTCSessionDescription(answer));
-      console.log('makeAnswer!');
+
+      console.log('rtcDetail: Sends makeAnswer!');
       callServiceInstance.emitEvent('makeAnswer', {
         answer,
         to: socket,
       });
       this.callMadeConfigured.emit();
     });
-
-    callServiceInstance.registerProcessor(
-      'includeOtherPeers',
-      async (message: any) => {
-        this.includeOtherPeersEvent.emit();
-      }
-    );
 
     // Escucho los ice candidates
     callServiceInstance.registerProcessor('onicecandidate', (message: any) => {
@@ -277,18 +272,14 @@ export class RTCCom {
         //console.log(`Me ${socketId} incomming ${socket}`);
         const peer = this.peers[socket];
         if (peer) {
-          console.log('answerMade -> peerConn.setRemoteDescription');
+          console.log(`rtcDetail: me: ${socketId} remote: ${socket}`);
+          console.log(`rtcDetail: answerMade -> peerConn.setRemoteDescription with state ${peer.peerConn.signalingState}`);
           await peer.peerConn.setRemoteDescription(
             new RTCSessionDescription(answer)
           );
         } else {
-          console.log(`answerMade No peer found for ${socket}`);
+          console.log(`rtcDetail: answerMade No peer found for ${socket}`);
         }
-
-        // Ask the peer to fix their connections with the rest of peers
-        this.callServiceInstance.emitEvent('includeOtherPeers', {
-          to: socket,
-        });
       }
     );
   }
