@@ -294,7 +294,8 @@ export class RTCCom {
   }
 
   static setOnlineStatus(status: string) {
-    console.log(`RTCPeer Conection ${status}`);
+    //console.log(`RTCPeer Conection ${status}`);
+    console.log(`rtcDetail: Conection ${status}`);
   }
 
   static sendBuffer(dataChannel: RTCDataChannel, buffer: Buffer) {
@@ -572,27 +573,27 @@ export class RTCCom {
       switch (peerConn.connectionState) {
         case 'new':
         case 'connecting':
-          this.setOnlineStatus('Connecting...');
+          this.setOnlineStatus(`Connecting... ${remoteSocketId}`);
           break;
         case 'connected':
-          this.setOnlineStatus('Online');
+          this.setOnlineStatus(`Online ${remoteSocketId}`);
           // succeed
           this.mustUpdate.emit();
           break;
         case 'disconnected':
-          this.setOnlineStatus('Disconnecting...');
+          this.setOnlineStatus(`Disconnecting... ${remoteSocketId}`);
           this.handleDisconnection(remoteSocketId);
           break;
         case 'closed':
-          this.setOnlineStatus('Offline');
+          this.setOnlineStatus(`Offline ${remoteSocketId}`);
           this.handleDisconnection(remoteSocketId);
           break;
         case 'failed':
-          this.setOnlineStatus('Error');
+          this.setOnlineStatus(`Error ${remoteSocketId}`);
           this.handleDisconnection(remoteSocketId);
           break;
         default:
-          this.setOnlineStatus('Unknown');
+          this.setOnlineStatus(`Unknown ${remoteSocketId}`);
           break;
       }
     };
