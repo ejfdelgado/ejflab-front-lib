@@ -129,19 +129,25 @@ export class RTCCom {
       return false;
     }
     const dataChannel = this.peers[remoteSocketId];
-    if (dataChannel.peerConn.connectionState != 'connected') {
-      return false;
-    }
-    // Maybe check if both streams are active?
-    const videoStream1: MediaStream | null =
-      dataChannel.streams.video[0].stream;
-    const videoStream2: MediaStream | null =
-      dataChannel.streams.video[1].stream;
-    const audioStream: MediaStream | null = dataChannel.streams.audio.stream;
-    if (!videoStream1 || !audioStream || !videoStream2) {
-      return false;
-    }
-    if (!videoStream1.active || !videoStream2.active || !audioStream.active) {
+    const connectionState = dataChannel.peerConn.connectionState;
+    if (connectionState == 'connected') {
+      // If it is connected
+      // then the health depends on the video and audio streams
+      const videoStream1: MediaStream | null =
+        dataChannel.streams.video[0].stream;
+      const videoStream2: MediaStream | null =
+        dataChannel.streams.video[1].stream;
+      const audioStream: MediaStream | null = dataChannel.streams.audio.stream;
+      if (!videoStream1 || !audioStream || !videoStream2) {
+        return false;
+      }
+      if (!videoStream1.active || !videoStream2.active || !audioStream.active) {
+        return false;
+      }
+    } else if (['connecting', 'new'].indexOf(connectionState) >= 0) {
+      // It is a normal state
+      return true;
+    } else if (['disconnected', 'failed', 'closed'].indexOf(connectionState) >= 0) {
       return false;
     }
     return true;
