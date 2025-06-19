@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { PromiseEmitter } from './PromiseEmitter';
 import { CallServiceInstance } from '../../services/call.service';
 import { MultiScaleMediaStream } from './VideoWebStream';
+import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
 
 export interface PeerStream {
   stream: MediaStream | null;
@@ -605,6 +606,13 @@ export class RTCCom {
     };
   }
 
+  static isMobile() {
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
+      return true;
+    }
+    return false;
+  }
+
   static connectStreamToHtmlElement(remoteSocketId: string, videoId?: number) {
     console.log(`connectStreamToHtmlElement(${remoteSocketId})`);
     if (!(remoteSocketId in this.peersElements)) {
@@ -629,6 +637,18 @@ export class RTCCom {
           )}`
         );
         audio.srcObject = peerRef.streams.audio.stream;
+        let speakerSelected = 'default';
+        if (!RTCCom.isMobile()) {
+          speakerSelected = MyCookies.getCookie('default_audio_output', 'default');
+        }
+        if (typeof audio.setSinkId === 'function') {
+          try {
+            console.log('Audio output set to ' + speakerSelected);
+            audio.setSinkId(speakerSelected);
+          } catch (err) {
+            //console.error('Failed to set sink ID:', err);
+          }
+        }
       } else {
         console.log(`ERROR: ${remoteSocketId} has no audio element`);
       }
