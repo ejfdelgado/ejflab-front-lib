@@ -46,7 +46,10 @@ export class RTCCom {
     this.callServiceInstance = callServiceInstance;
     // Configuración de una sola vez
     this.oneTimeConfiguration();
-    this.callServiceInstance.emitEvent('askiceservers', {});
+    // get query param
+    const urlParams = new URLSearchParams(window.location.search);
+    const webrtc_conf = urlParams.get("webrtc_conf");
+    this.callServiceInstance.emitEvent('askiceservers', { "webrtc_conf": webrtc_conf });
   }
 
   static unregisterAudioVideoElement(socketId: string) {
