@@ -41,15 +41,12 @@ export class RTCCom {
   static callMadeConfigured: EventEmitter<void> = new EventEmitter();
   static streamActive: EventEmitter<StreamActiveData> = new EventEmitter();
 
-  static async init(callServiceInstance: CallServiceInstance) {
+  static async init(callServiceInstance: CallServiceInstance, config: { [key: string]: any } = {}) {
     this.rtcConfig = new PromiseEmitter();
     this.callServiceInstance = callServiceInstance;
     // Configuración de una sola vez
     this.oneTimeConfiguration();
-    // get query param
-    const urlParams = new URLSearchParams(window.location.search);
-    const webrtc_conf = urlParams.get("webrtc_conf");
-    this.callServiceInstance.emitEvent('askiceservers', { "webrtc_conf": webrtc_conf });
+    this.callServiceInstance.emitEvent('askiceservers', config);
   }
 
   static unregisterAudioVideoElement(socketId: string) {
