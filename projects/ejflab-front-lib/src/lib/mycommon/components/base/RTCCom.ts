@@ -613,6 +613,22 @@ export class RTCCom {
     return false;
   }
 
+  // RTCCom.assignSrc()
+  static assignSrc(htmlElement: any, mediaStream: any) {
+    if ("srcObject" in htmlElement) {
+      htmlElement.srcObject = mediaStream;
+    } else {
+      htmlElement.src = URL.createObjectURL(mediaStream);
+    }
+  }
+
+  static removeMuteAudio(audioElement: any) {
+    setTimeout(() => {
+      audioElement.muted = false;
+      audioElement.removeAttribute("muted");
+    }, 300);
+  }
+
   static connectStreamToHtmlElement(remoteSocketId: string, videoId?: number) {
     console.log(`connectStreamToHtmlElement(${remoteSocketId})`);
     if (!(remoteSocketId in this.peersElements)) {
@@ -636,7 +652,8 @@ export class RTCCom {
             peerRef.streams.audio.stream
           )}`
         );
-        audio.srcObject = peerRef.streams.audio.stream;
+        RTCCom.assignSrc(audio, peerRef.streams.audio.stream);
+        RTCCom.removeMuteAudio(audio);
         let speakerSelected = 'default';
         if (!RTCCom.isMobile()) {
           speakerSelected = MyCookies.getCookie('default_audio_output', 'default');
@@ -690,7 +707,7 @@ export class RTCCom {
               currentStream.stream
             )}`
           );
-          video.srcObject = currentStream.stream;
+          RTCCom.assignSrc(video, currentStream.stream);
         } else {
           console.log(`ERROR: ${remoteSocketId} has no video element`);
         }
