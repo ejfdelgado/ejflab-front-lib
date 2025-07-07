@@ -24,6 +24,7 @@ import { ContextComponent } from './context.component';
 import { FlowchartService } from '../../services/flowchart.service';
 import { CallService } from '../../services/call.service';
 import { PageData } from '../../interfaces/login-data.interface';
+import { ConsoleService } from '../../services/console.service';
 
 export interface FileBase64Data {
   base64?: string;
@@ -62,8 +63,9 @@ export abstract class BaseComponent
     public override modalService: ModalService,
     public webcamService: WebcamService,
     public auth: Auth,
+    public override consoleSrv: ConsoleService,
   ) {
-    super(flowchartSrv, callService, modalService, cdr);
+    super(flowchartSrv, callService, modalService, cdr, consoleSrv);
   }
 
   private setCurrentUser(user: User | null) {
@@ -149,7 +151,7 @@ export abstract class BaseComponent
     }
   }
 
-  usePage() : boolean {
+  usePage(): boolean {
     return true;
   }
 

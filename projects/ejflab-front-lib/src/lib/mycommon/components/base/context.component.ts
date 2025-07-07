@@ -20,6 +20,7 @@ import { ModalService } from '../../services/modal.service';
 import { RTCCom } from './RTCCom';
 import { ModuloSonido } from '@ejfdelgado/ejflab-common/src/ModuloSonido';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
+import { ConsoleService } from '../../services/console.service';
 
 export interface FlowChartRef {
   room?: string;
@@ -83,7 +84,8 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     public flowchartSrv: FlowchartService,
     public callService: CallService,
     public modalService: ModalService,
-    public cdr: ChangeDetectorRef
+    public cdr: ChangeDetectorRef,
+    public consoleSrv: ConsoleService,
   ) {
     const urlParams = new URLSearchParams(window.location.search);
     // Override room from query param

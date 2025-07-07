@@ -9,6 +9,7 @@ import {
 import { ContextComponent } from './context.component';
 import { ModalService } from '../../services/modal.service';
 import { v4 as uuidv4 } from 'uuid';
+import { ConsoleService } from '../../services/console.service';
 
 @Component({
   selector: 'app-base',
@@ -27,9 +28,10 @@ export abstract class BaseMsComponent
     public override callService: CallService,
     public authSrv: MicrosoftAuthService,
     public override modalService: ModalService,
-    public override cdr: ChangeDetectorRef
+    public override cdr: ChangeDetectorRef,
+    public override consoleSrv: ConsoleService,
   ) {
-    super(flowchartSrv, callService, modalService, cdr);
+    super(flowchartSrv, callService, modalService, cdr, consoleSrv);
   }
   override async ngOnInit(): Promise<void> {
     super.ngOnInit();
