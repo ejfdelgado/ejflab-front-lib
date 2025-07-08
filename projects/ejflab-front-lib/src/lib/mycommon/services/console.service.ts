@@ -32,6 +32,9 @@ export class ConsoleService {
             console.log(...args);
         }
     }
+    warn(...args: any) {
+        this.warning(...args);
+    }
     warning(...args: any) {
         const level = this.configService.getLogLevel();
         if (["warning", "info"].indexOf(level) >= 0) {

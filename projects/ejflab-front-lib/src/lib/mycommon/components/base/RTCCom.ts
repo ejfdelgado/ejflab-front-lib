@@ -4,6 +4,7 @@ import { PromiseEmitter } from './PromiseEmitter';
 import { CallServiceInstance } from '../../services/call.service';
 import { MultiScaleMediaStream } from './VideoWebStream';
 import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
+import { ConsoleService } from '../../services/console.service';
 
 export interface PeerStream {
   stream: MediaStream | null;
@@ -40,6 +41,11 @@ export class RTCCom {
   static mediaStreams: MultiScaleMediaStream | null = null;
   static callMadeConfigured: EventEmitter<void> = new EventEmitter();
   static streamActive: EventEmitter<StreamActiveData> = new EventEmitter();
+  static consoleSrv: ConsoleService;
+
+  static setConsoleSrv(consoleSrv: ConsoleService) {
+    RTCCom.consoleSrv = consoleSrv;
+  }
 
   static async init(callServiceInstance: CallServiceInstance, config: { [key: string]: any } = {}) {
     this.rtcConfig = new PromiseEmitter();
@@ -102,7 +108,7 @@ export class RTCCom {
     try {
       peerData.peerConn.close();
     } catch (err) {
-      console.error(`Error closing ${remoteSocketId} peerConn`);
+      RTCCom.consoleSrv.error(`Error closing ${remoteSocketId} peerConn`);
     }
     try {
 
@@ -110,7 +116,7 @@ export class RTCCom {
         track.stop();
       });
     } catch (err) {
-      console.error(`Error closing ${remoteSocketId} audio stream`);
+      RTCCom.consoleSrv.error(`Error closing ${remoteSocketId} audio stream`);
     }
     try {
       const videos = peerData.streams.video;
@@ -120,7 +126,7 @@ export class RTCCom {
         });
       });
     } catch (err) {
-      console.error(`Error closing ${remoteSocketId} video stream`);
+      RTCCom.consoleSrv.error(`Error closing ${remoteSocketId} video stream`);
     }
     delete this.peers[remoteSocketId];
   }
@@ -158,7 +164,7 @@ export class RTCCom {
     remoteSocketId: string,
     channelLabels: Array<string> = []
   ) {
-    console.log(`rtcDetail: openChannelWith(${remoteSocketId})`);
+    RTCCom.consoleSrv.log(`rtcDetail: openChannelWith(${remoteSocketId})`);
     // Espero la configuración
     const config = await this.rtcConfig.then();
     // Se crea el webrtc
@@ -188,7 +194,7 @@ export class RTCCom {
         return peerConn.setLocalDescription(offer);
       })
       .then(() => {
-        console.log(`rtcDetail: send callUser`);
+        RTCCom.consoleSrv.log(`rtcDetail: send callUser`);
         this.callServiceInstance.emitEvent('callUser', {
           offer: peerConn.localDescription,
           to: remoteSocketId,
@@ -198,7 +204,7 @@ export class RTCCom {
   }
 
   static oneTimeConfiguration() {
-    console.log('oneTimeConfiguration');
+    RTCCom.consoleSrv.log('oneTimeConfiguration');
     // Escucho cuando alguien me llama
     const callServiceInstance = this.callServiceInstance;
     const socketId = callServiceInstance.getSocketId();
@@ -219,7 +225,7 @@ export class RTCCom {
     callServiceInstance.registerProcessor('callMade', async (message: any) => {
       // Se configura el secundario
       const { offer, socket } = message;
-      console.log(`callMade(${socket})`);
+      RTCCom.consoleSrv.log(`callMade(${socket})`);
       const config = await this.rtcConfig.then();
       // Se crea el webrtc
       const peerConn = new RTCPeerConnection(config);
@@ -236,13 +242,13 @@ export class RTCCom {
         this.onDataChannelCreated(event.channel, socket);
       };
       // Se envía la respuesta
-      console.log(`rtcDetail: me: ${socketId} remote: ${socket}`);
-      console.log(`rtcDetail: callMade -> peerConn.setRemoteDescription with state ${peerConn.signalingState}`);
+      RTCCom.consoleSrv.log(`rtcDetail: me: ${socketId} remote: ${socket}`);
+      RTCCom.consoleSrv.log(`rtcDetail: callMade -> peerConn.setRemoteDescription with state ${peerConn.signalingState}`);
       await peerConn.setRemoteDescription(new RTCSessionDescription(offer));
       const answer = await peerConn.createAnswer();
       await peerConn.setLocalDescription(new RTCSessionDescription(answer));
 
-      console.log('rtcDetail: Sends makeAnswer!');
+      RTCCom.consoleSrv.log('rtcDetail: Sends makeAnswer!');
       callServiceInstance.emitEvent('makeAnswer', {
         answer,
         to: socket,
@@ -263,7 +269,7 @@ export class RTCCom {
           })
         );
       } else {
-        console.log(`onicecandidate No peer found for ${remoteSocketId}`);
+        RTCCom.consoleSrv.log(`onicecandidate No peer found for ${remoteSocketId}`);
       }
     });
 
@@ -276,16 +282,16 @@ export class RTCCom {
           // Ignore call me with me
           return;
         }
-        //console.log(`Me ${socketId} incomming ${socket}`);
+        //RTCCom.consoleSrv.log(`Me ${socketId} incomming ${socket}`);
         const peer = this.peers[socket];
         if (peer) {
-          console.log(`rtcDetail: me: ${socketId} remote: ${socket}`);
-          console.log(`rtcDetail: answerMade -> peerConn.setRemoteDescription with state ${peer.peerConn.signalingState}`);
+          RTCCom.consoleSrv.log(`rtcDetail: me: ${socketId} remote: ${socket}`);
+          RTCCom.consoleSrv.log(`rtcDetail: answerMade -> peerConn.setRemoteDescription with state ${peer.peerConn.signalingState}`);
           await peer.peerConn.setRemoteDescription(
             new RTCSessionDescription(answer)
           );
         } else {
-          console.log(`rtcDetail: answerMade No peer found for ${socket}`);
+          RTCCom.consoleSrv.log(`rtcDetail: answerMade No peer found for ${socket}`);
         }
       }
     );
@@ -301,27 +307,27 @@ export class RTCCom {
   }
 
   static setOnlineStatus(status: string) {
-    //console.log(`RTCPeer Conection ${status}`);
-    console.log(`rtcDetail: Conection ${status}`);
+    //RTCCom.consoleSrv.log(`RTCPeer Conection ${status}`);
+    RTCCom.consoleSrv.log(`rtcDetail: Conection ${status}`);
   }
 
   static sendBuffer(dataChannel: RTCDataChannel, buffer: Buffer) {
     let CHUNK_LEN = 64000;
     let len = buffer.byteLength;
     let n = (len / CHUNK_LEN) | 0;
-    //console.log('Sending a total of ' + len + ' byte(s)');
+    //RTCCom.consoleSrv.log('Sending a total of ' + len + ' byte(s)');
     dataChannel.send(`${len}`);
     // split the photo and send in chunks of about 64KB
     for (var i = 0; i < n; i++) {
       var start = i * CHUNK_LEN,
         end = (i + 1) * CHUNK_LEN;
-      //console.log(start + ' - ' + (end - 1));
+      //RTCCom.consoleSrv.log(start + ' - ' + (end - 1));
       dataChannel.send(buffer.subarray(start, end));
     }
 
     // send the reminder, if any
     if (len % CHUNK_LEN) {
-      //console.log('last ' + (len % CHUNK_LEN) + ' byte(s)');
+      //RTCCom.consoleSrv.log('last ' + (len % CHUNK_LEN) + ' byte(s)');
       dataChannel.send(buffer.subarray(n * CHUNK_LEN));
     }
   }
@@ -332,7 +338,7 @@ export class RTCCom {
       const dataChannel = peer.channels[label];
       if (dataChannel) {
         if (dataChannel.readyState !== 'closed') {
-          //console.log(`Sending ${message}`);
+          //RTCCom.consoleSrv.log(`Sending ${message}`);
           if (typeof message == 'string') {
             const buf = Buffer.from(message, 'utf8');
             this.sendBuffer(dataChannel, buf);
@@ -340,22 +346,22 @@ export class RTCCom {
             this.sendBuffer(dataChannel, message);
           }
         } else {
-          console.log(`dataChannel.readyState = ${dataChannel.readyState}`);
+          RTCCom.consoleSrv.log(`dataChannel.readyState = ${dataChannel.readyState}`);
         }
       } else {
-        console.log(`Channel labeled ${label} does not exists`);
+        RTCCom.consoleSrv.log(`Channel labeled ${label} does not exists`);
       }
     } else {
-      console.log(`There is not connection with ${socketId}`);
+      RTCCom.consoleSrv.log(`There is not connection with ${socketId}`);
     }
   }
 
   static logError(err: any) {
     if (!err) return;
     if (typeof err === 'string') {
-      console.warn(err);
+      RTCCom.consoleSrv.warn(err);
     } else {
-      console.warn(err.toString(), err);
+      RTCCom.consoleSrv.warn(err.toString(), err);
     }
   }
 
@@ -363,16 +369,16 @@ export class RTCCom {
     const label = channel.label;
     this.peers[remoteSocketId].channels[label] = channel;
     channel.onopen = () => {
-      console.log(`Channel ${label} opened`);
+      RTCCom.consoleSrv.log(`Channel ${label} opened`);
     };
 
     channel.onclose = () => {
-      console.log(`Channel ${label} closed`);
+      RTCCom.consoleSrv.log(`Channel ${label} closed`);
       this.handleDisconnection(remoteSocketId);
     };
 
     const receiver = (buff: any) => {
-      //console.log(`receiver!`);
+      //RTCCom.consoleSrv.log(`receiver!`);
       this.dataChannelEvents.emit({
         data: buff,
         label,
@@ -394,7 +400,7 @@ export class RTCCom {
       if (typeof event.data === 'string') {
         buf = new Uint8ClampedArray(parseInt(event.data));
         count = 0;
-        //console.log('Expecting a total of ' + buf.byteLength + ' bytes');
+        //RTCCom.consoleSrv.log('Expecting a total of ' + buf.byteLength + ' bytes');
         return;
       }
 
@@ -402,11 +408,11 @@ export class RTCCom {
       buf.set(data, count);
 
       count += data.byteLength;
-      //console.log('count: ' + count);
+      //RTCCom.consoleSrv.log('count: ' + count);
 
       if (count === buf.byteLength) {
         // we're done: all data chunks have been received
-        //console.log('Done. Rendering photo.');
+        //RTCCom.consoleSrv.log('Done. Rendering photo.');
         callback(buf);
       }
     };
@@ -420,18 +426,18 @@ export class RTCCom {
         total = parseInt(event.data);
         parts = [];
         count = 0;
-        console.log('Expecting a total of ' + total + ' bytes');
+        RTCCom.consoleSrv.log('Expecting a total of ' + total + ' bytes');
         return;
       }
 
       parts.push(event.data);
       count += event.data.size;
-      console.log(
+      RTCCom.consoleSrv.log(
         'Got ' + event.data.size + ' byte(s), ' + (total - count) + ' to go.'
       );
 
       if (count === total) {
-        console.log('Assembling payload');
+        RTCCom.consoleSrv.log('Assembling payload');
         var buf = new Uint8ClampedArray(total);
         var compose = function (i: any, pos: any) {
           var reader = new FileReader();
@@ -439,7 +445,7 @@ export class RTCCom {
             const result: any = this.result;
             buf.set(new Uint8ClampedArray(result), pos);
             if (i + 1 === parts.length) {
-              console.log('Done. Rendering photo.');
+              RTCCom.consoleSrv.log('Done. Rendering photo.');
               callback(buf);
             } else {
               compose(i + 1, pos + result.byteLength);
@@ -460,7 +466,7 @@ export class RTCCom {
     const peer = this.peers[remoteSocketId];
     if (peer) {
       const senders = peer.peerConn.getSenders();
-      console.log(`Clean ${senders.length} tracks for ${remoteSocketId}`);
+      RTCCom.consoleSrv.log(`Clean ${senders.length} tracks for ${remoteSocketId}`);
       senders.forEach((sender) => {
         peer.peerConn.removeTrack(sender);
       });
@@ -491,7 +497,7 @@ export class RTCCom {
       for (let i = 0; i < llaves.length; i++) {
         const key = llaves[i];
         const currentMediaStream = mediaStreams[key];
-        console.log(
+        RTCCom.consoleSrv.log(
           `STREAM SEND: socketId: ${remoteSocketId} key: ${key} ${RTCCom.printMediaStream(
             currentMediaStream
           )}`
@@ -499,7 +505,7 @@ export class RTCCom {
         addSingleStream(currentMediaStream);
       }
     } else {
-      console.log(
+      RTCCom.consoleSrv.log(
         `ERROR: Can't publish media source because mediaStream OK? ${!!this
           .mediaStreams} peer OK? ${!!peer}`
       );
@@ -531,7 +537,7 @@ export class RTCCom {
       // WTF RECEIVE STREAMS
       const peerRef = this.peers[remoteSocketId];
       if (stream.getAudioTracks().length > 0) {
-        console.log(
+        RTCCom.consoleSrv.log(
           `STREAM RECEIVE: socketId: ${remoteSocketId} key:audio ${RTCCom.printMediaStream(
             stream
           )}`
@@ -563,7 +569,7 @@ export class RTCCom {
         };
         stream.addEventListener('active', emitFunction);
         emitFunction();
-        console.log(
+        RTCCom.consoleSrv.log(
           `STREAM RECEIVE: socketId: ${remoteSocketId} key:video#${peerRef.streams.video.length
           } ${RTCCom.printMediaStream(stream)}`
         );
@@ -630,9 +636,9 @@ export class RTCCom {
   }
 
   static connectStreamToHtmlElement(remoteSocketId: string, videoId?: number) {
-    console.log(`connectStreamToHtmlElement(${remoteSocketId})`);
+    RTCCom.consoleSrv.log(`connectStreamToHtmlElement(${remoteSocketId})`);
     if (!(remoteSocketId in this.peersElements)) {
-      console.log(
+      RTCCom.consoleSrv.log(
         `ERROR: No ${remoteSocketId} in this.peersElements ${Object.keys(
           this.peersElements
         ).join(', ')}`
@@ -642,12 +648,12 @@ export class RTCCom {
     const { audio, video } = this.peersElements[remoteSocketId];
     const peerRef = this.peers[remoteSocketId];
     if (!peerRef) {
-      console.log(`ERROR: No ${remoteSocketId} in this.peers`);
+      RTCCom.consoleSrv.log(`ERROR: No ${remoteSocketId} in this.peers`);
       return;
     }
     if (peerRef.streams.audio.stream) {
       if (audio) {
-        console.log(
+        RTCCom.consoleSrv.log(
           `STREAM ASSIGN: socketId: ${remoteSocketId} ${RTCCom.printMediaStream(
             peerRef.streams.audio.stream
           )}`
@@ -660,17 +666,17 @@ export class RTCCom {
         }
         if (typeof audio.setSinkId === 'function') {
           try {
-            console.log('Audio output set to ' + speakerSelected);
+            RTCCom.consoleSrv.log('Audio output set to ' + speakerSelected);
             audio.setSinkId(speakerSelected);
           } catch (err) {
-            //console.error('Failed to set sink ID:', err);
+            //RTCCom.consoleSrv.error('Failed to set sink ID:', err);
           }
         }
       } else {
-        console.log(`ERROR: ${remoteSocketId} has no audio element`);
+        RTCCom.consoleSrv.log(`ERROR: ${remoteSocketId} has no audio element`);
       }
     } else {
-      console.log(
+      RTCCom.consoleSrv.log(
         `ERROR: ${remoteSocketId} has no peerRef.streams.audio.stream`
       );
     }
@@ -691,28 +697,28 @@ export class RTCCom {
             video.srcObject = peerRef.streams.video[nextIndex].stream;
           }
         } else {
-          console.log(
+          RTCCom.consoleSrv.log(
             `ERROR: ${remoteSocketId} has video length = ${peerRef.streams.video.length}`
           );
         }
       } else {
-        console.log(`ERROR: ${remoteSocketId} has no video element`);
+        RTCCom.consoleSrv.log(`ERROR: ${remoteSocketId} has no video element`);
       }
     } else {
       if (peerRef.streams.video.length > videoId) {
         const currentStream = peerRef.streams.video[videoId];
         if (video) {
-          console.log(
+          RTCCom.consoleSrv.log(
             `STREAM ASSIGN: socketId: ${remoteSocketId} ${RTCCom.printMediaStream(
               currentStream.stream
             )}`
           );
           RTCCom.assignSrc(video, currentStream.stream);
         } else {
-          console.log(`ERROR: ${remoteSocketId} has no video element`);
+          RTCCom.consoleSrv.log(`ERROR: ${remoteSocketId} has no video element`);
         }
       } else {
-        console.log(
+        RTCCom.consoleSrv.log(
           `ERROR: ${remoteSocketId} has no index ${videoId} because has length ${peerRef.streams.video.length}`
         );
       }

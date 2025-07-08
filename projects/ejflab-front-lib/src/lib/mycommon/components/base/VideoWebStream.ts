@@ -1,6 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { EmitterThen } from './EmitterThen';
 import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
+import { ConsoleService } from '../../services/console.service';
 
 declare var MediaStreamTrackProcessor: any;
 declare var MediaStreamTrackGenerator: any;
@@ -63,12 +64,12 @@ export class VideoWebStream {
   volumeEmitter: EventEmitter<number> = new EventEmitter();
   lastUpdatedVideoDevice: string | null = null;
   lastUpdatedAudioDevice: string | null = null;
-  static hooks: {[key: string]: Function} = {};
+  static hooks: { [key: string]: Function } = {};
   static registerHook(name: string, fun: Function) {
     VideoWebStream.hooks[name] = fun;
   }
 
-  constructor() {
+  constructor(private consoleSrv: ConsoleService) {
     this.emitterDevices.then((devices: DevicesData) => {
       this.autoSelectMicrophoneAndVideoDevice(devices);
     });
@@ -340,25 +341,25 @@ export class VideoWebStream {
   logCurrentDevices() {
     const audioSource = this.currentDevices.audio;
     const videoSource = this.currentDevices.video;
-    console.log(
+    this.consoleSrv.log(
       `VideoWebStream.logCurrentDevices... video:${videoSource} audio:${audioSource}`
     );
   }
 
   useSpeakerDevice(outputDevice: string) {
-    console.log(`useSpeakerDevice ${outputDevice}`);
+    this.consoleSrv.log(`useSpeakerDevice ${outputDevice}`);
     this.currentDevices.speaker = outputDevice;
     this.storeCustomSelectedDevices();
   }
 
   useAudioDevice(audioDevice: string) {
-    console.log(`useAudioDevice ${audioDevice}`);
+    this.consoleSrv.log(`useAudioDevice ${audioDevice}`);
     this.currentDevices.audio = audioDevice;
     this.storeCustomSelectedDevices();
   }
 
   useVideoDevice(videoDevice: string) {
-    console.log(`useVideoDevice ${videoDevice}`);
+    this.consoleSrv.log(`useVideoDevice ${videoDevice}`);
     this.currentDevices.video = videoDevice;
     this.storeCustomSelectedDevices();
   }
@@ -400,10 +401,10 @@ export class VideoWebStream {
       this.devices,
       this.currentDevices.speaker
     );
-    //console.log('storeCustomSelectedDevices');
-    //console.log(microphoneDevice);
-    //console.log(videoDevice);
-    //console.log(speakerDevice);
+    //this.consoleSrv.log('storeCustomSelectedDevices');
+    //this.consoleSrv.log(microphoneDevice);
+    //this.consoleSrv.log(videoDevice);
+    //this.consoleSrv.log(speakerDevice);
     if (microphoneDevice) {
       audioInput = microphoneDevice.txt;
     }
@@ -550,6 +551,6 @@ export class VideoWebStream {
   }
 
   handleError(error: any) {
-    console.error('Error: ', error);
+    this.consoleSrv.error('Error: ', error);
   }
 }
