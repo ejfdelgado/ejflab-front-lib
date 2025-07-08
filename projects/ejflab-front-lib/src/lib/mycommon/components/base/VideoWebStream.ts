@@ -69,7 +69,7 @@ export class VideoWebStream {
     VideoWebStream.hooks[name] = fun;
   }
 
-  constructor(private consoleSrv: ConsoleService) {
+  constructor(public consoleSrv: ConsoleService) {
     this.emitterDevices.then((devices: DevicesData) => {
       this.autoSelectMicrophoneAndVideoDevice(devices);
     });
