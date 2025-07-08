@@ -118,7 +118,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
       null,
       filterRoutes
     );
-    //console.log(JSON.stringify(differences1, null, 4));
+    //this.consoleSrv.log(JSON.stringify(differences1, null, 4));
     if (differences1.total > 0) {
       differences1.orig = this.socketId;
       this.builder.affect(differences1);
@@ -127,7 +127,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
 
   getCallServiceInstance() {
     const roomName = this.builderConfig.roomName;
-    //console.log(`getCallServiceInstance for ${roomName}`);
+    //this.consoleSrv.log(`getCallServiceInstance for ${roomName}`);
     return this.callService.getInstance(roomName);
   }
 
@@ -170,7 +170,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
     const instance = this.getCallServiceInstance();
     socket.on('connect', () => {
       this.disconnectPromise = new PromiseEmitter();
-      console.log(
+      this.consoleSrv.log(
         `context: ${new Date()} connect to ${this.builderConfig.roomName
         } with ${socket.id}`
       ); // OK
@@ -182,25 +182,25 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
       if (this.disconnectPromise) {
         this.disconnectPromise.resolve({});
       }
-      console.log(
+      this.consoleSrv.log(
         `context: ${new Date()} disconnect from ${this.builderConfig.roomName}`
       ); // OK
       this.connectionState = 'offline';
       this.socketId = null;
     });
     socket.on('reconnect', () => {
-      console.log('context: reconnect...'); //Not fired
+      this.consoleSrv.log('context: reconnect...'); //Not fired
       this.connectionState = 'online';
       this.socketId = socket.id;
       instance.emitEvent('getModel', {});
     });
     socket.on('reconnecting', (nextRetry) => {
-      console.log('context: reconnecting...'); //Not fired
+      this.consoleSrv.log('context: reconnecting...'); //Not fired
       this.connectionState = 'reconnecting';
       this.socketId = null;
     });
     socket.on('reconnect_failed', () => {
-      console.log('context: reconnect_failed...'); //Not fired
+      this.consoleSrv.log('context: reconnect_failed...'); //Not fired
       this.connectionState = 'offline';
       this.socketId = null;
     });
@@ -225,7 +225,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
   async onFlowChartUnloaded() { }
 
   async socketIoDisconnect() {
-    console.log('socketIoDisconnect');
+    this.consoleSrv.log('socketIoDisconnect');
     const instance = this.getCallServiceInstance();
     if (!instance) {
       return;
@@ -266,7 +266,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
   }
 
   async connectToRoomName(roomName: string, disconnect: boolean = true) {
-    //console.log(`Disconnect from ${this.builderConfig.roomName}`);
+    //this.consoleSrv.log(`Disconnect from ${this.builderConfig.roomName}`);
     if (this.callService.isConnectedToRoom(roomName)) {
       // Already connected
       if (disconnect === true) {
@@ -283,7 +283,7 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
       LOW_PRESSURE_MS: 100,
       BACK_OFF_MULTIPLIER: 100,
     };
-    //console.log(`Connect to ${roomName}`);
+    //this.consoleSrv.log(`Connect to ${roomName}`);
     await this.socketIoConnect(this.builderConfig);
   }
 
@@ -400,9 +400,9 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
 
   registerVideoElements() {
     this.remoteVideoRefs.toArray().forEach((videoRef) => {
-      //console.log(videoRef);
+      //this.consoleSrv.log(videoRef);
       const socketIdRef = videoRef.nativeElement.getAttribute('data-socket-id');
-      console.log(
+      this.consoleSrv.log(
         `registerVideoElements(${socketIdRef}, ${videoRef.nativeElement})`
       );
       RTCCom.registerVideoElement(socketIdRef, videoRef.nativeElement);
@@ -411,9 +411,9 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
 
   registerAudioElements() {
     this.remoteAudioRefs.toArray().forEach((audioRef) => {
-      //console.log(audioRef);
+      //this.consoleSrv.log(audioRef);
       const socketIdRef = audioRef.nativeElement.getAttribute('data-socket-id');
-      console.log(
+      this.consoleSrv.log(
         `registerAudioElements(${socketIdRef}, ${audioRef.nativeElement})`
       );
       RTCCom.registerAudioElement(socketIdRef, audioRef.nativeElement);
