@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { ModalService } from './modal.service';
+import { ConsoleService } from './console.service';
 import { io, Socket } from 'socket.io-client';
 
 interface ServerToClientEvents {
@@ -22,10 +23,16 @@ export class CallServiceInstance {
   socketId?: string | null = null;
   socket: Socket<ServerToClientEvents, ClientToServerEvents> | null;
   removeInstance: Function;
+  consoleSrv: ConsoleService;
 
-  constructor(instanceId: string, removeInstance: Function) {
+  constructor(
+    instanceId: string,
+    removeInstance: Function,
+    consoleSrv: ConsoleService
+  ) {
     this.instanceId = instanceId;
     this.removeInstance = removeInstance;
+    this.consoleSrv = consoleSrv;
   }
 
   async waitUntilConnection() {
@@ -75,7 +82,7 @@ export class CallServiceInstance {
     if (!this.socket) {
       return;
     }
-    console.log(`endConnection! ${this.instanceId}`);
+    this.consoleSrv.log(`endConnection! ${this.instanceId}`);
     this.socket.disconnect();
     this.socket = null;
     this.removeInstance(this.instanceId);
@@ -89,13 +96,13 @@ export class CallServiceInstance {
   }
 
   unregisterAllProcessors(eventName?: string) {
-    //console.log(`unregisterAllProcessors...`);
+    //this.consoleSrv.log(`unregisterAllProcessors...`);
     if (!this.socket) {
-      console.log(`unregisterAllProcessors... no socket`);
+      this.consoleSrv.log(`unregisterAllProcessors... no socket`);
       return;
     }
     this.socket.removeAllListeners(eventName);
-    //console.log(`unregisterAllProcessors... OK`);
+    //this.consoleSrv.log(`unregisterAllProcessors... OK`);
   }
 
   registerProcessor(eventName: string, processor: (message: any) => void) {
@@ -126,7 +133,10 @@ export class CallServiceInstance {
 })
 export class CallService {
   instances: { [key: string]: CallServiceInstance } = {};
-  constructor(private modalSrv: ModalService) {}
+  constructor(
+    private modalSrv: ModalService,
+    private consoleSrv: ConsoleService,
+  ) { }
 
   getInstance(room?: string) {
     if (!room) {
@@ -135,7 +145,7 @@ export class CallService {
     let oldInstance = this.instances[room];
     if (!oldInstance) {
       const removeInstanceThis = this.removeInstance.bind(this);
-      oldInstance = new CallServiceInstance(room, removeInstanceThis);
+      oldInstance = new CallServiceInstance(room, removeInstanceThis, this.consoleSrv);
       this.instances[room] = oldInstance;
     }
     return oldInstance;
