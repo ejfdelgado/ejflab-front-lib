@@ -159,6 +159,7 @@ export class VideoWebStream {
   }
 
   async getDevices(): Promise<DevicesData> {
+    await navigator.mediaDevices.getUserMedia({ audio: true });
     // AFAICT in Safari this only gets default devices until gUM is called :/
     let deviceInfos: MediaDeviceInfo[] =
       await navigator.mediaDevices.enumerateDevices();
@@ -166,11 +167,7 @@ export class VideoWebStream {
     const audios: Array<DeviceOption> = [];
     const speaker: Array<DeviceOption> = [];
     deviceInfos = deviceInfos.filter((deviceInfo) => {
-      if (deviceInfo.kind == 'audiooutput') {
-        return !!deviceInfo.deviceId;
-      } else {
-        return !!deviceInfo.deviceId && deviceInfo.deviceId != 'default';
-      }
+      return !!deviceInfo.deviceId;
     });
     for (const deviceInfo of deviceInfos) {
       if (deviceInfo.kind === 'audioinput') {
