@@ -635,6 +635,11 @@ export class RTCCom {
     }, 300);
   }
 
+  static audioHtmlConnectFun: Function | null = null;
+  static setAudioHtmlConnectHook(external: Function) {
+    RTCCom.audioHtmlConnectFun = external;
+  }
+
   static connectStreamToHtmlElement(remoteSocketId: string, videoId?: number) {
     RTCCom.consoleSrv.log(`connectStreamToHtmlElement(${remoteSocketId})`);
     if (!(remoteSocketId in this.peersElements)) {
@@ -651,35 +656,41 @@ export class RTCCom {
       RTCCom.consoleSrv.log(`ERROR: No ${remoteSocketId} in this.peers`);
       return;
     }
-    if (peerRef.streams.audio.stream) {
-      if (audio) {
-        RTCCom.consoleSrv.log(
-          `STREAM ASSIGN: socketId: ${remoteSocketId} ${RTCCom.printMediaStream(
-            peerRef.streams.audio.stream
-          )}`
-        );
-        RTCCom.assignSrc(audio, peerRef.streams.audio.stream);
-        RTCCom.removeMuteAudio(audio);
-        let speakerSelected = 'default';
-        if (!RTCCom.isMobile()) {
-          speakerSelected = MyCookies.getCookie('default_audio_output', 'default');
-        }
-        if (typeof audio.setSinkId === 'function') {
-          try {
-            RTCCom.consoleSrv.log('Audio output set to ' + speakerSelected);
-            audio.setSinkId(speakerSelected);
-          } catch (err) {
-            //RTCCom.consoleSrv.error('Failed to set sink ID:', err);
+
+    if (RTCCom.audioHtmlConnectFun) {
+      RTCCom.audioHtmlConnectFun(RTCCom, remoteSocketId, peerRef.streams.audio.stream, audio);
+    } else {
+      if (peerRef.streams.audio.stream) {
+        if (audio) {
+          RTCCom.consoleSrv.log(
+            `STREAM ASSIGN: socketId: ${remoteSocketId} ${RTCCom.printMediaStream(
+              peerRef.streams.audio.stream
+            )}`
+          );
+          RTCCom.assignSrc(audio, peerRef.streams.audio.stream);
+          RTCCom.removeMuteAudio(audio);
+          let speakerSelected = 'default';
+          if (!RTCCom.isMobile()) {
+            speakerSelected = MyCookies.getCookie('default_audio_output', 'default');
           }
+          if (typeof audio.setSinkId === 'function') {
+            try {
+              RTCCom.consoleSrv.log('Audio output set to ' + speakerSelected);
+              audio.setSinkId(speakerSelected);
+            } catch (err) {
+              //RTCCom.consoleSrv.error('Failed to set sink ID:', err);
+            }
+          }
+        } else {
+          RTCCom.consoleSrv.log(`ERROR: ${remoteSocketId} has no audio element`);
         }
       } else {
-        RTCCom.consoleSrv.log(`ERROR: ${remoteSocketId} has no audio element`);
+        RTCCom.consoleSrv.log(
+          `ERROR: ${remoteSocketId} has no peerRef.streams.audio.stream`
+        );
       }
-    } else {
-      RTCCom.consoleSrv.log(
-        `ERROR: ${remoteSocketId} has no peerRef.streams.audio.stream`
-      );
     }
+
     if (videoId === undefined) {
       if (video) {
         if (peerRef.streams.video.length > 0) {

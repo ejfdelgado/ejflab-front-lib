@@ -65,6 +65,8 @@ export class VideoWebStream {
   lastUpdatedVideoDevice: string | null = null;
   lastUpdatedAudioDevice: string | null = null;
   static hooks: { [key: string]: Function } = {};
+  static lastDevices: DevicesData | null = null;
+
   static registerHook(name: string, fun: Function) {
     VideoWebStream.hooks[name] = fun;
   }
@@ -72,6 +74,7 @@ export class VideoWebStream {
   constructor(public consoleSrv: ConsoleService) {
     this.emitterDevices.then((devices: DevicesData) => {
       this.autoSelectMicrophoneAndVideoDevice(devices);
+      VideoWebStream.lastDevices = devices;
     });
     this.emitterStreams.subscribe((stream) => {
       this.updateSelectedDevice(stream);
