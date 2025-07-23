@@ -2,6 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { EmitterThen } from './EmitterThen';
 import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
 import { ConsoleService } from '../../services/console.service';
+import { AudioService } from '../../services/audio.service';
 
 declare var MediaStreamTrackProcessor: any;
 declare var MediaStreamTrackGenerator: any;
@@ -84,12 +85,12 @@ export class VideoWebStream {
       this.askAgainGetDevices();
     };
     this.askAgainGetDevices();
+    AudioService.getAudioContext().then((ac) => {
+      this.audioContext = ac;
+    }).catch((err) => { });
   }
 
   getAnalyser(): boolean {
-    const localWindow: any = window;
-    this.audioContext = new (localWindow.AudioContext ||
-      localWindow.webkitAudioContext)();
     if (!this.audioContext) {
       return false;
     }

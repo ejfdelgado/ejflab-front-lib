@@ -4,6 +4,7 @@
  */
 
 // Services
+export * from './lib/mycommon/services/audio.service';
 export * from './lib/mycommon/services/authorization.service';
 export * from './lib/mycommon/services/auth.service';
 export * from './lib/mycommon/services/backendPage.service';
