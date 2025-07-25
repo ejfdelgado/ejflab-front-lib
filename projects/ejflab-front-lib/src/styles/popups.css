@@ -54,7 +54,7 @@
 [mat-dialog-title] header {
     display: flex;
     flex-direction: row;
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.5625rem;
     padding: 0;
     border-bottom: 1px solid lightgray;
