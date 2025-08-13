@@ -162,6 +162,7 @@ import { AgePipe } from './pipes/age.pipe';
     InterpolatePipe,
     SincePipe,
     AgePipe,
+    { provide: 'msCacheLocation', useValue: 'sessionStorage' }
   ],
 })
 export class MycommonModule { }

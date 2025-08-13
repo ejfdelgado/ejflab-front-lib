@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 import { ConfigService } from "./config.service";
 
 /*
+
+?loglevel=info
+
 import { ConsoleService } from 'ejflab-front-lib';
 
 constructor(

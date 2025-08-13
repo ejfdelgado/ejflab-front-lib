@@ -17,7 +17,7 @@ export class NgInit {
   @Input() ngInit: any;
   ngOnInit() {
     if (this.ngInit) {
-      this.ngInit();
+      this.ngInit(this.values);
     }
   }
 }

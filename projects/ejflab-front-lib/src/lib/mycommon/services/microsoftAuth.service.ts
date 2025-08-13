@@ -40,6 +40,7 @@ export class MicrosoftAuthService {
     @Inject('msTenant') private tenant: string,
     @Inject('msClientId') private clientId: string,
     @Inject('msGroupIdMap') private groupIdMap: { [key: string]: string },
+    @Inject('msCacheLocation') private cacheLocation: string,
     @Inject(MS_LOGIN_MODE) private loginMode: string,
   ) {
     this.createMicrosoftAuth();
@@ -60,6 +61,9 @@ export class MicrosoftAuthService {
         //authority: `https://sts.windows.net/${this.tenant}`,
         redirectUri: window.location.href.replace(/#.*$/, ''),
       },
+      cache: {
+        cacheLocation: this.cacheLocation,
+      },
     };
     this.pca = msal.createStandardPublicClientApplication(msalConfig);
     const msalInstance = await this.pca;
@@ -71,9 +75,20 @@ export class MicrosoftAuthService {
       current = accounts[0];
     }
     */
-    this.currentAccount = msalInstance.getActiveAccount();
-    if (this.currentAccount) {
-      this.getSessionToken();
+    try {
+      this.currentAccount = msalInstance.getActiveAccount();
+      if (this.currentAccount) {
+        await this.getSessionToken();
+      }
+    } catch (error) {
+      if (error instanceof msal.InteractionRequiredAuthError) {
+        console.warn("Silent token failed, requiring interaction:", error);
+        // force logout and reload
+        await this.logout();
+        location.reload();
+      } else {
+        throw error; // Unexpected error
+      }
     }
   }
 

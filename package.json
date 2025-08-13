@@ -45,7 +45,7 @@
     "@angular/platform-browser-dynamic": "^18.0.6",
     "@angular/router": "^18.0.6",
     "@azure/msal-browser": "^3.24.0",
-    "@ejfdelgado/ejflab-common": "^1.16.3",
+    "@ejfdelgado/ejflab-common": "^1.16.5",
     "@googlemaps/js-api-loader": "^1.16.8",
     "@msgpack/msgpack": "^3.0.0-beta2",
     "@tensorflow/tfjs": "^4.21.0",
