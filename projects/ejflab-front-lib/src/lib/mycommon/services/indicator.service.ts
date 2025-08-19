@@ -11,13 +11,24 @@ export interface IndicatorPayload {
   loading: boolean;
 }
 
+export interface IndicatorDetail {
+  description: string;
+  html?: boolean;
+}
+
 export class Wait {
   desc: string | undefined;
+  detail?: IndicatorDetail;
   evento: EventEmitter<WaitPayload>;
   subscription: Subscription;
-  constructor(escucha: Function, desc?: string) {
+  constructor(escucha: Function, desc?: string | IndicatorDetail) {
     this.evento = new EventEmitter();
-    this.desc = desc;
+    if (typeof desc == "string") {
+      this.desc = desc;
+    } else if (desc) {
+      this.desc = desc.description;
+      this.detail = desc;
+    }
     this.subscribe(escucha);
   }
   unsubscribe() {
@@ -57,9 +68,10 @@ export class IndicatorService {
   subscribe(escucha: Function): Subscription {
     return this.evento.subscribe(escucha);
   }
-  start(desc?: string): Wait {
+  start(desc?: string | IndicatorDetail): Wait {
     const escuchaThis = this.escucha.bind(this);
-    const wait = new Wait(escuchaThis, desc);
+    let wait;
+    wait = new Wait(escuchaThis, desc);
     this.esperas.push(wait);
     this.notify();
     return wait;
@@ -68,6 +80,13 @@ export class IndicatorService {
     const luego = this.start();
     promesa.finally(() => {
       luego.done();
+    });
+  }
+
+  getTasks() {
+    // return only tasks with detail to show
+    return this.esperas.filter((task) => {
+      return !!task.detail;
     });
   }
 }

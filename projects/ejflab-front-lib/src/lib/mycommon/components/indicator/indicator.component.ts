@@ -5,6 +5,7 @@ import {
 } from '../../services/indicator.service';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { MyUtilities } from '@ejfdelgado/ejflab-common/src/MyUtilities';
+import { Wait } from "../../services/indicator.service";
 
 @Component({
   selector: 'app-indicator',
@@ -13,10 +14,11 @@ import { MyUtilities } from '@ejfdelgado/ejflab-common/src/MyUtilities';
 })
 export class IndicatorComponent implements OnInit {
   isLoading: boolean = false;
+  tasks: Array<Wait> = [];
   constructor(
     private cdr: ChangeDetectorRef,
     private indicatorSrv: IndicatorService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const actualizarEstadoThis = this.actualizarEstado.bind(this);
@@ -25,6 +27,7 @@ export class IndicatorComponent implements OnInit {
 
   private actualizarEstado(payload: IndicatorPayload) {
     this.isLoading = payload.loading;
+    this.tasks = this.indicatorSrv.getTasks();
     this.cdr.detectChanges();
   }
 
