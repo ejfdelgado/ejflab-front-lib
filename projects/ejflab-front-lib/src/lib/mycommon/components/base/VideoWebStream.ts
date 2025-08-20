@@ -9,6 +9,10 @@ declare var MediaStreamTrackGenerator: any;
 declare var TransformStream: any;
 declare var VideoFrame: any;
 
+export interface GetUserMediaData {
+  forceRecreate?: boolean;
+}
+
 export interface SelectedDeviceData {
   audio: string | null;
   video: string | null;
@@ -230,9 +234,9 @@ export class VideoWebStream {
     }
   }
 
-  async getUserMedia(): Promise<MultiScaleMediaStream> {
+  async getUserMedia(payload?: GetUserMediaData): Promise<MultiScaleMediaStream> {
     if ("getUserMedia" in VideoWebStream.hooks) {
-      return await VideoWebStream.hooks["getUserMedia"](this);
+      return await VideoWebStream.hooks["getUserMedia"](this, payload);
     }
     const audioSource = this.currentDevices.audio;
     const videoSource = this.currentDevices.video;
