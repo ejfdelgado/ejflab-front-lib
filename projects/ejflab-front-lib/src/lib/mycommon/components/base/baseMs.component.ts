@@ -57,10 +57,10 @@ export abstract class BaseMsComponent
   }
 
   async getCurrentUserUID() {
-    const cookieKey = 'ANONYMOUS_USER';
+    const keyName = 'ANONYMOUS_USER';
     if (this.currentUser == null) {
       // Ask the cookie
-      let oldValue = this.getSessionStorageValue(cookieKey);
+      let oldValue = this.getSessionStorageValue(keyName);
       if (!oldValue) {
         // If not cookie, create id and store it in the cookie
         let roomName = this.authSrv.getRoomNameFromPath();
@@ -69,7 +69,7 @@ export abstract class BaseMsComponent
         }
         const randomId = uuidv4().replace(/-/g, '_');
         oldValue = `pat_${roomName}_${randomId}`;
-        this.setSessionStorageValue(cookieKey, oldValue);
+        this.setSessionStorageValue(keyName, oldValue);
       }
       // Return cookie value
       this.currentUserUID = oldValue;
@@ -77,7 +77,7 @@ export abstract class BaseMsComponent
     } else {
       this.currentUserUID =
         'sig_' + this.authSrv.getRoomNameFromUser(this.currentUser);
-      this.setSessionStorageValue(cookieKey, this.currentUserUID);
+      this.setSessionStorageValue(keyName, this.currentUserUID);
       return this.currentUserUID;
     }
   }

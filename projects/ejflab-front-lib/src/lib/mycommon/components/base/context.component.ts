@@ -21,6 +21,7 @@ import { RTCCom } from './RTCCom';
 import { ModuloSonido } from '@ejfdelgado/ejflab-common/src/ModuloSonido';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { ConsoleService } from '../../services/console.service';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface FlowChartRef {
   room?: string;
@@ -434,5 +435,16 @@ export abstract class ContextComponent implements OnInit, OnDestroy {
 
   playSound(argumento: string, loop = false, volume = 1) {
     ModuloSonido.play(`${MyConstants.SRV_ROOT}assets/sounds/${argumento}`, loop, volume);
+  }
+
+  getSessionUID() {
+    const keyName = 'SESSION_UUID';
+    let oldValue = this.getSessionStorageValue(keyName);
+    if (!oldValue) {
+      const randomId = uuidv4().replace(/-/g, '_');
+      oldValue = `RAND_${randomId}`;
+      this.setSessionStorageValue(keyName, oldValue);
+    }
+    return oldValue;
   }
 }
