@@ -85,13 +85,53 @@ export class VideoWebStream {
       this.updateSelectedDevice(stream);
       this.updateVolumeMeter(stream?.audio);
     });
+
     navigator.mediaDevices.ondevicechange = async (event) => {
       this.askAgainGetDevices();
     };
     this.askAgainGetDevices();
-    AudioService.getAudioContext().then((ac) => {
-      this.audioContext = ac;
-    }).catch((err) => { });
+
+    // Just try...
+    this.startAudioContext().then(() => {
+    }).catch((err: any) => { });
+  }
+
+  async startAudioContext() {
+    this.audioContext = null;
+    const ac = await AudioService.getAudioContext();
+    this.audioContext = ac;
+  }
+
+  async hasMicrophonePermission() {
+    // First try Permissions API if available
+    if (navigator.permissions && navigator.permissions.query) {
+      try {
+        const result = await navigator.permissions.query({ name: 'microphone' as PermissionName });
+
+        if (result.state === 'granted') {
+          return "granted";
+        } else if (result.state === 'denied') {
+          return "denied";
+        } else {
+          return "prompt"; // not decided yet
+        }
+      } catch (err) {
+        // Some browsers throw if not supported (like Safari)
+        console.warn("Permissions API not fully supported:", err);
+      }
+    }
+
+    // Fallback: try requesting microphone access (needed on Safari)
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => track.stop()); // stop immediately
+      return "granted";
+    } catch (err: any) {
+      if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+        return "denied";
+      }
+      return "prompt"; // e.g., if browser requires user gesture before prompting
+    }
   }
 
   getAnalyser(): boolean {
