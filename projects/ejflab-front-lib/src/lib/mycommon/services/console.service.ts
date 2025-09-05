@@ -21,10 +21,14 @@ constructor(
     providedIn: 'root',
 })
 export class ConsoleService {
+    static traceMiddleware: { [key: string]: Function };
     constructor(
         private configService: ConfigService,
     ) {
 
+    }
+    static setTraceErrorMiddleware(key: string, extra: Function) {
+        ConsoleService.traceMiddleware[key] = extra;
     }
     info(...args: any) {
         this.log(...args);
@@ -43,11 +47,21 @@ export class ConsoleService {
         if (["warning", "info"].indexOf(level) >= 0) {
             console.warn(...args);
         }
+        for (let key in ConsoleService.traceMiddleware) {
+            if (typeof ConsoleService.traceMiddleware[key] == "function") {
+                ConsoleService.traceMiddleware[key](key, "warning", ...args);
+            }
+        }
     }
     error(...args: any) {
         const level = this.configService.getLogLevel();
         if (["error", "warning", "info"].indexOf(level) >= 0) {
             console.error(...args);
+        }
+        for (let key in ConsoleService.traceMiddleware) {
+            if (typeof ConsoleService.traceMiddleware[key] == "function") {
+                ConsoleService.traceMiddleware[key](key, "error", ...args);
+            }
         }
     }
 }

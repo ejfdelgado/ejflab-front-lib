@@ -59,11 +59,22 @@ export class ModalService {
     return this.generic(homologation);
   }
 
-  async error(error: Error) {
+  async error(error: Error, errorId?: string) {
+    let errorMessage = "Error: ";
+    if (typeof errorId == "string") {
+      errorMessage += errorId + ", ";
+    }
+    if (typeof error == "string") {
+      errorMessage += error;
+    } else if (typeof error.message == "string") {
+      errorMessage += error.message;
+    } else {
+      errorMessage += error.stack;
+    }
     const dialogRef = this.dialog.open(AlertComponent, {
       data: {
         title: this.translate('ups'),
-        txt: error.message,
+        txt: errorMessage,
         buttons: [
           { label: this.translate('ok') }
         ]
