@@ -21,7 +21,7 @@ constructor(
     providedIn: 'root',
 })
 export class ConsoleService {
-    static traceMiddleware: { [key: string]: Function };
+    static traceMiddleware: { [key: string]: Function } = {};
     constructor(
         private configService: ConfigService,
     ) {
