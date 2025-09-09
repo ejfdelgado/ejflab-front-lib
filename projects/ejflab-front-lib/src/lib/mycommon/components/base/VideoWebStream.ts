@@ -3,6 +3,8 @@ import { EmitterThen } from './EmitterThen';
 import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
 import { ConsoleService } from '../../services/console.service';
 import { AudioService } from '../../services/audio.service';
+import { MicrophonePermissionWatcher } from "./MicrophonePermissionWatcher";
+import { CameraPermissionWatcher } from "./CameraPermissionWatcher";
 
 declare var MediaStreamTrackProcessor: any;
 declare var MediaStreamTrackGenerator: any;
@@ -34,6 +36,9 @@ export interface MultiScaleMediaStream {
   big: MediaStream;
   small: MediaStream;
   audio: MediaStream;
+  bigIsMock?: boolean;
+  smallIsMock?: boolean;
+  audioIsMock?: boolean;
 }
 
 function scaleSource(sw: number, sh: number, dw: number, dh: number) {
@@ -71,12 +76,24 @@ export class VideoWebStream {
   lastUpdatedAudioDevice: string | null = null;
   static hooks: { [key: string]: Function } = {};
   static lastDevices: DevicesData | null = null;
+  micWatcher = new MicrophonePermissionWatcher();
+  camWatcher = new CameraPermissionWatcher();
+  lastPermissionVideoState: string | null = null;
+  lastPermissionAudioState: string | null = null;
 
   static registerHook(name: string, fun: Function) {
     VideoWebStream.hooks[name] = fun;
   }
 
   constructor(public consoleSrv: ConsoleService) {
+
+    this.micWatcher.onChange((currentPermission) => {
+      this.lastPermissionAudioState = currentPermission;
+    });
+    this.camWatcher.onChange((currentPermission) => {
+      this.lastPermissionVideoState = currentPermission;
+    });
+
     this.emitterDevices.then((devices: DevicesData) => {
       this.autoSelectMicrophoneAndVideoDevice(devices);
       VideoWebStream.lastDevices = devices;
@@ -199,7 +216,8 @@ export class VideoWebStream {
   async askAgainGetDevices() {
     const nextDevices = await this.getDevices();
     this.emitterDevices.update(nextDevices);
-    if (nextDevices.audios.length == 0 || nextDevices.videos.length == 0) {
+    if ((nextDevices.audios.length == 0 && this.lastPermissionAudioState != "denied")
+      || (nextDevices.videos.length == 0 && this.lastPermissionVideoState != "denied")) {
       setTimeout(() => {
         this.askAgainGetDevices();
       }, 1000);

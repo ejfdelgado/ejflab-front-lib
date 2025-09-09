@@ -43,6 +43,8 @@ export * from './lib/mycommon/services/config.service';
 
 // Extra
 export * from './lib/mycommon/interceptors/JwtInterceptor';
+export * from './lib/mycommon/components/base/CameraPermissionWatcher';
+export * from './lib/mycommon/components/base/MicrophonePermissionWatcher';
 
 // Components
 export * from './lib/mycommon/components/adduserrolepopup/adduserrolepopup.component';
