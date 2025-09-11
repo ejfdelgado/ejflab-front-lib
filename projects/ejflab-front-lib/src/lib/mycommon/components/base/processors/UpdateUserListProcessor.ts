@@ -6,7 +6,10 @@ export class UpdateUserListProcessor extends BaseProcesor {
     super(context);
   }
   async execute(args: any) {
-    this.context.userList = args.socketIds;
+    if (this.context.userList instanceof Array) {
+      this.context.userList.splice(0, this.context.userList.length);
+    }
+    this.context.userList.push(...args.socketIds);
     this.context.cdr.detectChanges();
     requestAnimationFrame(() => {
       //console.log(JSON.stringify(this.context.userList, null, 4));

@@ -32,6 +32,7 @@ export class MicrophonePermissionWatcher {
 
         // Fallback for Safari: no Permissions API → detect only when requesting
         this.tryGetUserMedia();
+        /*
         if (!hasPermissionAPI) {
             const MAX_COUNT = 30 * 1;//1 minute
             let counter = 2;
@@ -42,10 +43,11 @@ export class MicrophonePermissionWatcher {
                         counter++;
                         repeatedFunction();
                     }
-                }, 2000);
+                }, 3000);
             };
             repeatedFunction();
         }
+        */
     }
 
     private async tryGetUserMedia() {
@@ -60,10 +62,14 @@ export class MicrophonePermissionWatcher {
                 status = "prompt"; // e.g., before user decides
             }
         }
+        /*
         if (status != this.status) {
             this.status = status;
             this.notify(this.status);
         }
+        */
+        this.status = status;
+        this.notify(this.status);
     }
 
     onChange(callback: (state: PermissionStateCustom) => void) {
