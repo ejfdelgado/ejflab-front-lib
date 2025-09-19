@@ -263,7 +263,7 @@ export class MicrosoftAuthService {
     if (partes == null) {
       return null;
     }
-    return partes[1].toLocaleLowerCase().replace(/[^a-z0-9]/g, '_');
+    return partes[1].toLocaleLowerCase().replace(/[^a-z0-9\-]/g, '_');
   }
 
   getRoomNameFromPath(): string | null {

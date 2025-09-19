@@ -13,6 +13,11 @@ declare var VideoFrame: any;
 
 export interface GetUserMediaData {
   forceRecreate?: boolean;
+  useBlur?: boolean;
+  useGPU?: boolean;
+  blurAmount?: number;
+  softEdge?: boolean;
+  backgroundImage?: string;
 }
 
 export interface SelectedDeviceData {
