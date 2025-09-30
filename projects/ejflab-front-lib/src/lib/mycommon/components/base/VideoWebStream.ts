@@ -18,6 +18,7 @@ export interface GetUserMediaData {
   blurAmount?: number;
   softEdge?: boolean;
   backgroundImage?: string;
+  useEchoCancellation?: boolean;
 }
 
 export interface SelectedDeviceData {

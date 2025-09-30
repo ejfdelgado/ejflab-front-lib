@@ -80,7 +80,10 @@ export class MicrosoftAuthService {
       if (this.currentAccount) {
         await this.getSessionToken();
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.log(`error.name=${error.name}`);
+      console.log(`error.constructor.name=${error?.constructor?.name}`);
+      console.log(`error.message=${error.message}`);
       if (error instanceof msal.InteractionRequiredAuthError) {
         console.warn("Silent token failed, requiring interaction:", error);
         // force logout and reload
