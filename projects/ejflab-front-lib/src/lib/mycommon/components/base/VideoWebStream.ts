@@ -446,7 +446,7 @@ export class VideoWebStream {
       })[0]?.id;
       this.currentDevices.video = [...this.devices.videos].filter((option) => {
         const videoTrack = streams.big.getVideoTracks()[0];
-        const response = option.txt === videoTrack.label;
+        const response = (option.txt === videoTrack.label || option.txt === (videoTrack as any).customLabel);
         return response;
       })[0]?.id;
     }

@@ -81,14 +81,18 @@ export class MicrosoftAuthService {
         await this.getSessionToken();
       }
     } catch (error: any) {
-      console.log(`error.name=${error.name}`);
-      console.log(`error.constructor.name=${error?.constructor?.name}`);
-      console.log(`error.message=${error.message}`);
-      if (error instanceof msal.InteractionRequiredAuthError) {
-        console.warn("Silent token failed, requiring interaction:", error);
+      if (error.name == "InteractionRequiredAuthError") {
         // force logout and reload
-        await this.logout();
-        location.reload();
+        const promises = [];
+        promises.push(this.logout());
+        promises.push(new Promise<void>((resolve) => {
+          requestAnimationFrame(() => {
+            resolve();
+          })
+        }));
+        Promise.race(promises).finally(() => {
+          location.reload();
+        });
       } else {
         throw error; // Unexpected error
       }
