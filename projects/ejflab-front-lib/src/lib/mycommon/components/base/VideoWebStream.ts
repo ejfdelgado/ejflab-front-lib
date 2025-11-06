@@ -11,6 +11,14 @@ declare var MediaStreamTrackGenerator: any;
 declare var TransformStream: any;
 declare var VideoFrame: any;
 
+export interface BackgroundImageOptions {
+  useBackgroundImage: boolean;
+  imageMode: 'default' | 'custom';
+  customImageUrl?: string;
+  fitMode: 'cover' | 'contain' | 'stretch';
+  blurAmount: number;
+}
+
 export interface GetUserMediaData {
   forceRecreate?: boolean;
   useBlur?: boolean;
@@ -19,6 +27,9 @@ export interface GetUserMediaData {
   softEdge?: boolean;
   backgroundImage?: string;
   useEchoCancellation?: boolean;
+  noiseSuppression?: boolean;
+  autoGainControl?: boolean;
+  backgroundOptions?: BackgroundImageOptions;
 }
 
 export interface SelectedDeviceData {
@@ -194,7 +205,7 @@ export class VideoWebStream {
       }
       processing = true;
       if (this.audioContext && this.analyser && this.dataArray) {
-        this.analyser.getByteFrequencyData(this.dataArray);
+        this.analyser.getByteFrequencyData(this.dataArray as any);
         // Calculate the average volume level
         let sum = 0;
         for (let i = 0; i < this.dataArray.length; i++) {

@@ -1,6 +1,6 @@
 {
   "name": "ejflab-front-lib",
-  "version": "2.12.7",
+  "version": "2.12.9",
   "scripts": {},
   "peerDependencies": {
     "@ejfdelgado/ejflab-common": "^1.16.7",
