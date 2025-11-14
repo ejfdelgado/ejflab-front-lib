@@ -55,9 +55,9 @@ export class ImagepickerComponent implements OnInit, OnDestroy, OnChanges {
     private domSanitizer: DomSanitizer,
     public fileService: FileService,
     public modalService: ModalService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     if (this.backgroundSubscription != null) {
@@ -127,7 +127,7 @@ export class ImagepickerComponent implements OnInit, OnDestroy, OnChanges {
   askForImage() {
     // fileimage fileimage-photo photo
     const options: FileRequestData = {
-      type: 'fileimage-photo',
+      type: typeof this.options.askType == "string" ? this.options.askType : 'fileimage-photo',
       defaultFileName: this.options.defaultFileName,
     };
     const processFileThis = this.processFile.bind(this);
