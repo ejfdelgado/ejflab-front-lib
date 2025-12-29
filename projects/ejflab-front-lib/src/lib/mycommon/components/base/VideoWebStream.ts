@@ -633,4 +633,21 @@ export class VideoWebStream {
   handleError(error: any) {
     this.consoleSrv.error('Error: ', error);
   }
+
+  setVideoEnabled(videoState: boolean) {
+    if ("setVideoEnabled" in VideoWebStream.hooks) {
+      return VideoWebStream.hooks["setVideoEnabled"](this, videoState);
+    }
+
+    if (this.streams?.big) {
+      this.streams?.big.getVideoTracks().forEach((track) => {
+        track.enabled = videoState;
+      });
+    }
+    if (this.streams?.small) {
+      this.streams?.small.getVideoTracks().forEach((track) => {
+        track.enabled = videoState;
+      });
+    }
+  }
 }
