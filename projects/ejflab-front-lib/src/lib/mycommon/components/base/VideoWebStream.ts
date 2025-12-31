@@ -23,6 +23,7 @@ export interface GetUserMediaData {
   forceRecreate?: boolean;
   useBlur?: boolean;
   useGPU?: boolean;
+  blurEngine?: string;
   blurAmount?: number;
   softEdge?: boolean;
   backgroundImage?: string;
