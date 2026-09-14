@@ -18,6 +18,9 @@
   "author": "",
   "license": "ISC",
   "private": false,
+  "overrides": {
+    "tar": "^7.5.21"
+  },
   "dependencies": {
     "@angular/animations": "^18.0.6",
     "@angular/common": "^18.0.6",
@@ -61,8 +64,9 @@
     "@types/uuid": "^10.0.0",
     "@types/wavesurfer.js": "^6.0.12",
     "@types/webrtc": "^0.0.43",
-    "firebase-tools": "^13.13.1",
+    "firebase-tools": "^15.30.0",
     "jasmine-core": "~4.3.0",
+    "jwt-decode": "^4.0.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
@@ -78,7 +82,6 @@
     "rxjs": "^7.8.1",
     "socket.io-client": "^4.7.5",
     "typescript": "^5.4.5",
-    "zone.js": "~0.14.7",
-    "jwt-decode": "^4.0.0"
+    "zone.js": "~0.14.7"
   }
 }
