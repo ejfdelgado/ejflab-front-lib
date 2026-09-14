@@ -18,9 +18,10 @@ export interface PayuConfigData {
 }
 
 @Component({
-  selector: 'app-payupopup',
-  templateUrl: './payupopup.component.html',
-  styleUrls: ['./payupopup.component.css'],
+    selector: 'app-payupopup',
+    templateUrl: './payupopup.component.html',
+    styleUrls: ['./payupopup.component.css'],
+    standalone: false
 })
 export class PayupopupComponent implements OnInit {
   form: FormGroup;

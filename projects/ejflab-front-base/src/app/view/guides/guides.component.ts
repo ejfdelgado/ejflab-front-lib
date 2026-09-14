@@ -4,9 +4,10 @@ import { MenuItemData } from './models/menu';
 import { TheGuides } from './models/menu-index';
 
 @Component({
-  selector: 'app-guides',
-  templateUrl: './guides.component.html',
-  styleUrl: './guides.component.css',
+    selector: 'app-guides',
+    templateUrl: './guides.component.html',
+    styleUrl: './guides.component.css',
+    standalone: false
 })
 export class GuidesComponent {
   menu: Array<MenuItemData> = TheGuides;

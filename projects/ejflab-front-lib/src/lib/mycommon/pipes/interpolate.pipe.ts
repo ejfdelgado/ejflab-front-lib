@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
 
 @Pipe({
-  name: 'interpolate',
+    name: 'interpolate',
+    standalone: false
 })
 export class InterpolatePipe implements PipeTransform {
   static renderer = new MyTemplate();

@@ -8,9 +8,10 @@ import { MyUtilities } from '@ejfdelgado/ejflab-common/src/MyUtilities';
 import { Wait } from "../../services/indicator.service";
 
 @Component({
-  selector: 'app-indicator',
-  templateUrl: './indicator.component.html',
-  styleUrls: ['./indicator.component.css'],
+    selector: 'app-indicator',
+    templateUrl: './indicator.component.html',
+    styleUrls: ['./indicator.component.css'],
+    standalone: false
 })
 export class IndicatorComponent implements OnInit {
   isLoading: boolean = false;

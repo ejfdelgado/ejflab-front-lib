@@ -3,9 +3,10 @@ import { MenuItemClass } from '../../models/menu';
 import { TranslateService } from 'ejflab-front-lib';
 
 @Component({
-  selector: 'app-n06-pipes',
-  templateUrl: './n06-pipes.component.html',
-  styleUrls: ['./n06-pipes.component.css', '../../guides.component.css'],
+    selector: 'app-n06-pipes',
+    templateUrl: './n06-pipes.component.html',
+    styleUrls: ['./n06-pipes.component.css', '../../guides.component.css'],
+    standalone: false
 })
 export class N06PipesComponent extends MenuItemClass implements OnInit {
   model: any = {

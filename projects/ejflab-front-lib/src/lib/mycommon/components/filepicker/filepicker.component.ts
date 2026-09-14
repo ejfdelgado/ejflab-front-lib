@@ -7,9 +7,10 @@ import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
 import { FileRequestData } from '../../services/fileInterface';
 
 @Component({
-  selector: 'app-filepicker',
-  templateUrl: './filepicker.component.html',
-  styleUrls: ['./filepicker.component.css'],
+    selector: 'app-filepicker',
+    templateUrl: './filepicker.component.html',
+    styleUrls: ['./filepicker.component.css'],
+    standalone: false
 })
 export class FilepickerComponent implements OnInit {
   @ViewChild('imageInput') imageInput: ElementRef;

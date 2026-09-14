@@ -6,9 +6,10 @@ import { WebcamService } from '../../services/webcam.service';
 import { IdGen } from '@ejfdelgado/ejflab-common/src/IdGen';
 
 @Component({
-  selector: 'app-fileordevicepopup',
-  templateUrl: './fileordevicepopup.component.html',
-  styleUrls: ['./fileordevicepopup.component.css'],
+    selector: 'app-fileordevicepopup',
+    templateUrl: './fileordevicepopup.component.html',
+    styleUrls: ['./fileordevicepopup.component.css'],
+    standalone: false
 })
 export class FileordevicepopupComponent implements OnInit {
   constructor(

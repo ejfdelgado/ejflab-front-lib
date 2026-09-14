@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-    selector: '[appMoveNextByEnter]'
+    selector: '[appMoveNextByEnter]',
+    standalone: false
 })
 export class MoveNextByEnterDirective {
     @Input() appMoveNextByEnter: string; // Optional: pass next field ID

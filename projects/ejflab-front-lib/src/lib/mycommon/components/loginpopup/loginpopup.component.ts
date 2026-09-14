@@ -6,9 +6,10 @@ import { ModalService } from '../../services/modal.service';
 import { IndicatorService } from '../../services/indicator.service';
 
 @Component({
-  selector: 'app-loginpopup',
-  templateUrl: './loginpopup.component.html',
-  styleUrls: ['./loginpopup.component.css'],
+    selector: 'app-loginpopup',
+    templateUrl: './loginpopup.component.html',
+    styleUrls: ['./loginpopup.component.css'],
+    standalone: false
 })
 export class LoginpopupComponent implements OnInit {
   currentView = 'inicio';

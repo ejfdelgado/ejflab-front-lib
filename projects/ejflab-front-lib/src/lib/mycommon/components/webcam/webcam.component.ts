@@ -5,9 +5,10 @@ import { ModalService } from '../../services/modal.service';
 import { WebcamRequestData, WebcamService } from '../../services/webcam.service';
 
 @Component({
-  selector: 'app-webcam',
-  templateUrl: './webcam.component.html',
-  styleUrls: ['./webcam.component.css'],
+    selector: 'app-webcam',
+    templateUrl: './webcam.component.html',
+    styleUrls: ['./webcam.component.css'],
+    standalone: false
 })
 export class WebcamComponent implements OnInit {
   isActive: boolean = false;

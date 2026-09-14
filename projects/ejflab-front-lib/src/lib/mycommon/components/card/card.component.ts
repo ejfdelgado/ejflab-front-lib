@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { CardComponentData } from '../../interfaces/login-data.interface';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
-  host: { class: 'box' },
+    selector: 'app-card',
+    templateUrl: './card.component.html',
+    styleUrls: ['./card.component.css'],
+    host: { class: 'box' },
+    standalone: false
 })
 export class CardComponent implements OnInit {
   @HostBinding('class.small') isSmall: boolean = false;

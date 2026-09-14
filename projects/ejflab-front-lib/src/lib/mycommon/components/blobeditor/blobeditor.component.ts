@@ -17,9 +17,10 @@ export interface BlobOptionsData {
 }
 
 @Component({
-  selector: 'app-blobeditor',
-  templateUrl: './blobeditor.component.html',
-  styleUrls: ['./blobeditor.component.css'],
+    selector: 'app-blobeditor',
+    templateUrl: './blobeditor.component.html',
+    styleUrls: ['./blobeditor.component.css'],
+    standalone: false
 })
 export class BlobeditorComponent implements OnInit {
   @Input() options: BlobOptionsData;

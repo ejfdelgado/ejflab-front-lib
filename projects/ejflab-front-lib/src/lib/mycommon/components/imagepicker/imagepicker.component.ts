@@ -36,9 +36,10 @@ export interface ImagepickerOptionsData {
 }
 
 @Component({
-  selector: 'app-imagepicker',
-  templateUrl: './imagepicker.component.html',
-  styleUrls: ['./imagepicker.component.css'],
+    selector: 'app-imagepicker',
+    templateUrl: './imagepicker.component.html',
+    styleUrls: ['./imagepicker.component.css'],
+    standalone: false
 })
 export class ImagepickerComponent implements OnInit, OnDestroy, OnChanges {
   @Input() options: ImagepickerOptionsData;

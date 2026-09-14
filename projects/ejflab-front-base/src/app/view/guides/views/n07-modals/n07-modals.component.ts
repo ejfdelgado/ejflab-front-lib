@@ -3,9 +3,10 @@ import { MenuItemClass } from '../../models/menu';
 import { ModalService, TranslateService } from 'projects/ejflab-front-lib/src/public-api';
 
 @Component({
-  selector: 'app-n07-modals',
-  templateUrl: './n07-modals.component.html',
-  styleUrls: ['./n07-modals.component.css', '../../guides.component.css'],
+    selector: 'app-n07-modals',
+    templateUrl: './n07-modals.component.html',
+    styleUrls: ['./n07-modals.component.css', '../../guides.component.css'],
+    standalone: false
 })
 export class N07ModalsComponent extends MenuItemClass {
   model: any = {

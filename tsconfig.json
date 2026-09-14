@@ -10,7 +10,9 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "ejflab-front-lib": ["./dist/ejflab-front-lib"]
+      "ejflab-front-lib": [
+        "./dist/ejflab-front-lib"
+      ]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -21,13 +23,18 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "useDefineForClassFields": false,
     "target": "es2020",
     "module": "es2020",
-    "lib": ["es2020", "dom"],
-    "types": ["node"]
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "types": [
+      "node"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -23,13 +23,14 @@ export function MyCustomValidator(lista: Array<number>): ValidatorFn {
 }
 
 @Component({
-  selector: 'app-n05-form-validation',
-  templateUrl: './n05-form-validation.component.html',
-  styleUrls: [
-    './n05-form-validation.component.css',
-    '../../guides.component.css',
-    '../n03-model/n03-model.component.css',
-  ],
+    selector: 'app-n05-form-validation',
+    templateUrl: './n05-form-validation.component.html',
+    styleUrls: [
+        './n05-form-validation.component.css',
+        '../../guides.component.css',
+        '../n03-model/n03-model.component.css',
+    ],
+    standalone: false
 })
 export class N05FormValidationComponent
   extends MenuItemClass

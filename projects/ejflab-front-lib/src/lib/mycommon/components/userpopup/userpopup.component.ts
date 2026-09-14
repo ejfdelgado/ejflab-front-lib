@@ -15,9 +15,10 @@ export interface UserPopUpData {
 }
 
 @Component({
-  selector: 'app-userpopup',
-  templateUrl: './userpopup.component.html',
-  styleUrls: ['./userpopup.component.css'],
+    selector: 'app-userpopup',
+    templateUrl: './userpopup.component.html',
+    styleUrls: ['./userpopup.component.css'],
+    standalone: false
 })
 export class UserpopupComponent implements OnInit {
   form: FormGroup;

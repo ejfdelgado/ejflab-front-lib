@@ -322,13 +322,13 @@ export class RTCCom {
       var start = i * CHUNK_LEN,
         end = (i + 1) * CHUNK_LEN;
       //RTCCom.consoleSrv.log(start + ' - ' + (end - 1));
-      dataChannel.send(buffer.subarray(start, end));
+      dataChannel.send(buffer.subarray(start, end) as unknown as ArrayBufferView<ArrayBuffer>);
     }
 
     // send the reminder, if any
     if (len % CHUNK_LEN) {
       //RTCCom.consoleSrv.log('last ' + (len % CHUNK_LEN) + ' byte(s)');
-      dataChannel.send(buffer.subarray(n * CHUNK_LEN));
+      dataChannel.send(buffer.subarray(n * CHUNK_LEN) as unknown as ArrayBufferView<ArrayBuffer>);
     }
   }
 

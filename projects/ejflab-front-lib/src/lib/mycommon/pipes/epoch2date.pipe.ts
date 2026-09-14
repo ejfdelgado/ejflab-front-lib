@@ -6,7 +6,8 @@ import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 // <td>{{ variable | epoch2date:'mmm d yyyy' }}</td>
 
 @Pipe({
-  name: 'epoch2date',
+    name: 'epoch2date',
+    standalone: false
 })
 export class Epoch2datePipe implements PipeTransform {
   transform(value: number | undefined, ...args: unknown[]): unknown {

@@ -8,8 +8,9 @@ Remember use is as follow:
 2. Use this binding bindDragEventsThis = bindDragEvents.bind(this);
 */
 @Directive({
-  selector: '[ngInit]',
-  exportAs: 'ngInit',
+    selector: '[ngInit]',
+    exportAs: 'ngInit',
+    standalone: false
 })
 export class NgInit {
   @Input() values: any = {};

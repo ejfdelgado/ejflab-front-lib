@@ -20,9 +20,10 @@ export interface ScrollNavData {
 }
 
 @Component({
-  selector: 'app-scrollnav',
-  templateUrl: './scrollnav.component.html',
-  styleUrls: ['./scrollnav.component.css'],
+    selector: 'app-scrollnav',
+    templateUrl: './scrollnav.component.html',
+    styleUrls: ['./scrollnav.component.css'],
+    standalone: false
 })
 export class ScrollnavComponent implements OnInit, AfterViewInit {
   @ViewChild('scroll_parent') scrollParentEl: ElementRef;

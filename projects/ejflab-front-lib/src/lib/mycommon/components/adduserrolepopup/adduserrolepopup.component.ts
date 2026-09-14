@@ -6,9 +6,10 @@ import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
 import { AuthorizationData } from '../authorizationpopup/authorizationpopup.component';
 
 @Component({
-  selector: 'app-adduserrolepopup',
-  templateUrl: './adduserrolepopup.component.html',
-  styleUrls: ['./adduserrolepopup.component.css'],
+    selector: 'app-adduserrolepopup',
+    templateUrl: './adduserrolepopup.component.html',
+    styleUrls: ['./adduserrolepopup.component.css'],
+    standalone: false
 })
 export class AdduserrolepopupComponent implements OnInit {
   form: FormGroup;

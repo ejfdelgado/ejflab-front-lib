@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { MyDatesFront } from '@ejfdelgado/ejflab-common/src/MyDatesFront';
 
 @Pipe({
-  name: 'fechaCard',
+    name: 'fechaCard',
+    standalone: false
 })
 export class FechaCardPipe implements PipeTransform {
   transform(value: number | undefined, ...args: unknown[]): unknown {

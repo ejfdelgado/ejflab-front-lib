@@ -27,9 +27,10 @@ export interface OptionData {
 }
 
 @Component({
-  selector: 'app-statusbar',
-  templateUrl: './statusbar.component.html',
-  styleUrls: ['./statusbar.component.css'],
+    selector: 'app-statusbar',
+    templateUrl: './statusbar.component.html',
+    styleUrls: ['./statusbar.component.css'],
+    standalone: false
 })
 export class StatusbarComponent implements OnInit, OnDestroy {
   @Input('title')

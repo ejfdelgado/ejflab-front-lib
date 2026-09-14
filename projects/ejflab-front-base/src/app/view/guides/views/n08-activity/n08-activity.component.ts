@@ -3,9 +3,10 @@ import { MenuItemClass } from '../../models/menu';
 import { IndicatorService } from 'ejflab-front-lib';
 
 @Component({
-  selector: 'app-n08-activity',
-  templateUrl: './n08-activity.component.html',
-  styleUrls: ['./n08-activity.component.css', '../../guides.component.css'],
+    selector: 'app-n08-activity',
+    templateUrl: './n08-activity.component.html',
+    styleUrls: ['./n08-activity.component.css', '../../guides.component.css'],
+    standalone: false
 })
 export class N08ActivityComponent extends MenuItemClass {
   constructor(private indicatorSrv: IndicatorService) {

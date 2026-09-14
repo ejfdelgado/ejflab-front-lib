@@ -12,9 +12,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { ConsoleService } from '../../services/console.service';
 
 @Component({
-  selector: 'app-base',
-  template: ` <div></div> `,
-  styles: [],
+    selector: 'app-base',
+    template: ` <div></div> `,
+    styles: [],
+    standalone: false
 })
 export abstract class BaseMsComponent
   extends ContextComponent

@@ -71,9 +71,10 @@ export interface SeedData {
 }
 
 @Component({
-  selector: 'app-canvaseditor',
-  templateUrl: './canvaseditor.component.html',
-  styleUrls: ['./canvaseditor.component.css'],
+    selector: 'app-canvaseditor',
+    templateUrl: './canvaseditor.component.html',
+    styleUrls: ['./canvaseditor.component.css'],
+    standalone: false
 })
 export class CanvaseditorComponent implements OnInit, OnChanges {
   static MAX_UNDO_SIZE = 6;

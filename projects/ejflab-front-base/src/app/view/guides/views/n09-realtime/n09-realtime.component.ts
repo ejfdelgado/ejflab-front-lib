@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { BaseMenuItemClass } from '../../models/menuBase';
 
 @Component({
-  selector: 'app-n09-realtime',
-  templateUrl: './n09-realtime.component.html',
-  styleUrl: './n09-realtime.component.css'
+    selector: 'app-n09-realtime',
+    templateUrl: './n09-realtime.component.html',
+    styleUrl: './n09-realtime.component.css',
+    standalone: false
 })
 export class N09RealtimeComponent extends BaseMenuItemClass {
   override onTupleReadDone() {

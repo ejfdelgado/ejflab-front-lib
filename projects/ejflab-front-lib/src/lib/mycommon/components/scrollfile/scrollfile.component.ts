@@ -21,9 +21,10 @@ export interface ElementPairItemData {
 }
 
 @Component({
-  selector: 'app-scrollfile',
-  templateUrl: './scrollfile.component.html',
-  styleUrls: ['./scrollfile.component.css'],
+    selector: 'app-scrollfile',
+    templateUrl: './scrollfile.component.html',
+    styleUrls: ['./scrollfile.component.css'],
+    standalone: false
 })
 export class ScrollfileComponent implements OnInit {
   @Input('elemento')

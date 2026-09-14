@@ -3,7 +3,8 @@ import { TranslateService } from '../services/translate.service';
 import { MyTemplate } from '@ejfdelgado/ejflab-common/src/MyTemplate';
 
 @Pipe({
-  name: 'translate',
+    name: 'translate',
+    standalone: false
 })
 export class TranslatePipe implements PipeTransform {
   static renderer = new MyTemplate();

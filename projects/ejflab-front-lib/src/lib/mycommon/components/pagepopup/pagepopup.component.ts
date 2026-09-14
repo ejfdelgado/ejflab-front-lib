@@ -10,9 +10,10 @@ import { FileBase64Data } from '../base/base.component';
 import { PageData } from '../../interfaces/login-data.interface';
 
 @Component({
-  selector: 'app-pagepopup',
-  templateUrl: './pagepopup.component.html',
-  styleUrls: ['./pagepopup.component.css'],
+    selector: 'app-pagepopup',
+    templateUrl: './pagepopup.component.html',
+    styleUrls: ['./pagepopup.component.css'],
+    standalone: false
 })
 export class PagepopupComponent implements OnInit {
   form: FormGroup;
